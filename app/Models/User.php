@@ -99,6 +99,25 @@ class User extends Authenticatable implements JWTSubject
     }
 
     /**
+     * Consulta el usuario logueado
+     *
+     * @return object User loged
+     */
+    public static function getAuthUser()
+    {
+        $user = User::find(auth()->user()->id);
+
+        $user = $user;
+        $user->document_type = $user->getDocumentType->str_val;
+        $user->role = $user->getRole->str_val;
+        $user->area = $user->getArea->str_val;
+        $user->position = $user->getPosition->str_val;
+        $user->status = $user->getStatus->str_val;
+
+        return $user;
+    }
+
+    /**
      * Get the identifier that will be stored in the subject claim of the JWT.
      *
      * @return mixed

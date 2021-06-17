@@ -29,7 +29,7 @@ class LogController extends Controller
         $id_app_key = Parameter::getParameterByKey($app_key)->id;
         $log = new Log();
 
-        $log->id_user = User::getAuthUser()->id;
+        $log->id_user = User::getAuthUserId();
         $log->id_register = $id_register;
         $log->id_app_key = $id_app_key;
         $log->description = $description;

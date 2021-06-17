@@ -101,11 +101,11 @@ class User extends Authenticatable implements JWTSubject
     /**
      * Consulta el usuario logueado
      *
-     * @return object User loged
+     * @return object User logueado
      */
     public static function getAuthUser()
     {
-        $user = User::find(auth()->user()->id);
+        $user = User::find(User::getAuthUserId());
 
         $user = $user;
         $user->document_type = $user->getDocumentType->str_val;
@@ -115,6 +115,16 @@ class User extends Authenticatable implements JWTSubject
         $user->status = $user->getStatus->str_val;
 
         return $user;
+    }
+
+    /**
+     * Consulta el id usuario logueado
+     *
+     * @return number Id del usuario logueado
+     */
+    public static function getAuthUserId()
+    {
+        return auth()->user()->id;
     }
 
     /**

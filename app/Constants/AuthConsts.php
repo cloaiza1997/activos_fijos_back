@@ -12,5 +12,5 @@ class AuthConsts
     const AUTH_LOGIN_VALIDATION_EMAIL_EMAIL = "Usuario debe de ser un email";
     const AUTH_LOGIN_VALIDATION_EMAIL_REQUIRED = "Email es requerido";
     const AUTH_LOGIN_VALIDATION_PASSWORD_REQUIRED = "Contraseña es requerida";
-    const AUTH_LOGOUT_MESSAGE = "No se puede generar el token";
+    const AUTH_LOGOUT_MESSAGE = "Sesión cerrada correctamente";
 }

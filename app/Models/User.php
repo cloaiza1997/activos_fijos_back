@@ -124,7 +124,9 @@ class User extends Authenticatable implements JWTSubject
      */
     public static function getAuthUserId()
     {
-        return auth()->user()->id;
+        $user = auth()->user();
+
+        return $user ? $user->id : null;
     }
 
     /**

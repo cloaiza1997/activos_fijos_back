@@ -20,7 +20,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::post('login', "AuthController@login");
 Route::post('logout', "AuthController@logout");
+Route::post('recovery_password', "AuthController@recoveryPassword");
 
 Route::group(['middleware' => ['jwt']], function () {
-    Route::get('verify', 'AuthController@verify');
+    Route::get('test_login', 'AuthController@testLogin');
 });

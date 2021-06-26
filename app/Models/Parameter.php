@@ -43,6 +43,7 @@ class Parameter extends Model
      */
     public static function getParameterByKey($parameter_key)
     {
-        return Parameter::where("parameter_key", $parameter_key)->get()[0];
+        // **** TODO - REVISAR SI ES POSIBLE CREAR UN OBJETO DE TIPO PARAMETER
+        return Parameter::where("parameter_key", $parameter_key)->first();
     }
 }

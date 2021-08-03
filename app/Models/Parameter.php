@@ -34,4 +34,16 @@ class Parameter extends Model
     {
         return $this->belongsTo(Parameter::class, "id_parent");
     }
+
+    /**
+     * Consulta un parámetro con base en el campo parameter_jey
+     *
+     * @param string $parameter_key Key del parámetro a consultar
+     * @return Parameter Parámetro encontrado
+     */
+    public static function getParameterByKey($parameter_key)
+    {
+        // **** TODO - REVISAR SI ES POSIBLE CREAR UN OBJETO DE TIPO PARAMETER
+        return Parameter::where("parameter_key", $parameter_key)->first();
+    }
 }

@@ -21,8 +21,10 @@ class Outbox extends Model
     protected $fillable = [
         "id_app_key",
         "id_email_template",
-        "sender",
-        "receiver",
+        "from",
+        "address",
+        "cc",
+        "bcc",
         "subject",
         "body"
     ];

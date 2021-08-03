@@ -24,4 +24,5 @@ Route::post('recovery_password', "AuthController@recoveryPassword");
 
 Route::group(['middleware' => ['jwt']], function () {
     Route::get('test_login', 'AuthController@testLogin');
+    Route::post('update_password', 'UserController@updatePassword');
 });

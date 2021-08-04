@@ -9,6 +9,13 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
+/**
+ * @class UserController
+ * @namespace App\Http\Controllers
+ * @brief Controlador para la gestión de usuarios
+ * @date 01/06/2021
+ * @author Cristian Loaiza <cris-1997-loaiza@hotmail.com>
+ */
 class UserController extends Controller
 {
     public function updatePassword(Request $request)

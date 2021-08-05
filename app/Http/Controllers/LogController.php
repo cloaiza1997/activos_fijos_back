@@ -27,7 +27,7 @@ class LogController extends Controller
     public static function store(Request $request, $app_key, $description, $id_register = null)
     {
         $id_app_key = Parameter::getParameterByKey($app_key)->id;
-        $id_user = $request->id_user;
+        $id_user = $request->id_user ? $request->id_user : ($request->user ? $request->user_id : null);
         $log = new Log();
 
         $log->id_user = $id_user ? $id_user : User::getAuthUserId();

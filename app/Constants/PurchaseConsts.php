@@ -18,5 +18,7 @@ class PurchaseConsts
     const PURCHASE_MESSAGE_STORE_LOG = "Creación de orden de compra";
     const PURCHASE_MESSAGE_STORE_SUCCESS = "Orden de compra generada correctamente";
     const PURCHASE_MESSAGE_UPDATE_LOG = "Actualización de orden de compra";
+    const PURCHASE_MESSAGE_UPDATE_STATUS_LOG = "Actualización de estado de orden de compra";
+    const PURCHASE_MESSAGE_UPDATE_STATUS_SUCCESS = "Estado de orden de compra actualizado correctamente";
     const PURCHASE_MESSAGE_UPDATE_SUCCESS = "Orden de compra actualizada correctamente";
 }

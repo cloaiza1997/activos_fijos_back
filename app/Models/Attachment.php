@@ -36,4 +36,11 @@ class Attachment extends Model
     {
         return $this->belongsTo(Parameter::class, "id_attachment_type");
     }
+
+    public static function getAttachments($app_key, $id_register)
+    {
+        $id_app_key = Parameter::getParameterByKey($app_key)->id;
+
+        return Attachment::where("id_app_key", $id_app_key)->where("id_register", $id_register)->where("is_active", 1)->get();
+    }
 }

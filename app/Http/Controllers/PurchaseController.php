@@ -6,6 +6,7 @@ use App\Constants\AssetConsts;
 use App\Constants\AuthConsts;
 use App\Constants\GeneralConsts;
 use App\Constants\PurchaseConsts;
+use App\Models\Attachment;
 use App\Models\Parameter;
 use App\Models\Provider;
 use App\Models\Purchase;
@@ -109,14 +110,12 @@ class PurchaseController extends Controller
         $purchase = Purchase::getPurchase($id);
 
         if (
-            $purchase && ($purchase->status->parameter_key === PurchaseConsts::PURCHASE_STATUS_IN_PROCESS || $purchase->status->parameter_key === PurchaseConsts::PURCHASE_STATUS_APPROVED)
+            $purchase && ($purchase->status->parameter_key != PurchaseConsts::PURCHASE_STATUS_CANCELLED)
         ) {
-            $params["purchase"] = $purchase;
-        } else {
-            $params["purchase"] = null;
-        }
+            $purchase->files = Attachment::getAttachments(PurchaseConsts::PURCHASE_APP_KEY, $purchase->id);
 
-        if ($params["purchase"]) {
+            $params["purchase"] = $purchase;
+
             return response()->json($params);
         } else {
             return response()->json(['status' => false, 'message' => PurchaseConsts::PURCHASE_MESSAGE_EDIT_ERROR], 400);
@@ -124,18 +123,15 @@ class PurchaseController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * Actualiza una orden de compra
      */
     public function update(Request $request, $id)
     {
         $inputs = $request->all();
+        $inputs["id_status"] = Parameter::getParameterByKey(PurchaseConsts::PURCHASE_STATUS_IN_PROCESS)->id;
+        $inputs["id_updater_user"] = $request->user->id;
 
         $purchase = Purchase::find($id);
-        $purchase->id_updater_user = $request->user->id;
         $purchase->update($inputs);
 
         PurchaseItem::where("id_purchase", $id)->delete();
@@ -154,6 +150,32 @@ class PurchaseController extends Controller
         return response()->json([
             'status' => true,
             'message' => PurchaseConsts::PURCHASE_MESSAGE_UPDATE_SUCCESS,
+            'purchase' => $purchase
+        ], 200);
+    }
+
+    public function updateStatus(Request $request, $id)
+    {
+        $inputs = $request->all();
+        $new_status = Parameter::getParameterByKey($inputs["status"]);
+
+        $purchase = Purchase::find($id);
+        $purchase->id_status = $new_status->id;
+
+        if ($new_status->parameter_key == PurchaseConsts::PURCHASE_STATUS_APPROVED) {
+            $purchase->id_approver_user = $request->user->id;
+            $purchase->approved_at = date('Y-m-d H:i:s');
+        }
+
+        $purchase->update();
+
+        LogController::store($request, PurchaseConsts::PURCHASE_APP_KEY, PurchaseConsts::PURCHASE_MESSAGE_UPDATE_STATUS_LOG . " - " . $new_status->str_val, $purchase->id);
+
+        $purchase = Purchase::getPurchase($id);
+
+        return response()->json([
+            'status' => true,
+            'message' => PurchaseConsts::PURCHASE_MESSAGE_UPDATE_STATUS_SUCCESS,
             'purchase' => $purchase
         ], 200);
     }

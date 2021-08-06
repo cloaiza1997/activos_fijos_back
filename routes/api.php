@@ -21,6 +21,10 @@ Route::group(['middleware' => ['jwt']], function () {
     Route::get('test_login', 'AuthController@testLogin');
     Route::post('update_password', 'UserController@updatePassword');
 
+    // Adjuntos
+    Route::post('upload_files/{app_key}/{id_register}', 'AttachmentController@uploadFiles');
+
     // Compras
     Route::resource('purchase', 'PurchaseController');
+    Route::put('purchase/update_status/{id}', 'PurchaseController@updateStatus');
 });

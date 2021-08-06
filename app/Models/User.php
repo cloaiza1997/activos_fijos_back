@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Constants\AuthConsts;
 use App\Models\Parameter;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -110,6 +111,9 @@ class User extends Authenticatable implements JWTSubject
         $user = $user;
         $user->document_type = $user->getDocumentType->str_val;
         $user->role = $user->getRole->str_val;
+        $user->is_admin = $user->getRole->parameter_key == AuthConsts::USER_ROLE_ADMIN;
+        $user->is_approver = $user->getRole->parameter_key == AuthConsts::USER_ROLE_APPROVER;
+        $user->is_responsible = $user->getRole->parameter_key == AuthConsts::USER_ROLE_RESPONSIBLE;
         $user->area = $user->getArea->str_val;
         $user->position = $user->getPosition->str_val;
         $user->status = $user->getStatus->str_val;

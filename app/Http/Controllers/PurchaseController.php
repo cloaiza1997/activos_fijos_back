@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Constants\AssetConsts;
 use App\Constants\AuthConsts;
 use App\Constants\GeneralConsts;
+use App\Constants\MailConsts;
 use App\Constants\PurchaseConsts;
 use App\Models\Attachment;
 use App\Models\Parameter;
@@ -157,6 +158,7 @@ class PurchaseController extends Controller
     public function updateStatus(Request $request, $id)
     {
         $inputs = $request->all();
+        $approved = false;
         $new_status = Parameter::getParameterByKey($inputs["status"]);
 
         $purchase = Purchase::find($id);
@@ -165,9 +167,24 @@ class PurchaseController extends Controller
         if ($new_status->parameter_key == PurchaseConsts::PURCHASE_STATUS_APPROVED) {
             $purchase->id_approver_user = $request->user->id;
             $purchase->approved_at = date('Y-m-d H:i:s');
+            $approved = true;
         }
 
         $purchase->update();
+
+        if ($approved) {
+            $id_order = str_pad($purchase->id, 8, "0", STR_PAD_LEFT);
+
+            $params = [
+                "app_key" => PurchaseConsts::PURCHASE_APP_KEY,
+                "address" => [["email" => $purchase->getCreatorUser->email, "name" => $purchase->getCreatorUser->display_name]],
+                "cc" => [["email" => $purchase->getApproverUser->email, "name" => $purchase->getApproverUser->display_name]],
+                "subject" => ["id_order" => $id_order],
+                "body" => ["id_order" => $id_order, "approver_name" => $purchase->getApproverUser->display_name, "approved_at" => $purchase->approved_at],
+            ];
+
+            MailController::sendEmailByTemplate($params, MailConsts::EMAIL_TEMPLATE_PURCHASE_APPROVED);
+        }
 
         LogController::store($request, PurchaseConsts::PURCHASE_APP_KEY, PurchaseConsts::PURCHASE_MESSAGE_UPDATE_STATUS_LOG . " - " . $new_status->str_val, $purchase->id);
 

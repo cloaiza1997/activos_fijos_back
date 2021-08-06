@@ -81,6 +81,17 @@ class Parameter extends Model
         return ["departments" => $departments, "departments_cities" => $departments_cities];
     }
 
+    public static function getCompnayInfo()
+    {
+        $company_info["name"] = Parameter::getParameterByKey(GeneralConsts::COMPANY_NAME)->str_val;
+        $company_info["document_number"] = Parameter::getParameterByKey(GeneralConsts::COMPANY_DOCUMENT_NUMBER)->str_val;
+        $company_info["address"] = Parameter::getParameterByKey(GeneralConsts::COMPANY_ADDRESS)->str_val;
+        $company_info["phone_number"] = Parameter::getParameterByKey(GeneralConsts::COMPANY_PHONE_NUMBER)->str_val;
+        $company_info["city"] = Parameter::find(Parameter::getParameterByKey(GeneralConsts::COMPANY_CITY_ID)->num_val)->str_val;
+
+        return $company_info;
+    }
+
     public static function getPaymentMethods()
     {
         $payment_methods_id = Parameter::getParameterByKey(GeneralConsts::PAYMENT_METHODS)->id;

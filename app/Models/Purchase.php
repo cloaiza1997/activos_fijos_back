@@ -52,7 +52,9 @@ class Purchase extends Model
             $purchase->items = $purchase->getPurchaseItems;
             $purchase->payment_method = $purchase->getPaymentMethod;
             $purchase->provider = $purchase->getProvider;
+            $purchase->provider->city = $purchase->getProvider->getCity;
             $purchase->requesting_user = $purchase->getRequestingUser;
+            $purchase->requesting_user->area = $purchase->getRequestingUser->getArea;
             $purchase->status = $purchase->getStatus;
             $purchase->updater_user = $purchase->getUpdaterUser;
         }

@@ -27,4 +27,5 @@ Route::group(['middleware' => ['jwt']], function () {
     // Compras
     Route::resource('purchase', 'PurchaseController');
     Route::put('purchase/update_status/{id}', 'PurchaseController@updateStatus');
+    Route::get('purchase_to_approve', 'PurchaseController@indexApprover');
 });

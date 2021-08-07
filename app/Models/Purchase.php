@@ -2,12 +2,14 @@
 
 namespace App\Models;
 
+use App\Constants\PurchaseConsts;
 use App\Models\Parameter;
 use App\Models\Provider;
 use App\Models\PurchaseItem;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 /**
  * @class Purchase
@@ -60,6 +62,38 @@ class Purchase extends Model
         }
 
         return $purchase;
+    }
+
+    public static function getPurchaseList()
+    {
+        $purchases = DB::select("SELECT a.id, LPAD(a.id, 8 ,0) consecutive, b.str_val status, 
+        DATE_FORMAT(a.created_at, '%Y-%m-%d') created_at, a.delivery_date, a.total, c.str_val payment_method, d.name provider, COUNT(a.id) items
+        FROM purchases AS a, parameters AS b, parameters AS c, providers AS d, purch_items AS e
+        WHERE a.id_status = b.id 
+        AND a.id_payment_method = c.id 
+        AND a.id_provider = d.id
+        AND a.id = e.id_purchase
+        GROUP BY a.id, consecutive, status, created_at, a.delivery_date, a.total, payment_method, provider");
+
+        return $purchases;
+    }
+
+    public static function getPurchaseListToApprove()
+    {
+        $status_id = Parameter::getParameterByKey(PurchaseConsts::PURCHASE_STATUS_CHECKING)->id;
+
+        $purchases = DB::select("SELECT a.id, LPAD(a.id, 8 ,0) consecutive, b.str_val status, 
+        DATE_FORMAT(a.created_at, '%Y-%m-%d') created_at, a.delivery_date, a.total, c.str_val payment_method, d.name provider, f.display_name creator, COUNT(a.id) items
+        FROM purchases AS a, parameters AS b, parameters AS c, providers AS d, purch_items AS e, users AS f
+        WHERE a.id_status = b.id 
+        AND a.id_payment_method = c.id 
+        AND a.id_provider = d.id
+        AND a.id = e.id_purchase
+        AND a.id_creator_user = f.id
+        AND a.id_status = $status_id
+        GROUP BY a.id, consecutive, status, created_at, a.delivery_date, a.total, payment_method, provider, f.display_name");
+
+        return $purchases;
     }
 
     public function getPurchaseItems()

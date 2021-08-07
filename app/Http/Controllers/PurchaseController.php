@@ -44,14 +44,25 @@ class PurchaseController extends Controller
             "iva" => $iva * 1,
         ];
     }
+
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
+     * Consulta el listado de órdenes de compra
      */
     public function index()
     {
-        //
+        $purchases = Purchase::getPurchaseList();
+
+        return response()->json(["purchases" => $purchases]);
+    }
+
+    /**
+     * Consulta el listado de órdenes de compra pendientes de aprobación
+     */
+    public function indexApprover()
+    {
+        $purchases = Purchase::getPurchaseListToApprove();
+
+        return response()->json(["purchases" => $purchases]);
     }
 
     /**

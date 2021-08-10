@@ -28,4 +28,6 @@ Route::group(['middleware' => ['jwt']], function () {
     Route::resource('purchase', 'PurchaseController');
     Route::put('purchase/update_status/{id}', 'PurchaseController@updateStatus');
     Route::get('purchase_to_approve', 'PurchaseController@indexApprover');
+    // Activos
+    Route::resource('asset', 'AssetController');
 });

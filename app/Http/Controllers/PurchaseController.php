@@ -105,17 +105,6 @@ class PurchaseController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
      * Consulta la orden de compra a editar
      */
     public function edit($id)
@@ -208,16 +197,5 @@ class PurchaseController extends Controller
             'message' => PurchaseConsts::PURCHASE_MESSAGE_UPDATE_STATUS_SUCCESS,
             'purchase' => $purchase
         ], 200);
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
     }
 }

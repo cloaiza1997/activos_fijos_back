@@ -24,6 +24,9 @@ use Illuminate\Http\Request;
  */
 class PurchaseController extends Controller
 {
+    /**
+     * Consulta los listados necesarios para los formularios
+     */
     private function getFormParams()
     {
         $users = User::where('id_status', Parameter::getParameterByKey(AuthConsts::AUTH_USER_STATUS_ACTIVE)->id)->get();
@@ -43,6 +46,17 @@ class PurchaseController extends Controller
             "asset_amount" => $asset_amount * 1,
             "iva" => $iva * 1,
         ];
+    }
+
+    /**
+     * Consulta órdenes de compra de acuerdo con el estado
+     * @param number $status Estado de la OC
+     */
+    public function getPurchasesByStatus($status)
+    {
+        $purchases = Purchase::getPurchaseListByStatus($status);
+
+        return response()->json(["purchases" => $purchases]);
     }
 
     /**

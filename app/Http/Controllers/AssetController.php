@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Constants\AssetConsts;
+use App\Constants\PurchaseConsts;
 use App\Models\Asset;
 use App\Models\Parameter;
+use App\Models\Purchase;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -49,6 +51,28 @@ class AssetController extends Controller
             "asset_brands" => $asset_brands,
             "asset_main_freq" => $asset_main_freq,
         ];
+    }
+
+    /**
+     * Consulta las órdenes de compra las cuales están finalizadas
+     */
+    public function getPurchaseFinished()
+    {
+        $purchases = Purchase::getPurchaseListByStatus(PurchaseConsts::PURCHASE_STATUS_FINISHED, false);
+
+        foreach ($purchases as $purchase) {
+            $purchase->items = DB::select("SELECT * 
+            FROM purch_items 
+            WHERE id_purchase = $purchase->id 
+            AND id NOT IN (
+                SELECT id_purchase_item 
+                FROM assets 
+                WHERE id_purchase_item IS NOT NULL 
+                GROUP BY id_purchase_item
+            )");
+        }
+
+        return response()->json(["purchases" => $purchases]);
     }
 
     /**

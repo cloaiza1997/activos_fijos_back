@@ -96,6 +96,42 @@ class Purchase extends Model
         return $purchases;
     }
 
+    public static function getPurchaseListByStatus($status, $with_items = true)
+    {
+        $status_id = Parameter::getParameterByKey($status)->id;
+
+        $purchases = Purchase::where("id_status", $status_id)->get([
+            "id",
+            DB::raw('LPAD(id, 8 ,0) consecutive'),
+            "id_provider",
+            "id_requesting_user",
+            "delivery_date",
+            "delivery_address",
+            "id_city",
+            "sub_total",
+            "iva",
+            "total",
+            "id_status",
+            "id_payment_method",
+            "payment_days",
+            "observations",
+            "id_creator_user",
+            "created_at",
+            "id_approver_user",
+            "approved_at",
+            "id_updater_user",
+            "updated_at",
+        ]);
+
+        if ($with_items) {
+            foreach ($purchases as $purchase) {
+                $purchase->getPurchaseItems;
+            }
+        }
+
+        return $purchases;
+    }
+
     public function getPurchaseItems()
     {
         return $this->hasMany(PurchaseItem::class, 'id_purchase');

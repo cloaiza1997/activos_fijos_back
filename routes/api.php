@@ -25,9 +25,11 @@ Route::group(['middleware' => ['jwt']], function () {
     Route::post('upload_files/{app_key}/{id_register}', 'AttachmentController@uploadFiles');
 
     // Compras
-    Route::resource('purchase', 'PurchaseController');
-    Route::put('purchase/update_status/{id}', 'PurchaseController@updateStatus');
+    Route::get('purchase_by_status/{status}', 'PurchaseController@getPurchasesByStatus');
     Route::get('purchase_to_approve', 'PurchaseController@indexApprover');
+    Route::put('purchase/update_status/{id}', 'PurchaseController@updateStatus');
+    Route::resource('purchase', 'PurchaseController');
     // Activos
+    Route::get('asset/purchase_finished_available', 'AssetController@getPurchaseFinished');
     Route::resource('asset', 'AssetController');
 });

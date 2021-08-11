@@ -10,6 +10,7 @@ use App\Models\Parameter;
 use App\Models\Purchase;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 /**
  * @class AssetController
@@ -106,6 +107,8 @@ class AssetController extends Controller
         $asset->save();
         $asset->asset_number = str_pad($asset->id_asset_group, 3, "0", STR_PAD_LEFT) . "-" . str_pad($asset->id_asset_type, 3, "0", STR_PAD_LEFT) . "-" .  str_pad($asset->id, 6, "0", STR_PAD_LEFT);
         $asset->update();
+
+        QrCode::generate($asset->asset_number, "../public/assets-qrcodes/$asset->asset_number.svg");
 
         LogController::store($request, AssetConsts::ASSET_APP_KEY, AssetConsts::ASSET_MESSAGE_STORE_LOG . " - " . $asset->asset_number, $asset->id);
 

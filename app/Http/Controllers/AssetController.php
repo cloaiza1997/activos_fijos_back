@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Constants\AssetConsts;
 use App\Constants\PurchaseConsts;
 use App\Models\Asset;
+use App\Models\Attachment;
 use App\Models\Parameter;
 use App\Models\Purchase;
 use Illuminate\Http\Request;
@@ -76,13 +77,13 @@ class AssetController extends Controller
     }
 
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
+     * Consulta el listado de activos
      */
     public function index()
     {
-        //
+        $assets = Asset::getAssetList();
+
+        return response()->json(["assets" => $assets]);
     }
 
     /**
@@ -106,7 +107,7 @@ class AssetController extends Controller
         $asset->asset_number = str_pad($asset->id_asset_group, 3, "0", STR_PAD_LEFT) . "-" . str_pad($asset->id_asset_type, 3, "0", STR_PAD_LEFT) . "-" .  str_pad($asset->id, 6, "0", STR_PAD_LEFT);
         $asset->update();
 
-        LogController::store($request, AssetConsts::ASSET_APP_KEY, AssetConsts::ASSET_MESSAGE_STORE_LOG, $asset->id);
+        LogController::store($request, AssetConsts::ASSET_APP_KEY, AssetConsts::ASSET_MESSAGE_STORE_LOG . " - " . $asset->asset_number, $asset->id);
 
         return response()->json([
             'status' => true,
@@ -127,14 +128,22 @@ class AssetController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * Consulta el formulario de edición
      */
     public function edit($id)
     {
-        //
+        $params = $this->getFormParams();
+        $asset = Asset::getAsset($id);
+
+        if ($asset) {
+            $asset->files = Attachment::getAttachments(AssetConsts::ASSET_APP_KEY, $asset->id);
+
+            $params["asset"] = $asset;
+
+            return response()->json($params);
+        } else {
+            return response()->json(['status' => false, 'message' => AssetConsts::ASSET_MESSAGE_EDIT_ERROR], 400);
+        }
     }
 
     /**
@@ -146,7 +155,20 @@ class AssetController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $inputs = $request->all();
+
+        $asset = Asset::find($id);
+        $asset->update($inputs);
+
+        LogController::store($request, AssetConsts::ASSET_APP_KEY, AssetConsts::ASSET_MESSAGE_UPDATE_LOG . " - " . $asset->asset_number, $asset->id);
+
+        $asset = Asset::getAsset($id);
+
+        return response()->json([
+            'status' => true,
+            'message' => AssetConsts::ASSET_MESSAGE_UPDATE_SUCCESS,
+            'asset' => $asset
+        ], 200);
     }
 
     /**

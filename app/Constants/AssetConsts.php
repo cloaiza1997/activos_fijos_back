@@ -16,6 +16,9 @@ class AssetConsts
   const ASSET_DECOMMISSIONED = "ASSET_DECOMMISSIONED";
   const ASSET_UNASSIGNED = "ASSET_UNASSIGNED";
 
+  const ASSET_MESSAGE_EDIT_ERROR = "Error al consultar el activo";
   const ASSET_MESSAGE_STORE_LOG = "Creación de activo fijo";
   const ASSET_MESSAGE_STORE_SUCCESS = "Activo fijo creado correctamente - Nº de activo: ";
+  const ASSET_MESSAGE_UPDATE_LOG = "Actualización de activo fijo";
+  const ASSET_MESSAGE_UPDATE_SUCCESS = "Activo actualizado correctamente";
 }

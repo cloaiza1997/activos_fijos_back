@@ -30,6 +30,8 @@ Route::group(['middleware' => ['jwt']], function () {
     Route::put('purchase/update_status/{id}', 'PurchaseController@updateStatus');
     Route::resource('purchase', 'PurchaseController');
     // Activos
+    Route::get('asset/list_own', 'AssetController@indexOwner');
     Route::get('asset/purchase_finished_available', 'AssetController@getPurchaseFinished');
+    Route::post('asset/generate_plate/{asset_number}', 'AssetController@generateAssetPlateQrCode');
     Route::resource('asset', 'AssetController');
 });

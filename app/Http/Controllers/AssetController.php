@@ -8,6 +8,7 @@ use App\Models\Asset;
 use App\Models\Attachment;
 use App\Models\Parameter;
 use App\Models\Purchase;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
@@ -55,6 +56,11 @@ class AssetController extends Controller
         ];
     }
 
+    public function generateAssetPlateQrCode($asset_number)
+    {
+        QrCode::generate($asset_number, "../public/assets-qrcodes/$asset_number.svg");
+    }
+
     /**
      * Consulta las órdenes de compra las cuales están finalizadas
      */
@@ -88,6 +94,16 @@ class AssetController extends Controller
     }
 
     /**
+     * Consulta el listado de activos asignados
+     */
+    public function indexOwner()
+    {
+        $assets = Asset::getAssetOwnList();
+
+        return response()->json(["assets" => $assets]);
+    }
+
+    /**
      * Consulta los listados requeridos para el formulario de creación
      */
     public function create()
@@ -108,7 +124,7 @@ class AssetController extends Controller
         $asset->asset_number = str_pad($asset->id_asset_group, 3, "0", STR_PAD_LEFT) . "-" . str_pad($asset->id_asset_type, 3, "0", STR_PAD_LEFT) . "-" .  str_pad($asset->id, 6, "0", STR_PAD_LEFT);
         $asset->update();
 
-        QrCode::generate($asset->asset_number, "../public/assets-qrcodes/$asset->asset_number.svg");
+        $this->generateAssetPlateQrCode($asset->asset_number);
 
         LogController::store($request, AssetConsts::ASSET_APP_KEY, AssetConsts::ASSET_MESSAGE_STORE_LOG . " - " . $asset->asset_number, $asset->id);
 
@@ -142,6 +158,9 @@ class AssetController extends Controller
             $asset->files = Attachment::getAttachments(AssetConsts::ASSET_APP_KEY, $asset->id);
 
             $params["asset"] = $asset;
+            $params["user_is_admin"] = User::getAuthUser()->is_admin;
+
+            $this->generateAssetPlateQrCode($asset->asset_number);
 
             return response()->json($params);
         } else {

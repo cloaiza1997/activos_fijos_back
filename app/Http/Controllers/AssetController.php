@@ -136,17 +136,6 @@ class AssetController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
      * Consulta el formulario de edición
      */
     public function edit($id)
@@ -191,16 +180,5 @@ class AssetController extends Controller
             'message' => AssetConsts::ASSET_MESSAGE_UPDATE_SUCCESS,
             'asset' => $asset
         ], 200);
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
     }
 }

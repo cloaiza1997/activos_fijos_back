@@ -24,7 +24,7 @@ class AttachmentController extends Controller
      * @param number $id_register Id del registro a relacionar los archivos
      * @return void
      */
-    public function uploadFiles(Request $request, $app_key, $id_register)
+    public function uploadFiles(Request $request, $app_key, $id_register, $response = true)
     {
         $success = false;
         $id_app_key = Parameter::getParameterByKey($app_key)->id;
@@ -70,6 +70,10 @@ class AttachmentController extends Controller
         // Se consultan los archivos activos
         $files = Attachment::getAttachments($app_key, $id_register);
 
-        return response()->json(["status" => true, "message" => $success ? AttachmentConsts::ATTACHMENT_MESSAGE_STORE_SUCCESS : null, "files" => $files]);
+        if ($response) {
+            return response()->json(["status" => true, "message" => $success ? AttachmentConsts::ATTACHMENT_MESSAGE_STORE_SUCCESS : null, "files" => $files]);
+        } else {
+            return $files;
+        }
     }
 }

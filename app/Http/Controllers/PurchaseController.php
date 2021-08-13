@@ -33,7 +33,7 @@ class PurchaseController extends Controller
         $providers = Provider::where('is_active', 1)->get();
         $cities = Parameter::getCitiesByDepartment()["departments_cities"];
         $payment_methods = Parameter::getPaymentMethods();
-        $company_info = Parameter::getCompnayInfo();
+        $company_info = Parameter::getCompanyInfo();
         $asset_amount = Parameter::getParameterByKey(AssetConsts::ASSET_AMOUNT)->num_val;
         $iva = Parameter::getParameterByKey(GeneralConsts::IVA)->num_val;
 

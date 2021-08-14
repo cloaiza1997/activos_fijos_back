@@ -35,6 +35,8 @@ Route::group(['middleware' => ['jwt']], function () {
     Route::post('asset/generate_plate/{asset_number}', 'AssetController@generateAssetPlateQrCode');
     Route::resource('asset', 'AssetController');
     // Actas
+    Route::get('certificate/list_own', 'CertificateController@indexResponsible');
+    Route::get('certificate/list_to_approve', 'CertificateController@indexApprover');
     Route::post('certificate/store_item', 'CertificateController@storeItem');
     Route::resource('certificate', 'CertificateController');
 });

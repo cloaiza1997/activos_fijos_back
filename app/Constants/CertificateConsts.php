@@ -16,4 +16,7 @@ class CertificateConsts
   const CERTIFICATE_SIGNATURE_PROCESS = "CERTIFICATE_SIGNATURE_PROCESS";
 
   const CERTIFICATES_ASSET_STATUS = "CERTIFICATES_ASSET_STATUS";
+
+  const CERTIFICATE_MESSAGE_STORE_SUCCESS = "Generación de acta de movimiento";
+  const CERTIFICATE_MESSAGE_UPDATE_SUCCESS = "Actualización de acta de movimiento";
 }

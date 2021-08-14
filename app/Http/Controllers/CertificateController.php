@@ -6,6 +6,7 @@ use App\Constants\AssetConsts;
 use App\Constants\AuthConsts;
 use App\Constants\CertificateConsts;
 use App\Models\Asset;
+use App\Models\Attachment;
 use App\Models\Certificate;
 use App\Models\CertificateDetail;
 use App\Models\Parameter;
@@ -15,9 +16,8 @@ use Illuminate\Http\Request;
 class CertificateController extends Controller
 {
 
-    private function getFormData()
+    private function getFormParams()
     {
-        $admin_id = Parameter::getParameterByKey(AuthConsts::USER_ROLE_ADMIN)->id;
         $active_status_id = Parameter::getParameterByKey(AuthConsts::AUTH_USER_STATUS_ACTIVE)->id;
 
         $users = User::where("id_status", $active_status_id)->get();
@@ -39,23 +39,45 @@ class CertificateController extends Controller
     }
 
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
+     * Listado principal de actas
      */
     public function index()
     {
-        //
+        $certificates = Certificate::with(["getDeliverUser", "getReceiverUser", "getStatus"])->get();
+
+        return response()->json(["certificates" => $certificates]);
+    }
+
+    /**
+     * Listado de actas pendientes de aprobación
+     */
+    public function indexApprover()
+    {
+        $status_id = Parameter::getParameterByKey(CertificateConsts::CERTIFICATE_CHECKING)->id;
+
+        $certificates = Certificate::where("id_status", $status_id)->with(["getDeliverUser", "getReceiverUser"])->get();
+
+        return response()->json(["certificates" => $certificates]);
+    }
+
+    /**
+     * Listado de actas propias de un usuario
+     */
+    public function indexResponsible()
+    {
+        $user_id = User::getAuthUserId();
+
+        $certificates = Certificate::where("id_receiver_user", $user_id)->orWhere("id_deliver_user", $user_id)->with(["getDeliverUser", "getReceiverUser", "getStatus"])->get();
+
+        return response()->json(["certificates" => $certificates]);
     }
 
     /**
      * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
      */
     public function create()
     {
-        $params = $this->getFormData();
+        $params = $this->getFormParams();
 
         return response()->json($params);
     }
@@ -72,6 +94,8 @@ class CertificateController extends Controller
         $certificate->id_status = Parameter::getParameterByKey(CertificateConsts::CERTIFICATE_IN_PROCESS)->id;
         $certificate->save();
 
+        LogController::store($request, CertificateConsts::CERTIFICATE_APP_KEY, CertificateConsts::CERTIFICATE_MESSAGE_STORE_SUCCESS, $certificate->id);
+
         return response()->json(["certificate" => $certificate]);
     }
 
@@ -82,11 +106,17 @@ class CertificateController extends Controller
     {
         $inputs = $request->all();
 
-        $certi_detail = new CertificateDetail($inputs);
-        $certi_detail->save();
+        if (isset($inputs["id"])) {
+            $certi_detail = CertificateDetail::find($inputs["id"]);
+            $certi_detail->update($inputs);
+        } else {
+            $certi_detail = new CertificateDetail($inputs);
+            $certi_detail->save();
+        }
 
         $attachment = new AttachmentController();
 
+        $certi_detail = CertificateDetail::find($certi_detail->id);
         $certi_detail->files = $attachment->uploadFiles($request, CertificateConsts::CERTIFICATE_APP_KEY, $certi_detail->id, false);
 
         return response()->json(["certi_detail" => $certi_detail]);
@@ -111,7 +141,22 @@ class CertificateController extends Controller
      */
     public function edit($id)
     {
-        //
+        $params = $this->getFormParams();
+        $certificate = Certificate::find($id);
+
+        if ($certificate) {
+            $certificate->getCertificateDetails;
+
+            foreach ($certificate->getCertificateDetails as $item) {
+                $item->files = Attachment::getAttachments(CertificateConsts::CERTIFICATE_APP_KEY, $item->id);
+            }
+
+            $params["certificate"] = $certificate;
+
+            return response()->json($params);
+        } else {
+            return response()->json(['status' => false, 'message' => AssetConsts::ASSET_MESSAGE_EDIT_ERROR], 400);
+        }
     }
 
     /**
@@ -123,7 +168,14 @@ class CertificateController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $inputs = $request->all();
+
+        $certificate = Certificate::find($id);
+        $certificate->update($inputs);
+
+        LogController::store($request, CertificateConsts::CERTIFICATE_APP_KEY, CertificateConsts::CERTIFICATE_MESSAGE_UPDATE_SUCCESS, $certificate->id);
+
+        return response()->json(["certificate" => $certificate]);
     }
 
     /**

@@ -35,6 +35,11 @@ class Certificate extends Model
         "observations"
     ];
 
+    public function getCertificateDetails()
+    {
+        return $this->hasMany(CertificateDetail::class, 'id_certificate');
+    }
+
     public function getDeliverUser()
     {
         return $this->belongsTo(User::class, "id_deliver_user");

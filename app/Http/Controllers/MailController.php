@@ -78,7 +78,7 @@ class MailController extends Controller
      * @param Array $data Datos opcionales
      * @return Array [ status => boolean, outbox ]
      */
-    public static function sendMail($mail_params = MailConsts::MAIL_PARAMS_DEFAULT, $subject, $body, $data = [])
+    public static function sendMail($mail_params = MailConsts::MAIL_PARAMS_DEFAULT, $subject = "", $body = "", $data = [])
     {
         try {
             $id_app_key = Parameter::getParameterByKey($mail_params["app_key"])->id;

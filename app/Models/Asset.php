@@ -50,6 +50,17 @@ class Asset extends Model
             $asset->getMaintenanceFrequence;
             $asset->getPurchaseItem;
             $asset->getStatus;
+
+            $asset->certificates = DB::select("SELECT a.id, LPAD(a.id, 6 ,0) AS certificate_number, a.delivered_at, a.received_at, d.display_name AS deliver_user, e.display_name AS receiver_user, f.str_val AS status
+            FROM certificates AS a, certi_details AS b, assets AS c, users AS d, users AS e, parameters AS f
+            WHERE a.id = b.id_certificate
+            AND b.id_asset = c.id
+            AND a.id_deliver_user = d.id
+            AND a.id_receiver_user = e.id
+            AND a.id_status = f.id
+            AND b.id_asset = $asset->id
+            GROUP BY a.id, certificate_number, a.delivered_at, a.received_at, deliver_user, receiver_user, status
+            ORDER BY a.id");
         }
 
         return $asset;

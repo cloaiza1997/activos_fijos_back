@@ -35,6 +35,20 @@ class Certificate extends Model
         "observations"
     ];
 
+    public static function getCertificate($id)
+    {
+        $certificate = Certificate::find($id);
+
+        if ($certificate) {
+            $certificate->getCertificateDetails;
+            $certificate->getCreatorUser;
+            $certificate->getApproverUser;
+            $certificate->getStatus;
+        }
+
+        return $certificate;
+    }
+
     public function getCertificateDetails()
     {
         return $this->hasMany(CertificateDetail::class, 'id_certificate');

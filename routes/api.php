@@ -37,6 +37,13 @@ Route::group(['middleware' => ['jwt']], function () {
     // Actas
     Route::get('certificate/list_own', 'CertificateController@indexResponsible');
     Route::get('certificate/list_to_approve', 'CertificateController@indexApprover');
+    Route::post('certificate/status/active/{id}', 'CertificateController@setStatusActive');
+    Route::post('certificate/status/approved/{id}', 'CertificateController@setStatusApproved');
+    Route::post('certificate/status/cancel/{id}', 'CertificateController@setStatusCancel');
+    Route::post('certificate/status/checking/{id}', 'CertificateController@setStatusChecking');
+    Route::post('certificate/status/inactive/{id}', 'CertificateController@setStatusInactive');
+    Route::post('certificate/status/rejected/{id}', 'CertificateController@setStatusRejected');
+    Route::post('certificate/status/send_sign/{id}', 'CertificateController@setStatusSendSign');
     Route::post('certificate/store_item', 'CertificateController@storeItem');
     Route::resource('certificate', 'CertificateController');
 });

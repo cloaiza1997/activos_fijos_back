@@ -17,6 +17,10 @@ class CertificateConsts
 
   const CERTIFICATES_ASSET_STATUS = "CERTIFICATES_ASSET_STATUS";
 
-  const CERTIFICATE_MESSAGE_STORE_SUCCESS = "Generación de acta de movimiento";
-  const CERTIFICATE_MESSAGE_UPDATE_SUCCESS = "Actualización de acta de movimiento";
+  const CERTIFICATE_MESSAGE_GET_ERROR = "Error al consultar el acta";
+  const CERTIFICATE_MESSAGE_UPDATE_STATUS_SUCCESS = "Estado actualizado correctamente";
+
+  const CERTIFICATE_LOG_STORE_SUCCESS = "Generación de acta de movimiento";
+  const CERTIFICATE_LOG_UPDATE_STATUS_SUCCESS = "Actualización de acta de estado de acta";
+  const CERTIFICATE_LOG_UPDATE_SUCCESS = "Actualización de acta de movimiento";
 }

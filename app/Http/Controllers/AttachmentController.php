@@ -60,7 +60,7 @@ class AttachmentController extends Controller
 
         if (count($files_to_delete)) {
             foreach ($files_to_delete as $delete) {
-                unlink(public_path() . "/attachments/$delete->file_name");
+                @unlink(public_path() . "/attachments/$delete->file_name");
                 $delete->delete();
             }
 

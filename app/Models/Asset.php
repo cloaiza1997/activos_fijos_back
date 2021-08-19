@@ -92,6 +92,8 @@ class Asset extends Model
     {
         $user_id = User::getAuthUserId();
 
+        $cetificate_status_id = Parameter::getParameterByKey(CertificateConsts::CERTIFICATE_ACTIVE)->id;
+
         $assets = DB::select("SELECT a.id, a.asset_number, a.name, 
         f.str_val AS 'group', g.str_val AS 'type', h.str_val AS brand, i.str_val AS 'status',
         b.id_certificate, LPAD(b.id_certificate, 6 ,0) AS certificate_number, c.id_status AS id_certificate_status, d.parameter_key AS id_certificate_status_key, d.str_val AS certificate_status, 
@@ -100,6 +102,7 @@ class Asset extends Model
         parameters AS f, parameters AS g, parameters AS h, parameters AS i, users AS j
         WHERE a.id = b.id_asset
         AND b.id_certificate = c.id
+        AND c.id_status = $cetificate_status_id
         AND c.id_status = d.id
         AND c.id_receiver_user = e.id
         AND a.id_asset_group = f.id

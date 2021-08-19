@@ -175,6 +175,8 @@ class AssetController extends Controller
 
         $asset = Asset::getAsset($id);
 
+        $asset->files = Attachment::getAttachments(AssetConsts::ASSET_APP_KEY, $asset->id);
+
         return response()->json([
             'status' => true,
             'message' => AssetConsts::ASSET_MESSAGE_UPDATE_SUCCESS,

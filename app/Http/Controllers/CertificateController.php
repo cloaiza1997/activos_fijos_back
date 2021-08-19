@@ -13,10 +13,10 @@ use App\Models\CertificateDetail;
 use App\Models\Parameter;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class CertificateController extends Controller
 {
-
     private function getFormParams()
     {
         $active_status_id = Parameter::getParameterByKey(AuthConsts::AUTH_USER_STATUS_ACTIVE)->id;
@@ -29,7 +29,7 @@ class CertificateController extends Controller
         $physical_status = Parameter::where("id_parent", $physical_status_id)->where("is_active", 1)->get(["id", "str_val as name"]);
 
         $asset_decommissioned_id = Parameter::getParameterByKey(AssetConsts::ASSET_DECOMMISSIONED)->id;
-        $assets = Asset::where("id_status", "!=", $asset_decommissioned_id)->with(["getBrand"])->get();
+        $assets = Asset::where("id_status", "!=", $asset_decommissioned_id)->with(["getBrand", "getStatus"])->get();
 
         return [
             "users" => $users,
@@ -106,7 +106,27 @@ class CertificateController extends Controller
         $certificate->delivered_at = date("Y-m-d");
         $certificate->save();
 
-        LogController::store($request, CertificateConsts::CERTIFICATE_APP_KEY, CertificateConsts::CERTIFICATE_LOG_STORE_SUCCESS, $certificate->id);
+        $items_id = [];
+
+        foreach ($inputs["items"] as $item) {
+            $items_id[] = $item["id_asset"];
+        }
+
+        // Se consultan todas las actas a las que pertenecen los activos a agregar
+        $certificates_to_inactive = CertificateDetail::whereIn("id_asset", $items_id)->groupBy("id_certificate")->pluck("id_certificate")->toArray();
+        $certificate_inactive_status_id = Parameter::getParameterByKey(CertificateConsts::CERTIFICATE_INACTIVE)->id;
+        // Se inactivan todas las actas
+        Certificate::whereIn("id", $certificates_to_inactive)->update(["id_status" => $certificate_inactive_status_id]);
+
+        // Se consultan los activos a desasignar
+        $assets_to_inactive = CertificateDetail::whereIn("id_certificate", $certificates_to_inactive)->whereNotIn("id_asset", $items_id)->groupBy("id_asset")->pluck("id_asset")->toArray();
+        $status_asset_unassigned_id = Parameter::getParameterByKey(AssetConsts::ASSET_UNASSIGNED)->id;
+        // Se actualizan todos los activos
+        Asset::whereIn("id", $assets_to_inactive)->update(["id_status" => $status_asset_unassigned_id]);
+
+        $message = CertificateConsts::CERTIFICATE_LOG_STORE_SUCCESS . " - Actas Inactivadas: " . implode(",", $certificates_to_inactive) . " - Activos desasignados: " . implode(",", $assets_to_inactive);
+
+        LogController::store($request, CertificateConsts::CERTIFICATE_APP_KEY, $message, $certificate->id);
 
         return response()->json(["certificate" => $certificate]);
     }
@@ -125,6 +145,12 @@ class CertificateController extends Controller
             $certi_detail = new CertificateDetail($inputs);
             $certi_detail->save();
         }
+
+        $status_asset_assigned_id = Parameter::getParameterByKey(AssetConsts::ASSET_ASSIGNED)->id;
+
+        $asset = Asset::find($certi_detail->id_asset);
+        $asset->id_status = $status_asset_assigned_id;
+        $asset->update();
 
         $attachment = new AttachmentController();
 
@@ -183,7 +209,48 @@ class CertificateController extends Controller
 
         $certificate = Certificate::getCertificate($id);
 
-        LogController::store($request, CertificateConsts::CERTIFICATE_APP_KEY, CertificateConsts::CERTIFICATE_LOG_UPDATE_SUCCESS, $certificate->id);
+        $items_id = [];
+        $items_asset_id = [];
+
+        foreach ($inputs["items"] as $item) {
+            if (isset($item["id"])) {
+                $items_id[] = $item["id"];
+            }
+
+            $items_asset_id[] = $item["id_asset"];
+        }
+
+        // Se eliminan los items del acta
+        $attachment = new AttachmentController();
+        $items = CertificateDetail::where("id_certificate", $certificate->id)->whereNotIn("id", $items_id)->get();
+        $items_to_delete_id = [];
+
+        foreach ($items as $item) {
+            $attachment->uploadFiles(new Request(), CertificateConsts::CERTIFICATE_APP_KEY, $item->id);
+            $item->delete();
+
+            $items_to_delete_id[] = $item->id_asset;
+        }
+
+        $status_asset_unassigned_id = Parameter::getParameterByKey(AssetConsts::ASSET_UNASSIGNED)->id;
+
+        Asset::whereIn("id", $items_to_delete_id)->update(["id_status" => $status_asset_unassigned_id]);
+
+        // Se consultan todas las actas a las que pertenecen los activos a agregar
+        $certificates_to_inactive = CertificateDetail::whereIn("id_asset", $items_asset_id)->where("id_certificate", "!=", $certificate->id)->groupBy("id_certificate")->pluck("id_certificate")->toArray();
+        $certificate_inactive_status_id = Parameter::getParameterByKey(CertificateConsts::CERTIFICATE_INACTIVE)->id;
+        // Se inactivan todas las actas
+        Certificate::whereIn("id", $certificates_to_inactive)->update(["id_status" => $certificate_inactive_status_id]);
+
+        // Se consultan los activos a desasignar
+        $assets_to_inactive = CertificateDetail::whereIn("id_certificate", $certificates_to_inactive)->whereNotIn("id_asset", $items_asset_id)->groupBy("id_asset")->pluck("id_asset")->toArray();
+        $status_asset_unassigned_id = Parameter::getParameterByKey(AssetConsts::ASSET_UNASSIGNED)->id;
+        // Se actualizan todos los activos
+        Asset::whereIn("id", $assets_to_inactive)->update(["id_status" => $status_asset_unassigned_id]);
+
+        $message = CertificateConsts::CERTIFICATE_LOG_UPDATE_SUCCESS . " - Actas Inactivadas: " . implode(",", $certificates_to_inactive) . " - Activos desasignados: " . implode(",", $assets_to_inactive);
+
+        LogController::store($request, CertificateConsts::CERTIFICATE_APP_KEY, $message, $certificate->id);
 
         return response()->json(["certificate" => $certificate]);
     }
@@ -204,7 +271,27 @@ class CertificateController extends Controller
             $certificate->id
         );
 
-        return response()->json(['status' => false, 'message' => CertificateConsts::CERTIFICATE_MESSAGE_UPDATE_STATUS_SUCCESS, "certificate" => $certificate]);
+        foreach ($certificate->getCertificateDetails as $item) {
+            $item->getPhysicalStatus;
+            $item->files = Attachment::getAttachments(CertificateConsts::CERTIFICATE_APP_KEY, $item->id);
+        }
+
+        return response()->json(['status' => true, 'message' => CertificateConsts::CERTIFICATE_MESSAGE_UPDATE_STATUS_SUCCESS, "certificate" => $certificate]);
+    }
+
+    /**
+     * Actualiza el estados de las actas desactivadas
+     * @param number $id_certificate
+     */
+    private function unassignetAssetsByCertificate($id_certificate)
+    {
+        $status_asset_unassigned_id = Parameter::getParameterByKey(AssetConsts::ASSET_UNASSIGNED)->id;
+
+        DB::update("UPDATE assets SET id_status = $status_asset_unassigned_id WHERE id IN (
+            SELECT a.id_asset 
+            FROM certi_details AS a 
+            WHERE a.id_certificate = $id_certificate
+        )");
     }
 
     /**
@@ -231,6 +318,8 @@ class CertificateController extends Controller
         $certificate = Certificate::find($id);
         $certificate->id_status = $status_id;
         $certificate->update();
+
+        $this->unassignetAssetsByCertificate($certificate->id);
 
         return $this->statusChangeLog($request, $id);
     }
@@ -297,6 +386,7 @@ class CertificateController extends Controller
 
         $certificate = Certificate::find($id);
         $certificate->id_status = $status_id;
+        $certificate->received_at = date('Y-m-d H:i:s');
         $certificate->update();
 
         $id_certificate = str_pad($certificate->id, 6, "0", STR_PAD_LEFT);
@@ -327,6 +417,8 @@ class CertificateController extends Controller
         $certificate->id_status = $status_id;
         $certificate->update();
 
+        $this->unassignetAssetsByCertificate($certificate->id);
+
         return $this->statusChangeLog($request, $id);
     }
 
@@ -340,6 +432,8 @@ class CertificateController extends Controller
         $certificate = Certificate::find($id);
         $certificate->id_status = $status_id;
         $certificate->update();
+
+        $this->unassignetAssetsByCertificate($certificate->id);
 
         return $this->statusChangeLog($request, $id);
     }

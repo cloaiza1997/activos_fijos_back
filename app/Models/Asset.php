@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Constants\AssetConsts;
 use App\Constants\CertificateConsts;
 use App\Models\Parameter;
 use App\Models\PurchaseItem;
@@ -84,10 +85,11 @@ class Asset extends Model
         // AND a.id_asset_type = g.id
         // AND a.id_brand = h.id
         // AND a.id_status = i.id");
+        $assigned = AssetConsts::ASSET_ASSIGNED;
 
         $assets = DB::select("SELECT a.id, a.asset_number, a.name, 
             f.str_val AS 'group', g.str_val AS 'type', h.str_val AS brand, i.parameter_key AS 'status_key', i.str_val AS 'status',
-            b.id_certificate, c.id_status AS id_certificate_status, d.parameter_key AS id_certificate_status_key, d.str_val AS certificate_status, e.display_name AS user
+            b.id_certificate, c.id_status AS id_certificate_status, d.parameter_key AS id_certificate_status_key, d.str_val AS 'certificate_status', IF(i.parameter_key = '$assigned', e.display_name, null) AS user
             FROM assets AS a 
             LEFT JOIN certi_details AS b ON a.id = b.id_asset
             LEFT JOIN certificates AS c ON b.id_certificate = c.id

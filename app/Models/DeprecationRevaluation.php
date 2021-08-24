@@ -47,4 +47,9 @@ class DeprecationRevaluation extends Model
     {
         return $this->belongsTo(DeprecationRevaluation::class, "id_parent");
     }
+
+    public function getDetails()
+    {
+        return $this->hasMany(DeprecationRevaluationDetail::class, 'id_depre_reval');
+    }
 }

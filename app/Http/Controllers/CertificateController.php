@@ -15,6 +15,13 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
+/**
+ * @class CertificateController
+ * @namespace App\Http\Controllers
+ * @brief Controlador de las actas de movimiento
+ * @date 01/06/2021
+ * @author Cristian Loaiza <cris-1997-loaiza@hotmail.com>
+ */
 class CertificateController extends Controller
 {
     private function getFormParams()

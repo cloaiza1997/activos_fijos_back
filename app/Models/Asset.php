@@ -51,6 +51,7 @@ class Asset extends Model
             $asset->getMaintenanceFrequence;
             $asset->getPurchaseItem;
             $asset->getStatus;
+            $asset->getRevaluations;
 
             $asset->certificates = DB::select("SELECT a.id, LPAD(a.id, 6 ,0) AS certificate_number, a.delivered_at, a.received_at, d.display_name AS deliver_user, e.display_name AS receiver_user, f.str_val AS status
             FROM certificates AS a, certi_details AS b, assets AS c, users AS d, users AS e, parameters AS f
@@ -69,22 +70,6 @@ class Asset extends Model
 
     public static function getAssetList()
     {
-        // $cetificate_status_id = Parameter::getParameterByKey(CertificateConsts::CERTIFICATE_ACTIVE)->id;
-
-        // $assets = DB::select("SELECT a.id, a.asset_number, a.name, 
-        // f.str_val AS 'group', g.str_val AS 'type', h.str_val AS brand, i.str_val AS 'status',
-        // b.id_certificate, c.id_status AS id_certificate_status, d.parameter_key AS id_certificate_status_key, d.str_val AS certificate_status, e.display_name AS user
-        // FROM assets AS a 
-        // LEFT JOIN certi_details AS b ON a.id = b.id_asset
-        // LEFT JOIN certificates AS c ON b.id_certificate = c.id
-        // LEFT JOIN parameters AS d ON c.id_status = d.id
-        // LEFT JOIN users AS e ON c.id_receiver_user = e.id,
-        // parameters AS f, parameters AS g, parameters AS h, parameters AS i
-        // WHERE (c.id_status = $cetificate_status_id OR c.id_status IS NULL)
-        // AND a.id_asset_group = f.id
-        // AND a.id_asset_type = g.id
-        // AND a.id_brand = h.id
-        // AND a.id_status = i.id");
         $assigned = AssetConsts::ASSET_ASSIGNED;
 
         $assets = DB::select("SELECT a.id, a.asset_number, a.name, 
@@ -168,5 +153,10 @@ class Asset extends Model
     public function getPurchaseItem()
     {
         return $this->belongsTo(PurchaseItem::class, "id_purchase_item");
+    }
+
+    public function getRevaluations()
+    {
+        return $this->hasMany(DeprecationRevaluationDetail::class, "id_asset");
     }
 }

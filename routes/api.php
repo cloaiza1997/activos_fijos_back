@@ -47,5 +47,8 @@ Route::group(['middleware' => ['jwt']], function () {
     Route::post('certificate/store_item', 'CertificateController@storeItem');
     Route::resource('certificate', 'CertificateController');
     // Revaluaciones
+    Route::post('revaluation/status/cancel/{id}', 'RevaluationController@setStatusCancel');
+    Route::post('revaluation/status/execute/{id}', 'RevaluationController@setStatusExecute');
+    Route::post('revaluation/status/reverse/{id}', 'RevaluationController@setStatusReverse');
     Route::resource('revaluation', 'RevaluationController');
 });

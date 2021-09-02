@@ -7,6 +7,7 @@ class RevaluationConsts
 
   const REVALUATION_APP_KEY = "REVALUATIONS";
 
+  const REVALUATION_MESSAGE_EDIT_ERROR = "Ocurrió un error al consultar la revaluación";
   const REVALUATION_MESSAGE_STORE_LOG = "Creación de revaluación";
   const REVALUATION_MESSAGE_STORE_SUCCESS = "Proceso de revaluación creado correctamente";
   const REVALUATION_MESSAGE_UPDATE_LOG = "Actualización de revaluación";

@@ -33,6 +33,8 @@ class Asset extends Model
         "model",
         "serial_number",
         "entry_date",
+        "init_value",
+        "residual_value",
         "current_value",
         "use_life",
         "id_maintenance_frequence",
@@ -51,7 +53,16 @@ class Asset extends Model
             $asset->getMaintenanceFrequence;
             $asset->getPurchaseItem;
             $asset->getStatus;
-            $asset->getRevaluations;
+            $asset->getDepreReval;
+
+            foreach ($asset->getDepreReval as $item) {
+                $depre_reval = DeprecationRevaluation::find($item->id_depre_reval);
+                $depre_reval->getStatus;
+                $depre_reval->getActionType;
+                $depre_reval->getUser;
+
+                $item->depre_reval = $depre_reval;
+            }
 
             $asset->certificates = DB::select("SELECT a.id, LPAD(a.id, 6 ,0) AS certificate_number, a.delivered_at, a.received_at, d.display_name AS deliver_user, e.display_name AS receiver_user, f.str_val AS status
             FROM certificates AS a, certi_details AS b, assets AS c, users AS d, users AS e, parameters AS f
@@ -155,7 +166,7 @@ class Asset extends Model
         return $this->belongsTo(PurchaseItem::class, "id_purchase_item");
     }
 
-    public function getRevaluations()
+    public function getDepreReval()
     {
         return $this->hasMany(DeprecationRevaluationDetail::class, "id_asset");
     }

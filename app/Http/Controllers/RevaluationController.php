@@ -27,7 +27,6 @@ class RevaluationController extends Controller
     {
         $revaluation_process_id = Parameter::getParameterByKey(AssetConsts::ASSET_REVALUATION)->id;
 
-
         $revaluations = DeprecationRevaluation::where("id_action_type", $revaluation_process_id)->with(["getUser", "getStatus"])->get();
 
         return response()->json(["revaluations" => $revaluations]);
@@ -64,15 +63,20 @@ class RevaluationController extends Controller
     public function edit($id)
     {
         $revaluation = DeprecationRevaluation::getDepreRevalCanReverse($id);
-        $revaluation->getDetails;
-        $revaluation->getUser;
-        $revaluation->getStatus;
-        $revaluation->getChildren;
 
-        $asset_decommissioned_id = Parameter::getParameterByKey(AssetConsts::ASSET_DECOMMISSIONED)->id;
-        $assets = Asset::where("id_status", "!=", $asset_decommissioned_id)->with(["getBrand", "getStatus"])->get();
+        if ($revaluation) {
+            $revaluation->getDetails;
+            $revaluation->getUser;
+            $revaluation->getStatus;
+            $revaluation->getChildren;
 
-        return response()->json(["revaluation" => $revaluation, "assets" => $assets]);
+            $asset_decommissioned_id = Parameter::getParameterByKey(AssetConsts::ASSET_DECOMMISSIONED)->id;
+            $assets = Asset::where("id_status", "!=", $asset_decommissioned_id)->with(["getBrand", "getStatus"])->get();
+
+            return response()->json(["revaluation" => $revaluation, "assets" => $assets]);
+        } else {
+            return response()->json(['status' => false, 'message' => RevaluationConsts::REVALUATION_MESSAGE_EDIT_ERROR], 400);
+        }
     }
 
     /**

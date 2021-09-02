@@ -118,8 +118,12 @@ class AssetController extends Controller
     {
         $inputs = $request->all();
 
+        $residual_percentage = Parameter::getParameterByKey(AssetConsts::ASSET_DEPRECATION_RESIDUAL_VALUE);
+
         $asset = new Asset($inputs);
         $asset->id_status = Parameter::getParameterByKey(AssetConsts::ASSET_UNASSIGNED)->id;
+        $asset->init_value = $asset->current_value;
+        $asset->residual_value = $asset->current_value * $residual_percentage->num_val;
         $asset->save();
         $asset->asset_number = str_pad($asset->id_asset_group, 3, "0", STR_PAD_LEFT) . "-" . str_pad($asset->id_asset_type, 3, "0", STR_PAD_LEFT) . "-" .  str_pad($asset->id, 6, "0", STR_PAD_LEFT);
         $asset->update();

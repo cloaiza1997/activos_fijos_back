@@ -29,11 +29,13 @@ Route::group(['middleware' => ['jwt']], function () {
     Route::get('purchase_to_approve', 'PurchaseController@indexApprover');
     Route::put('purchase/update_status/{id}', 'PurchaseController@updateStatus');
     Route::resource('purchase', 'PurchaseController');
+
     // Activos
     Route::get('asset/list_own', 'AssetController@indexOwner');
     Route::get('asset/purchase_finished_available', 'AssetController@getPurchaseFinished');
     Route::post('asset/generate_plate/{asset_number}', 'AssetController@generateAssetPlateQrCode');
     Route::resource('asset', 'AssetController');
+
     // Actas
     Route::get('certificate/list_own', 'CertificateController@indexResponsible');
     Route::get('certificate/list_to_approve', 'CertificateController@indexApprover');
@@ -46,12 +48,17 @@ Route::group(['middleware' => ['jwt']], function () {
     Route::post('certificate/status/send_sign/{id}', 'CertificateController@setStatusSendSign');
     Route::post('certificate/store_item', 'CertificateController@storeItem');
     Route::resource('certificate', 'CertificateController');
+
     // Revaluaciones
     Route::post('revaluation/status/cancel/{id}', 'RevaluationController@setStatusCancel');
     Route::post('revaluation/status/execute/{id}', 'RevaluationController@setStatusExecute');
     Route::post('revaluation/status/reverse/{id}', 'RevaluationController@setStatusReverse');
     Route::resource('revaluation', 'RevaluationController');
+
     // Depreciaciones
     Route::post('deprecation/status/reverse/{id}', 'DeprecationController@setStatusReverse');
     Route::resource('deprecation', 'DeprecationController');
+
+    // Inventario
+    Route::resource('inventory', 'InventoryController');
 });

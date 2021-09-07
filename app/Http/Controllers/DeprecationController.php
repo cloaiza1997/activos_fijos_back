@@ -118,20 +118,20 @@ class DeprecationController extends Controller
             // echo ("<br/> new_value <br/>");
             // echo ($new_value);
 
-            // // echo ($current_value);
-            // // echo "<br/>";
-            // // echo ($new_value);
-            // // echo "<br/>";
-            // // echo ($use_life_days);
-            // // echo "<br/>";
-            // // echo ($use_life_years);
-            // // echo "<br/>";
-            // // echo ($diff_days_entry_date);
-            // // echo "<br/>";
-            // // echo ($diff_years_entry_date);
-            // // echo "<br/>";
-            // // echo ($diff_days_last_depre);
-            // // echo "<br/>";
+            // echo ($current_value);
+            // echo "<br/>";
+            // echo ($new_value);
+            // echo "<br/>";
+            // echo ($use_life_days);
+            // echo "<br/>";
+            // echo ($use_life_years);
+            // echo "<br/>";
+            // echo ($diff_days_entry_date);
+            // echo "<br/>";
+            // echo ($diff_years_entry_date);
+            // echo "<br/>";
+            // echo ($diff_days_last_depre);
+            // echo "<br/>";
         }
 
         $deprecation->id_status = $status_id_executed;
@@ -169,25 +169,61 @@ class DeprecationController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * Realiza un proceso de reversa de revaluación
      */
-    public function update(Request $request, $id)
+    public function setStatusReverse(Request $request, $id)
     {
-        //
-    }
+        $reversed_status_id = Parameter::getParameterByKey(AssetConsts::ASSET_UPDATE_COST_REVERSED)->id;
+        $executed_status_id = Parameter::getParameterByKey(AssetConsts::ASSET_UPDATE_COST_EXECUTED)->id;
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        $deprecation = DeprecationRevaluation::find($id);
+        $deprecation->id_status = $reversed_status_id;
+        $deprecation->update();
+
+        LogController::store($request, DeprecationConsts::DEPRECATION_APP_KEY, DeprecationConsts::DEPRECATION_MESSAGE_UPDATE_STATUS_LOG . " - " . $deprecation->getStatus->str_val, $deprecation->id);
+
+        $observations = DeprecationConsts::DEPRECATION_OBSERVATION_REVERSE . " - " . $deprecation->id;
+
+        $new_deprecation = new DeprecationRevaluation();
+        $new_deprecation->id_action_type = $deprecation->id_action_type;
+        $new_deprecation->id_user = User::getAuthUserId();
+        $new_deprecation->observations = $observations;
+        $new_deprecation->id_status = $executed_status_id;
+        $new_deprecation->id_parent = $deprecation->id;
+        $new_deprecation->save();
+
+        LogController::store($request, DeprecationConsts::DEPRECATION_APP_KEY, $observations, $new_deprecation->id);
+
+        foreach ($deprecation->getDetails as $detail) {
+            $deprecation_detail = new DeprecationRevaluationDetail();
+            $deprecation_detail->id_depre_reval = $new_deprecation->id;
+            $deprecation_detail->id_asset = $detail->id_asset;
+            $deprecation_detail->old_value = $detail->new_value;
+            $deprecation_detail->new_value = $detail->old_value;
+            $deprecation_detail->id_parent = $detail->id;
+            $deprecation_detail->observations = DeprecationConsts::DEPRECATION_OBSERVATION_REVERSE_DETAIL . " - " . $detail->id;
+            $deprecation_detail->save();
+
+            $asset = Asset::find($deprecation_detail->id_asset);
+            $asset->current_value = $deprecation_detail->new_value;
+            $asset->update();
+        }
+
+        $deprecation->getDetails;
+        $deprecation->getUser;
+        $deprecation->getStatus;
+        $deprecation->getChildren;
+
+        foreach ($deprecation->getDetails as $detail) {
+            $asset = Asset::getAsset($detail->id_asset);
+
+            $detail->asset = $asset;
+        }
+
+        return response()->json([
+            'status' => true,
+            'message' => DeprecationConsts::DEPRECATION_MESSAGE_UPDATE_STATUS_SUCCESS,
+            'deprecation' => $deprecation
+        ], 200);
     }
 }

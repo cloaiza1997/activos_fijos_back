@@ -52,5 +52,6 @@ Route::group(['middleware' => ['jwt']], function () {
     Route::post('revaluation/status/reverse/{id}', 'RevaluationController@setStatusReverse');
     Route::resource('revaluation', 'RevaluationController');
     // Depreciaciones
+    Route::post('deprecation/status/reverse/{id}', 'DeprecationController@setStatusReverse');
     Route::resource('deprecation', 'DeprecationController');
 });

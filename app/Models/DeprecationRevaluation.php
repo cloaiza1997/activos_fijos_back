@@ -67,18 +67,19 @@ class DeprecationRevaluation extends Model
     {
         $depre_reval = DeprecationRevaluation::find($id);
 
-        $executed_status_id = Parameter::getParameterByKey(AssetConsts::ASSET_UPDATE_COST_EXECUTED)->id;
-        $in_process_status_id = Parameter::getParameterByKey(AssetConsts::ASSET_UPDATE_COST_IN_PROCESS)->id;
+        if ($depre_reval) {
+            $executed_status_id = Parameter::getParameterByKey(AssetConsts::ASSET_UPDATE_COST_EXECUTED)->id;
+            $in_process_status_id = Parameter::getParameterByKey(AssetConsts::ASSET_UPDATE_COST_IN_PROCESS)->id;
 
-        $list = DB::select("SELECT MAX(id) id
-        FROM depreciation_revaluation
-        WHERE id_status IN ($executed_status_id, $in_process_status_id)
-        AND id_action_type = $depre_reval->id_action_type");
+            $list = DB::select("SELECT MAX(id) id
+                FROM depreciation_revaluation
+                WHERE id_status IN ($executed_status_id, $in_process_status_id)");
 
-        if (count($list) == 1) {
-            $max_revaluation = DeprecationRevaluation::find($list[0]->id);
+            if (count($list) == 1) {
+                $max_revaluation = DeprecationRevaluation::find($list[0]->id);
 
-            $depre_reval->can_reverse = $depre_reval->id == $max_revaluation->id && $max_revaluation->id_status == $executed_status_id;
+                $depre_reval->can_reverse = $depre_reval->id == $max_revaluation->id && $max_revaluation->id_status == $executed_status_id;
+            }
         }
 
         return $depre_reval;

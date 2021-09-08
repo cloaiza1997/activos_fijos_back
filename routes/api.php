@@ -60,5 +60,7 @@ Route::group(['middleware' => ['jwt']], function () {
     Route::resource('deprecation', 'DeprecationController');
 
     // Inventario
+    Route::post('inventory/detail', 'InventoryController@storeInventoryDetail');
+    Route::post('inventory/status/finished/{id}', 'InventoryController@setStatusFinished');
     Route::resource('inventory', 'InventoryController');
 });

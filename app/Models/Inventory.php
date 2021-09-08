@@ -35,4 +35,9 @@ class Inventory extends Model
     {
         return $this->belongsTo(Parameter::class, "id_status");
     }
+
+    public function getDetails()
+    {
+        return $this->hasMany(InventoryDetail::class, "id_inventory");
+    }
 }

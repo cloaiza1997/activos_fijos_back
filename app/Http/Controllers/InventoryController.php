@@ -11,6 +11,13 @@ use App\Models\Parameter;
 use App\Models\User;
 use Illuminate\Http\Request;
 
+/**
+ * @class InventoryController
+ * @namespace App\Http\Controllers
+ * @brief Controlador de los inventarios
+ * @date 01/06/2021
+ * @author Cristian Loaiza <cris-1997-loaiza@hotmail.com>
+ */
 class InventoryController extends Controller
 {
     public function index()

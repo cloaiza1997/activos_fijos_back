@@ -48,4 +48,9 @@ class Derecognition extends Model
     {
         return $this->belongsTo(User::class, "id_approver_user");
     }
+
+    public function getDetails()
+    {
+        return $this->hasMany(DerecognitionDetail::class, "id_derecognition");
+    }
 }

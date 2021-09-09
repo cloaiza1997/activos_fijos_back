@@ -25,7 +25,7 @@ class DerecognitionDetail extends Model
         "id_derecognition",
         "id_asset",
         "id_reason",
-        "observation",
+        "observations",
         "id_parent"
     ];
 

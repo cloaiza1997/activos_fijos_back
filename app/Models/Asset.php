@@ -55,6 +55,7 @@ class Asset extends Model
             $asset->getStatus;
             $asset->getDepreReval;
             $asset->getInventories;
+            $asset->getDerecognitions;
 
             foreach ($asset->getDepreReval as $item) {
                 $depre_reval = DeprecationRevaluation::find($item->id_depre_reval);
@@ -71,6 +72,15 @@ class Asset extends Model
                 $inventory->getUser;
 
                 $item->inventory = $inventory;
+            }
+
+            foreach ($asset->getDerecognitions as $item) {
+                $derecognition = DerecognitionDetail::find($item->id);
+                $derecognition->getReason;
+                $derecognition->getDerecognition;
+                $derecognition->getDerecognition->getCreatorUser;
+
+                $item->derecognition = $derecognition;
             }
 
             $asset->certificates = DB::select("SELECT a.id, LPAD(a.id, 6 ,0) AS certificate_number, a.delivered_at, a.received_at, d.display_name AS deliver_user, e.display_name AS receiver_user, f.str_val AS status
@@ -183,5 +193,10 @@ class Asset extends Model
     public function getInventories()
     {
         return $this->hasMany(InventoryDetail::class, "id_asset");
+    }
+
+    public function getDerecognitions()
+    {
+        return $this->hasMany(DerecognitionDetail::class, "id_asset");
     }
 }

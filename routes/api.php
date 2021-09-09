@@ -65,5 +65,12 @@ Route::group(['middleware' => ['jwt']], function () {
     Route::resource('inventory', 'InventoryController');
 
     // Bajas
+    Route::get('derecognition/list_to_approve', 'DerecognitionController@indexApprover');
+    Route::post('derecognition/status/approved/{id}', 'DerecognitionController@setStatusApproved');
+    Route::post('derecognition/status/cancel/{id}', 'DerecognitionController@setStatusCancel');
+    Route::post('derecognition/status/checking/{id}', 'DerecognitionController@setStatusChecking');
+    Route::post('derecognition/status/executed/{id}', 'DerecognitionController@setStatusExecuted');
+    Route::post('derecognition/status/rejected/{id}', 'DerecognitionController@setStatusRejected');
+    Route::post('derecognition/status/reverse/{id}', 'DerecognitionController@setStatusReverse');
     Route::resource('derecognition', 'DerecognitionController');
 });

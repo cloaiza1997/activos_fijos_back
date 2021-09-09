@@ -26,7 +26,7 @@ class Derecognition extends Model
         "id_parent",
         "id_creator_user",
         "id_approver_user",
-        "approvated_at"
+        "approved_at"
     ];
 
     public function getStatus()

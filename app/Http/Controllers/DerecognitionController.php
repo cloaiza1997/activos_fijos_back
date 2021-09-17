@@ -206,6 +206,9 @@ class DerecognitionController extends Controller
             $asset = Asset::find($detail->id_asset);
             $asset->id_status = $status_id;
             $asset->update();
+
+            $detail->getAsset;
+            $detail->getReason;
         }
 
         return $this->getResponseUpdateStatus($derecognition);

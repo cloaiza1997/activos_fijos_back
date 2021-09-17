@@ -6,6 +6,7 @@ use App\Constants\AssetConsts;
 use App\Constants\AuthConsts;
 use App\Constants\MaintenanceConsts;
 use App\Models\Asset;
+use App\Models\Attachment;
 use App\Models\Maintenance;
 use App\Models\MaintenanceDetail;
 use App\Models\MaintenanceResponsible;
@@ -84,38 +85,74 @@ class MaintenanceController extends Controller
         ]);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
-        //
+        $maintenance = Maintenance::find($id);
+
+        if ($maintenance) {
+            $maintenance->files = Attachment::getAttachments(MaintenanceConsts::MAINTENANCE_APP_KEY, $maintenance->id);
+            $maintenance->getDetails;
+            $maintenance->getStatus;
+            $maintenance->getResponsibles;
+            $maintenance->getUser;
+
+            foreach ($maintenance->getDetails as $detail) {
+                $asset = Asset::find($detail->id_asset);
+                $asset->getMaintenanceFrequence;
+
+                $detail->asset = $asset;
+            }
+
+            $params = $this->getFormData();
+
+            $params["maintenance"] = $maintenance;
+
+            return response()->json($params);
+        } else {
+            return response()->json(['status' => false, 'message' => MaintenanceConsts::MAINTENANCE_MESSAGE_EDIT_ERROR], 400);
+        }
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
-        //
+        $inputs = $request->all();
+
+        $status_id = Parameter::getParameterByKey(MaintenanceConsts::MAINTENANCE_IN_PROCESS)->id;
+
+        $maintenance = Maintenance::find($id);
+        $maintenance->id_status = $inputs["id_status"];
+        $maintenance->id_status = $status_id;
+        $maintenance->observations = $inputs["observations"];
+        $maintenance->update();
+
+        MaintenanceDetail::where("id_maintenance", $id)->delete();
+        MaintenanceResponsible::where("id_maintenance", $id)->delete();
+
+        foreach ($inputs["get_responsibles"] as $responsible) {
+            $responsible["id"] = null;
+            $responsible["created_at"] = null;
+            $responsible["updated_at"] = null;
+
+            $maintenance_responsible = new MaintenanceResponsible($responsible);
+            $maintenance_responsible->id_maintenance = $maintenance->id;
+            $maintenance_responsible->save();
+        }
+
+        foreach ($inputs["get_details"] as $detail) {
+            $detail["id"] = null;
+
+            $maintenance_detail = new MaintenanceDetail($detail);
+            $maintenance_detail->id_maintenance = $maintenance->id;
+            $maintenance_detail->save();
+        }
+
+        LogController::store($request, MaintenanceConsts::MAINTENANCE_APP_KEY, MaintenanceConsts::MAINTENANCE_MESSAGE_UPDATE_SUCCESS, $maintenance->id);
+
+        return response()->json([
+            'status' => true,
+            'message' => MaintenanceConsts::MAINTENANCE_MESSAGE_UPDATE_SUCCESS,
+            "maintenance" => $maintenance
+        ]);
     }
 
     /**

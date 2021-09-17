@@ -41,4 +41,14 @@ class Maintenance extends Model
     {
         return $this->belongsTo(Parameter::class, "id_type");
     }
+
+    public function getDetails()
+    {
+        return $this->hasMany(MaintenanceDetail::class, "id_maintenance");
+    }
+
+    public function getResponsibles()
+    {
+        return $this->hasMany(MaintenanceResponsible::class, "id_maintenance");
+    }
 }

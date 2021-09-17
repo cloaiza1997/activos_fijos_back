@@ -73,4 +73,7 @@ Route::group(['middleware' => ['jwt']], function () {
     Route::post('derecognition/status/rejected/{id}', 'DerecognitionController@setStatusRejected');
     Route::post('derecognition/status/reverse/{id}', 'DerecognitionController@setStatusReverse');
     Route::resource('derecognition', 'DerecognitionController');
+
+    // Mantenimientos
+    Route::resource('maintenance', 'MaintenanceController');
 });

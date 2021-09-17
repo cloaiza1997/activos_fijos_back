@@ -38,6 +38,7 @@ class Asset extends Model
         "current_value",
         "use_life",
         "id_maintenance_frequence",
+        "maintenance_date",
         "id_purchase_item",
         "id_status"
     ];

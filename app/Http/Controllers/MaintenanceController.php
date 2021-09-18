@@ -41,6 +41,28 @@ class MaintenanceController extends Controller
         return ["maintenance_types" => $maintenance_types, "providers" => $providers, "users" => $users, "assets" => $assets];
     }
 
+    private function getEditForm($maintenance)
+    {
+        $maintenance->files = Attachment::getAttachments(MaintenanceConsts::MAINTENANCE_APP_KEY, $maintenance->id);
+        $maintenance->getDetails;
+        $maintenance->getStatus;
+        $maintenance->getResponsibles;
+        $maintenance->getUser;
+
+        foreach ($maintenance->getDetails as $detail) {
+            $asset = Asset::find($detail->id_asset);
+            $asset->getMaintenanceFrequence;
+
+            $detail->asset = $asset;
+        }
+
+        $params = $this->getFormData();
+
+        $params["maintenance"] = $maintenance;
+
+        return $params;
+    }
+
     public function index()
     {
         $maintenances = Maintenance::with(["getUser", "getStatus", "getType"])->get();
@@ -90,24 +112,7 @@ class MaintenanceController extends Controller
         $maintenance = Maintenance::find($id);
 
         if ($maintenance) {
-            $maintenance->files = Attachment::getAttachments(MaintenanceConsts::MAINTENANCE_APP_KEY, $maintenance->id);
-            $maintenance->getDetails;
-            $maintenance->getStatus;
-            $maintenance->getResponsibles;
-            $maintenance->getUser;
-
-            foreach ($maintenance->getDetails as $detail) {
-                $asset = Asset::find($detail->id_asset);
-                $asset->getMaintenanceFrequence;
-
-                $detail->asset = $asset;
-            }
-
-            $params = $this->getFormData();
-
-            $params["maintenance"] = $maintenance;
-
-            return response()->json($params);
+            return response()->json($this->getEditForm($maintenance));
         } else {
             return response()->json(['status' => false, 'message' => MaintenanceConsts::MAINTENANCE_MESSAGE_EDIT_ERROR], 400);
         }
@@ -155,14 +160,45 @@ class MaintenanceController extends Controller
         ]);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
+    public function setStatusCancel(Request $request, $id)
     {
-        //
+        $status_id = Parameter::getParameterByKey(MaintenanceConsts::MAINTENANCE_CANCELLED)->id;
+
+        $maintenance = Maintenance::find($id);
+        $maintenance->id_status = $status_id;
+        $maintenance->update();
+
+        LogController::store($request, MaintenanceConsts::MAINTENANCE_APP_KEY, MaintenanceConsts::MAINTENANCE_MESSAGE_UPDATE_STATUS_LOG .  $maintenance->getStatus->str_val, $maintenance->id);
+
+        $params = $this->getEditForm($maintenance);
+        $params["status"] = true;
+        $params["message"] =  MaintenanceConsts::MAINTENANCE_MESSAGE_UPDATE_STATUS_SUCCESS;
+        $params["maintenance"] = $maintenance;
+
+        return response()->json($params);
+    }
+
+    public function setStatusFinished(Request $request, $id)
+    {
+        $status_id = Parameter::getParameterByKey(MaintenanceConsts::MAINTENANCE_FINISHED)->id;
+
+        $maintenance = Maintenance::find($id);
+        $maintenance->id_status = $status_id;
+        $maintenance->update();
+
+        LogController::store($request, MaintenanceConsts::MAINTENANCE_APP_KEY, MaintenanceConsts::MAINTENANCE_MESSAGE_UPDATE_STATUS_LOG .  $maintenance->getStatus->str_val, $maintenance->id);
+
+        foreach ($maintenance->getDetails as $detail) {
+            $asset = Asset::find($detail->id_asset);
+            $asset->maintenance_date = $detail->executed_at;
+            $asset->update();
+        }
+
+        $params = $this->getEditForm($maintenance);
+        $params["status"] = true;
+        $params["message"] =  MaintenanceConsts::MAINTENANCE_MESSAGE_UPDATE_STATUS_SUCCESS;
+        $params["maintenance"] = $maintenance;
+
+        return response()->json($params);
     }
 }

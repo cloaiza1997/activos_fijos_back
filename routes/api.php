@@ -75,5 +75,7 @@ Route::group(['middleware' => ['jwt']], function () {
     Route::resource('derecognition', 'DerecognitionController');
 
     // Mantenimientos
+    Route::post('maintenance/status/cancel/{id}', 'MaintenanceController@setStatusCancel');
+    Route::post('maintenance/status/finished/{id}', 'MaintenanceController@setStatusFinished');
     Route::resource('maintenance', 'MaintenanceController');
 });

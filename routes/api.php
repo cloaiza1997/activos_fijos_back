@@ -18,8 +18,10 @@ Route::post('logout', "AuthController@logout");
 Route::post('recovery_password', "AuthController@recoveryPassword");
 
 Route::group(['middleware' => ['jwt']], function () {
+    // Usuarios
     Route::get('test_login', 'AuthController@testLogin');
     Route::post('update_password', 'UserController@updatePassword');
+    Route::resource('user', 'UserController');
 
     // Adjuntos
     Route::post('upload_files/{app_key}/{id_register}', 'AttachmentController@uploadFiles');

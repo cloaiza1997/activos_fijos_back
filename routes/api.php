@@ -21,6 +21,7 @@ Route::group(['middleware' => ['jwt']], function () {
     // Usuarios
     Route::get('test_login', 'AuthController@testLogin');
     Route::post('update_password', 'UserController@updatePassword');
+    Route::post('user/admin_update_password/{id}', 'UserController@adminUpdatePassword');
     Route::resource('user', 'UserController');
 
     // Adjuntos

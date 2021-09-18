@@ -23,6 +23,11 @@ class UserConsts
   const USER_ROLE = "USER_ROLE";
   const USER_STATUS = "USER_STATUS";
 
+  const USER_MESSAGE_EDIT_ERROR = "Usuario no existe";
   const USER_MESSAGE_STORE_LOG = "Creación de usuario";
   const USER_MESSAGE_STORE_SUCCESS = "Usuario creado correctamente";
+  const USER_MESSAGE_UPDATE_LOG = "Actualización de usuario";
+  const USER_MESSAGE_UPDATE_SUCCESS = "Usuario actualizado correctamente";
+  const USER_MESSAGE_UPDATE_PASSWORD_LOG = "Actualización de contraseña por el administrador";
+  const USER_MESSAGE_UPDATE_PASSWORD_SUCCESS = "Contraseña actualizada correctamente";
 }

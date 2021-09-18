@@ -7,6 +7,7 @@ use App\Constants\MailConsts;
 use App\Constants\RegexConsts;
 use App\Constants\UserConsts;
 use App\Helpers\FunctionsHelper;
+use App\Models\Attachment;
 use App\Models\Parameter;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -62,7 +63,9 @@ class UserController extends Controller
             "body" => ["name" => $user->name, "password" => $new_password],
         ];
 
-        $mail = MailController::sendEmailByTemplate($params, MailConsts::EMAIL_TEMPLATE_USER_PASSWORD);
+        MailController::sendEmailByTemplate($params, MailConsts::EMAIL_TEMPLATE_USER_PASSWORD);
+
+        return $user;
     }
 
     public function updatePassword(Request $request)
@@ -150,6 +153,69 @@ class UserController extends Controller
         return response()->json([
             'status' => true,
             'message' => UserConsts::USER_MESSAGE_STORE_SUCCESS,
+            "user" => $user
+        ]);
+    }
+
+    public function edit($id)
+    {
+        $user = User::find($id);
+
+        if ($user && $id != 1) {
+            $user->signature = Attachment::getAttachments(UserConsts::USER_APP_KEY, $user->id);
+
+            $params = $this->getFormData();
+            $params["user"] = $user;
+
+            return response()->json($params);
+        } else {
+            return response()->json(['status' => false, 'message' => UserConsts::USER_MESSAGE_EDIT_ERROR], 400);
+        }
+    }
+
+    public function update(Request $request, $id)
+    {
+        $fail = FunctionsHelper::validateRequest(
+            $request,
+            [
+                "document_number" => "unique:users,document_number,$id",
+                "email" => "unique:users,email,$id",
+            ],
+            [
+                "document_number.unique" => UserConsts::USER_REQUEST_DOCUMENT_NUMBER_UNIQUE,
+                "email.unique" => UserConsts::USER_REQUEST_EMAIL_UNIQUE,
+            ]
+        );
+
+        if ($fail) {
+            return $fail;
+        }
+
+        $inputs = $request->all();
+
+        $user = User::find($id);
+        $user->update($inputs);
+        $user->display_name = $user->name . " " . $user->last_name;
+        $user->update();
+
+        LogController::store($request, UserConsts::USER_APP_KEY, UserConsts::USER_MESSAGE_UPDATE_LOG, $user->id);
+
+        return response()->json([
+            'status' => true,
+            'message' => UserConsts::USER_MESSAGE_UPDATE_SUCCESS,
+            "user" => $user
+        ]);
+    }
+
+    public function adminUpdatePassword(Request $request, $id)
+    {
+        $user = $this->generatePassword($id);
+
+        LogController::store($request, UserConsts::USER_APP_KEY, UserConsts::USER_MESSAGE_UPDATE_PASSWORD_LOG, $user->id);
+
+        return response()->json([
+            'status' => true,
+            'message' => UserConsts::USER_MESSAGE_UPDATE_PASSWORD_SUCCESS,
             "user" => $user
         ]);
     }

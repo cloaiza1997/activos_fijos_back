@@ -39,4 +39,11 @@ class LogController extends Controller
 
         $log->save();
     }
+
+    public function index()
+    {
+        $logs = Log::with(["getUser", "getAppKey"])->get();
+
+        return response()->json(["logs" => $logs]);
+    }
 }

@@ -82,6 +82,9 @@ Route::group(['middleware' => ['jwt']], function () {
     Route::post('maintenance/status/finished/{id}', 'MaintenanceController@setStatusFinished');
     Route::resource('maintenance', 'MaintenanceController');
 
+    // Proveedores
+    Route::resource('provider', 'ProviderController');
+
     // Logs
     Route::get('log', 'LogController@index');
 });

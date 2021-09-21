@@ -86,6 +86,7 @@ Route::group(['middleware' => ['jwt']], function () {
     Route::resource('provider', 'ProviderController');
 
     // Parámetros
+    Route::get('parameter/details/{id}', 'ParameterController@indexDetail');
     Route::resource('parameter', 'ParameterController');
 
     // Logs

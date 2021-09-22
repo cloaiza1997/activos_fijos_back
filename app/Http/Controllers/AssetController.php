@@ -39,9 +39,9 @@ class AssetController extends Controller
                 SELECT parameter_key
                 FROM parameters 
                 WHERE id_parent =  $asset_group_id
-                AND is_active = 1
             )
         )
+        AND is_active = 1
         ORDER BY id_parent, name");
 
         $asset_brands = Parameter::where("id_parent", Parameter::getParameterByKey(AssetConsts::ASSET_BRAND)->id)->where("is_active", 1)->get(["id", "str_val as name"]);

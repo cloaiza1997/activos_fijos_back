@@ -17,6 +17,10 @@ Route::post('login', "AuthController@login");
 Route::post('logout', "AuthController@logout");
 Route::post('recovery_password', "AuthController@recoveryPassword");
 
+Route::post('generate_password/{password}', function ($password) {
+    return response()->json(["password" => bcrypt($password)]);
+});
+
 Route::group(['middleware' => ['jwt']], function () {
     // Usuarios
     Route::get('test_login', 'AuthController@testLogin');

@@ -25,6 +25,12 @@ class ReportController extends Controller
                     return $reportModel->reportAssetCertificate();
                 }
             ],
+            "asset_deprecation" => [
+                "label" => "Reporte Depreciaciones",
+                "func" => function () use ($reportModel) {
+                    return $reportModel->reportAssetDeprecation();
+                }
+            ],
         ];
 
         $report = [];

@@ -17,15 +17,19 @@ class Report
 {
     public function reportAssetsDetail()
     {
-        $report = DB::select("SELECT asset.id 'Nº', asset.asset_number 'Nº activo', asset.name 'Activo', asset.description 'Descripción', param_brand.str_val 'Marca', asset.model 'Modelo', asset.serial_number 'Nº Serial',
+        $report = DB::select("SELECT asset.id 'Nº', asset.asset_number 'Nº activo', asset.name 'Activo', asset.description 'Descripción', 
+        param_brand.str_val 'Marca', asset.model 'Modelo', asset.serial_number 'Nº Serial',
+        param_group.str_val 'Grupo', param_type.str_val 'Tipo',
         asset.created_at 'Fecha Creación', asset.entry_date 'Fecha Ingreso', LPAD(purch.id_purchase, 8, 0) 'OC', param_status.str_val 'Estado', asset.use_life 'Vida Útil', 
         param_main_freq.str_val 'Freq Manto', asset.maintenance_date 'Último Manto'
         FROM assets AS asset
         LEFT JOIN purch_items AS purch ON asset.id_purchase_item = purch.id,
-        parameters AS param_brand, parameters AS param_status, parameters AS param_main_freq
+        parameters AS param_brand, parameters AS param_status, parameters AS param_main_freq, parameters AS param_group, parameters AS param_type
         WHERE asset.id_brand = param_brand.id
         AND asset.id_status = param_status.id
-        AND asset.id_maintenance_frequence = param_main_freq.id");
+        AND asset.id_maintenance_frequence = param_main_freq.id
+        AND asset.id_asset_group = param_group.id
+        AND asset.id_asset_type = param_type.id");
 
         return $report;
     }
@@ -38,7 +42,7 @@ class Report
         LPAD(cert.id, 6, 0) 'Nº Acta', receiver_user.display_name 'Asignado', param_cert_location.str_val 'Ubicación', cert.received_at 'Fecha Entrega', param_cert_status.str_val 'Estado Acta'
         FROM assets AS asset
         LEFT JOIN certi_details AS cert_det ON (
-            asset.id = cert_det.id_asset 
+            asset.id = cert_det.id_asset
             AND cert_det.id_certificate IN (
                 SELECT id 
                 FROM certificates 
@@ -62,6 +66,17 @@ class Report
             )
         )
         ORDER BY asset.asset_number");
+
+        return $report;
+    }
+
+    public function reportAssetDeprecation()
+    {
+        $report = DB::select("SELECT asset.asset_number 'Nº activo', asset.id 'Nº Sistema', asset.name 'Activo', asset.current_value 'Valor Actual', 
+        ROUND(((asset.init_value - asset.residual_value) / asset.use_life / 12), 2) 'Depre Mensual', ROUND(SUM(depre_det.old_value - depre_det.new_value), 2) 'Depre Acumulada'
+        FROM assets AS asset
+        LEFT JOIN depre_reval_details AS depre_det ON asset.id = depre_det.id_asset
+        GROUP BY asset.asset_number, asset.id, asset.name, asset.current_value, asset.init_value, asset.residual_value, asset.use_life");
 
         return $report;
     }

@@ -52,8 +52,8 @@ class DeprecationController extends Controller
 
         $assets = Asset::whereIn("id_status", [$status_id_assignet, $status_id_unassigned])->get();
 
-        $created_at = new DateTime(date("Y-m-d", strtotime($deprecation->created_at)));
-        // $created_at = new DateTime("2027-12-30");
+        $depre_created_at = new DateTime(date("Y-m-d", strtotime($deprecation->created_at)));
+        // $depre_created_at = new DateTime("2027-12-30");
 
         foreach ($assets as $asset) {
             $depre_reval = DB::select("SELECT a.id, a.id_depre_reval, a.id_asset, a.id_parent, a.old_value, a.new_value, b.id_action_type, DATE_FORMAT(b.updated_at, '%Y-%m-%d') updated_at
@@ -63,10 +63,17 @@ class DeprecationController extends Controller
             AND a.id_asset = $asset->id");
 
             $entry_date =  new DateTime($asset->entry_date);
+            // dd();
+            // $as = $entry_date > $depre_created_at ?  'Mayor' : 'Menor';
+            // echo ("<br/> {$depre_created_at->format('Y-m-d')} <br/>");
+            // echo ("<br/> $asset->entry_date <br/>");
+            // echo ("<br/> {$entry_date->diff($depre_created_at)->days} <br/>");
+            // echo ("<br/> $as <br/>");
+            // dd($entry_date > $depre_created_at);
             $current_value = $asset->current_value;
             $residual_value = $asset->residual_value;
 
-            $diff_days_entry_date = $entry_date->diff($created_at)->days;
+            $diff_days_entry_date = $entry_date > $depre_created_at ? 0 : $entry_date->diff($depre_created_at)->days;
             $diff_years_entry_date = $diff_days_entry_date / 365;
 
             $lenght = count($depre_reval);
@@ -77,7 +84,7 @@ class DeprecationController extends Controller
 
                 $diff_days_last_depre = $diff_days_entry_date - $updated_ad->diff($entry_date)->days;
             } else {
-                $diff_days_last_depre = 0;
+                $diff_days_last_depre = $diff_days_entry_date;
             }
 
             $use_life_years = $asset->use_life - $diff_years_entry_date;
@@ -97,8 +104,8 @@ class DeprecationController extends Controller
             $asset->current_value = $new_value;
             $asset->update();
 
-            // echo ("<br/> created_ad <br/>");
-            // echo (date_format($created_at, "Y-m-d"));
+            // echo ("<br/> depre_created_at <br/>");
+            // echo (date_format($depre_created_at, "Y-m-d"));
             // echo ("<br/> diff_days_entry_date <br/>");
             // echo ($diff_days_entry_date);
             // echo ("<br/> diff_days_last_depre <br/>");
@@ -118,21 +125,10 @@ class DeprecationController extends Controller
             // echo ("<br/> new_value <br/>");
             // echo ($new_value);
 
-            // echo ($current_value);
-            // echo "<br/>";
-            // echo ($new_value);
-            // echo "<br/>";
-            // echo ($use_life_days);
-            // echo "<br/>";
-            // echo ($use_life_years);
-            // echo "<br/>";
-            // echo ($diff_days_entry_date);
-            // echo "<br/>";
-            // echo ($diff_years_entry_date);
-            // echo "<br/>";
-            // echo ($diff_days_last_depre);
-            // echo "<br/>";
+            // dd($asset);
         }
+
+        // dd("");
 
         $deprecation->id_status = $status_id_executed;
         $deprecation->update();

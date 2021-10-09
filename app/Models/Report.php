@@ -17,7 +17,7 @@ class Report
 {
     public function reportAssetsDetail()
     {
-        $report = DB::select("SELECT asset.id 'Nº', asset.asset_number 'Nº activo', asset.name 'Activo', asset.description 'Descripción', 
+        $report = DB::select("SELECT asset.id 'Nº', asset.asset_number 'Nº Activo', asset.name 'Activo', asset.description 'Descripción', 
         param_brand.str_val 'Marca', asset.model 'Modelo', asset.serial_number 'Nº Serial',
         param_group.str_val 'Grupo', param_type.str_val 'Tipo',
         asset.created_at 'Fecha Creación', asset.entry_date 'Fecha Ingreso', LPAD(purch.id_purchase, 8, 0) 'OC', param_status.str_val 'Estado', asset.use_life 'Vida Útil', 
@@ -38,7 +38,7 @@ class Report
     {
         $id_certificate_active = Parameter::getParameterByKey(CertificateConsts::CERTIFICATE_ACTIVE)->id;
 
-        $report = DB::select("SELECT asset.asset_number 'Nº activo', asset.id 'Nº Sistema', asset.name 'Activo', param_asset_status.str_val 'Estado Activo',
+        $report = DB::select("SELECT asset.asset_number 'Nº Activo', asset.id 'Nº Sistema', asset.name 'Activo', param_asset_status.str_val 'Estado Activo',
         LPAD(cert.id, 6, 0) 'Nº Acta', receiver_user.display_name 'Asignado', param_cert_location.str_val 'Ubicación', cert.received_at 'Fecha Entrega', param_cert_status.str_val 'Estado Acta'
         FROM assets AS asset
         LEFT JOIN certi_details AS cert_det ON (
@@ -72,7 +72,7 @@ class Report
 
     public function reportAssetDeprecation()
     {
-        $report = DB::select("SELECT asset.asset_number 'Nº activo', asset.id 'Nº Sistema', asset.name 'Activo', asset.current_value 'Valor Actual', 
+        $report = DB::select("SELECT asset.asset_number 'Nº Activo', asset.id 'Nº Sistema', asset.name 'Activo', asset.current_value 'Valor Actual', 
         ROUND(((asset.init_value - asset.residual_value) / asset.use_life / 12), 2) 'Depre Mensual', ROUND(SUM(depre_det.old_value - depre_det.new_value), 2) 'Depre Acumulada'
         FROM assets AS asset
         LEFT JOIN depre_reval_details AS depre_det ON asset.id = depre_det.id_asset

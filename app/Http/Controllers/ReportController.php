@@ -40,14 +40,25 @@ class ReportController extends Controller
         ];
 
         $report = [];
+        $status = true;
+        $code = 200;
+        $message = "";
 
         if (isset($reports[$inputs["name"]])) {
             $label = $reports[$inputs["name"]]["label"];
             $report =  $reports[$inputs["name"]]["func"]();
+
+            $status = true;
+            $message = "Reporte generado correctamente";
+            $code = 200;
         } else {
             $label = "No existe el reporte";
+
+            $status = false;
+            $message = $label;
+            $code = 400;
         }
 
-        return response()->json(["label" => $label, "report" => $report]);
+        return response()->json(["status" => $status, "message" => $message, "label" => $label, "report" => $report], $code);
     }
 }

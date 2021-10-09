@@ -2,31 +2,37 @@
 
 namespace App\Http\Controllers;
 
+use App\Constants\ReportConsts;
 use App\Models\Report;
 use Illuminate\Http\Request;
 
 class ReportController extends Controller
 {
+    public function index()
+    {
+        return response()->json(["reports" => ReportConsts::REPORT_LIST]);
+    }
+
     public function generateReport(Request $request)
     {
         $inputs = $request->all();
         $reportModel = new Report();
 
         $reports = [
-            "asset_details" => [
-                "label" => "Reporte Detalle de Activos",
+            ReportConsts::REPORT_ASSET_DETAILS => [
+                "label" => ReportConsts::REPORT_ASSET_DETAILS_LABEL,
                 "func" => function () use ($reportModel) {
                     return $reportModel->reportAssetsDetail();
                 }
             ],
-            "asset_certificate" => [
-                "label" => "Reporte Activos y Actas",
+            ReportConsts::REPORT_ASSET_CERTIFICATE => [
+                "label" =>  ReportConsts::REPORT_ASSET_CERTIFICATE_LABEL,
                 "func" => function () use ($reportModel) {
                     return $reportModel->reportAssetCertificate();
                 }
             ],
-            "asset_deprecation" => [
-                "label" => "Reporte Depreciaciones",
+            ReportConsts::REPORT_ASSET_DEPRECATION => [
+                "label" => ReportConsts::REPORT_ASSET_DEPRECATION_LABEL,
                 "func" => function () use ($reportModel) {
                     return $reportModel->reportAssetDeprecation();
                 }

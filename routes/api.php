@@ -95,4 +95,7 @@ Route::group(['middleware' => ['jwt']], function () {
 
     // Logs
     Route::get('log', 'LogController@index');
+
+    // Reportes
+    Route::post('resport', 'ReportController@generateReport');
 });

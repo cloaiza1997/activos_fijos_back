@@ -56,7 +56,7 @@ CREATE TABLE IF NOT EXISTS `assets` (
   CONSTRAINT `fk_purch_item_assets_id_purchas` FOREIGN KEY (`id_purchase_item`) REFERENCES `purch_items` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla gestion_activos.assets: ~0 rows (aproximadamente)
+-- Volcando datos para la tabla gestion_activos.assets: ~71 rows (aproximadamente)
 /*!40000 ALTER TABLE `assets` DISABLE KEYS */;
 /*!40000 ALTER TABLE `assets` ENABLE KEYS */;
 
@@ -75,7 +75,7 @@ CREATE TABLE IF NOT EXISTS `attachments` (
   CONSTRAINT `fk_parameters_attachment_id_app_key` FOREIGN KEY (`id_app_key`) REFERENCES `parameters` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla gestion_activos.attachments: ~0 rows (aproximadamente)
+-- Volcando datos para la tabla gestion_activos.attachments: ~8 rows (aproximadamente)
 /*!40000 ALTER TABLE `attachments` DISABLE KEYS */;
 /*!40000 ALTER TABLE `attachments` ENABLE KEYS */;
 
@@ -116,7 +116,7 @@ CREATE TABLE IF NOT EXISTS `certificates` (
   CONSTRAINT `fk_users_certificat_id_receive` FOREIGN KEY (`id_receiver_user`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla gestion_activos.certificates: ~0 rows (aproximadamente)
+-- Volcando datos para la tabla gestion_activos.certificates: ~1 rows (aproximadamente)
 /*!40000 ALTER TABLE `certificates` DISABLE KEYS */;
 /*!40000 ALTER TABLE `certificates` ENABLE KEYS */;
 
@@ -170,7 +170,7 @@ CREATE TABLE IF NOT EXISTS `depreciation_revaluation` (
   CONSTRAINT `fk_users_depre_reva_id_user` FOREIGN KEY (`id_user`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla gestion_activos.depreciation_revaluation: ~0 rows (aproximadamente)
+-- Volcando datos para la tabla gestion_activos.depreciation_revaluation: ~2 rows (aproximadamente)
 /*!40000 ALTER TABLE `depreciation_revaluation` DISABLE KEYS */;
 /*!40000 ALTER TABLE `depreciation_revaluation` ENABLE KEYS */;
 
@@ -195,7 +195,7 @@ CREATE TABLE IF NOT EXISTS `depre_reval_details` (
   CONSTRAINT `fk_depre_reva_dep_rev_de_id_depre_r` FOREIGN KEY (`id_depre_reval`) REFERENCES `depreciation_revaluation` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla gestion_activos.depre_reval_details: ~0 rows (aproximadamente)
+-- Volcando datos para la tabla gestion_activos.depre_reval_details: ~138 rows (aproximadamente)
 /*!40000 ALTER TABLE `depre_reval_details` DISABLE KEYS */;
 /*!40000 ALTER TABLE `depre_reval_details` ENABLE KEYS */;
 
@@ -222,7 +222,7 @@ CREATE TABLE IF NOT EXISTS `derecognitions` (
   CONSTRAINT `fk_users_derecognit_id_creator` FOREIGN KEY (`id_creator_user`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla gestion_activos.derecognitions: ~0 rows (aproximadamente)
+-- Volcando datos para la tabla gestion_activos.derecognitions: ~2 rows (aproximadamente)
 /*!40000 ALTER TABLE `derecognitions` DISABLE KEYS */;
 /*!40000 ALTER TABLE `derecognitions` ENABLE KEYS */;
 
@@ -248,7 +248,7 @@ CREATE TABLE IF NOT EXISTS `derec_details` (
   CONSTRAINT `fk_parameters_derec_deta_id_reason` FOREIGN KEY (`id_reason`) REFERENCES `parameters` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla gestion_activos.derec_details: ~0 rows (aproximadamente)
+-- Volcando datos para la tabla gestion_activos.derec_details: ~2 rows (aproximadamente)
 /*!40000 ALTER TABLE `derec_details` DISABLE KEYS */;
 /*!40000 ALTER TABLE `derec_details` ENABLE KEYS */;
 
@@ -268,7 +268,7 @@ CREATE TABLE IF NOT EXISTS `inventories` (
   CONSTRAINT `fk_users_inventorie_id_user` FOREIGN KEY (`id_user`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla gestion_activos.inventories: ~0 rows (aproximadamente)
+-- Volcando datos para la tabla gestion_activos.inventories: ~1 rows (aproximadamente)
 /*!40000 ALTER TABLE `inventories` DISABLE KEYS */;
 /*!40000 ALTER TABLE `inventories` ENABLE KEYS */;
 
@@ -310,7 +310,7 @@ CREATE TABLE IF NOT EXISTS `logs` (
   CONSTRAINT `fk_users_logs_id_user` FOREIGN KEY (`id_user`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla gestion_activos.logs: ~0 rows (aproximadamente)
+-- Volcando datos para la tabla gestion_activos.logs: ~93 rows (aproximadamente)
 /*!40000 ALTER TABLE `logs` DISABLE KEYS */;
 /*!40000 ALTER TABLE `logs` ENABLE KEYS */;
 
@@ -333,7 +333,7 @@ CREATE TABLE IF NOT EXISTS `maintenances` (
   CONSTRAINT `fk_users_maintenanc_id_user` FOREIGN KEY (`id_user`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla gestion_activos.maintenances: ~0 rows (aproximadamente)
+-- Volcando datos para la tabla gestion_activos.maintenances: ~1 rows (aproximadamente)
 /*!40000 ALTER TABLE `maintenances` DISABLE KEYS */;
 /*!40000 ALTER TABLE `maintenances` ENABLE KEYS */;
 
@@ -354,7 +354,7 @@ CREATE TABLE IF NOT EXISTS `maint_details` (
   CONSTRAINT `fk_maintenanc_maint_deta_id_mainten` FOREIGN KEY (`id_maintenance`) REFERENCES `maintenances` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla gestion_activos.maint_details: ~0 rows (aproximadamente)
+-- Volcando datos para la tabla gestion_activos.maint_details: ~2 rows (aproximadamente)
 /*!40000 ALTER TABLE `maint_details` DISABLE KEYS */;
 /*!40000 ALTER TABLE `maint_details` ENABLE KEYS */;
 
@@ -376,7 +376,7 @@ CREATE TABLE IF NOT EXISTS `maint_responsibles` (
   CONSTRAINT `fk_users_maint_resp_id_user` FOREIGN KEY (`id_user`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla gestion_activos.maint_responsibles: ~0 rows (aproximadamente)
+-- Volcando datos para la tabla gestion_activos.maint_responsibles: ~2 rows (aproximadamente)
 /*!40000 ALTER TABLE `maint_responsibles` DISABLE KEYS */;
 /*!40000 ALTER TABLE `maint_responsibles` ENABLE KEYS */;
 
@@ -401,7 +401,7 @@ CREATE TABLE IF NOT EXISTS `outboxes` (
   CONSTRAINT `fk_parameters_outboxes_id_email_t` FOREIGN KEY (`id_email_template`) REFERENCES `parameters` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla gestion_activos.outboxes: ~0 rows (aproximadamente)
+-- Volcando datos para la tabla gestion_activos.outboxes: ~9 rows (aproximadamente)
 /*!40000 ALTER TABLE `outboxes` DISABLE KEYS */;
 /*!40000 ALTER TABLE `outboxes` ENABLE KEYS */;
 
@@ -422,207 +422,207 @@ CREATE TABLE IF NOT EXISTS `parameters` (
   PRIMARY KEY (`id`),
   KEY `fk_parameters_parameters_id_parent` (`id_parent`),
   CONSTRAINT `fk_parameters_parameters_id_parent` FOREIGN KEY (`id_parent`) REFERENCES `parameters` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=264 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla gestion_activos.parameters: ~0 rows (aproximadamente)
+-- Volcando datos para la tabla gestion_activos.parameters: ~196 rows (aproximadamente)
 /*!40000 ALTER TABLE `parameters` DISABLE KEYS */;
 INSERT INTO `parameters` (`id`, `id_parent`, `parameter_key`, `name`, `num_val`, `str_val`, `is_active`, `is_editable`, `is_editable_details`, `created_at`, `updated_at`) VALUES
-	(1, NULL, 'APP_KEY', 'Identificador que representa un módulo o proceso del sistema', NULL, NULL, 1, 0, 0, '2021-10-29 21:03:54', '2021-10-29 21:03:54'),
-	(2, NULL, 'ASSET_BRAND', 'Marcas de los activos', NULL, NULL, 1, 0, 1, '2021-10-29 21:03:54', '2021-10-29 21:03:54'),
-	(3, NULL, 'ASSET_GROUP', 'Grupos de activos', NULL, NULL, 1, 0, 1, '2021-10-29 21:03:54', '2021-10-29 21:03:54'),
-	(4, NULL, 'ASSET_MAINTENANCE_FREQUENCE', 'Frecuencia del mantenimiento de un activo', NULL, NULL, 1, 0, 0, '2021-10-29 21:03:54', '2021-10-29 21:03:54'),
-	(5, NULL, 'ASSET_STATUS', 'Estado de un activo fijo', NULL, NULL, 1, 0, 0, '2021-10-29 21:03:54', '2021-10-29 21:03:54'),
-	(6, NULL, 'ASSET_UPDATE_COST', 'Tipo de acción que afecta el costo del activo', NULL, NULL, 1, 0, 0, '2021-10-29 21:03:54', '2021-10-29 21:03:54'),
-	(7, NULL, 'ASSET_UPDATE_COST_STATUS', 'Estados para los procesos de depreciación y revaluación', NULL, NULL, 1, 0, 0, '2021-10-29 21:03:54', '2021-10-29 21:03:54'),
-	(8, NULL, 'CERTIFICATES_ASSET_STATUS', 'Estado físico del activo a entregar', NULL, NULL, 1, 0, 0, '2021-10-29 21:03:54', '2021-10-29 21:03:54'),
-	(9, NULL, 'CERTIFICATES_STATUS', 'Estados de las actas', NULL, NULL, 1, 0, 0, '2021-10-29 21:03:54', '2021-10-29 21:03:54'),
-	(10, NULL, 'COMPANY_AREAS', 'Áreas de la compañía', NULL, NULL, 1, 0, 1, '2021-10-29 21:03:54', '2021-10-29 21:03:54'),
-	(11, NULL, 'COMPANY_INFO', 'Información de la compañía', NULL, NULL, 1, 0, 1, '2021-10-29 21:03:54', '2021-10-29 21:03:54'),
-	(12, NULL, 'COMPANY_POSITIONS', 'Cargos de la compañía', NULL, NULL, 1, 0, 1, '2021-10-29 21:03:54', '2021-10-29 21:03:54'),
-	(13, NULL, 'DEPARTMENTS', 'Departamentos de Colombia', NULL, NULL, 1, 0, 1, '2021-10-29 21:03:54', '2021-10-29 21:03:54'),
-	(14, NULL, 'DERECOGNITION_REASONS', 'Motivos para dar de baja a un activo', NULL, NULL, 1, 0, 1, '2021-10-29 21:03:54', '2021-10-29 21:03:54'),
-	(15, NULL, 'DERECOGNITION_STATUS', 'Estados que puede tener un proceso de baja de activos', NULL, NULL, 1, 0, 0, '2021-10-29 21:03:54', '2021-10-29 21:03:54'),
-	(16, NULL, 'DOCUMENT_TYPE', 'Tipos de documentos de identidad', NULL, NULL, 1, 0, 1, '2021-10-29 21:03:54', '2021-10-29 21:03:54'),
-	(17, NULL, 'EMAILS_TEMPLATES', 'Plantillas para el envío de correos', NULL, NULL, 1, 0, 1, '2021-10-29 21:03:54', '2021-10-29 21:03:54'),
-	(18, NULL, 'GENERIC_AREA_MANAGEMENT_ASSETS', 'Identificador de un área genérica en el sistema que solo es utilizada para indicar que un activo no ', 195.00000, NULL, 1, 0, 0, '2021-10-29 21:03:54', '2021-10-29 21:03:54'),
-	(19, NULL, 'GENERIC_USER_MANAGEMENT_ASSETS', 'Identificador de un usuario genérico en el sistema que solo es utilizado para indicar que un activo ', 1.00000, NULL, 1, 0, 0, '2021-10-29 21:03:54', '2021-10-29 21:03:54'),
-	(20, NULL, 'INVENTORY_STATUS', 'Estados que puede tener un proceso de inventario de activos', NULL, NULL, 1, 0, 0, '2021-10-29 21:03:54', '2021-10-29 21:03:54'),
-	(21, NULL, 'IVA', 'IVA', 0.19000, NULL, 1, 1, 0, '2021-10-29 21:03:54', '2021-10-29 21:03:54'),
-	(22, NULL, 'MAINTENANCE_STATUS', 'Estados que puede tener un proceso de mantenimiento de activos', NULL, NULL, 1, 0, 0, '2021-10-29 21:03:54', '2021-10-29 21:03:54'),
-	(23, NULL, 'MAINTENANCE_TYPE', 'Tipos de mantenimiento', NULL, NULL, 1, 0, 1, '2021-10-29 21:03:54', '2021-10-29 21:03:54'),
-	(24, NULL, 'PAYMENT_METHODS', 'Métodos de pago', NULL, NULL, 1, 0, 0, '2021-10-29 21:03:54', '2021-10-29 21:03:54'),
-	(25, NULL, 'PURCHASE_STATUS', 'Estados que puede tener una orden de compra', NULL, NULL, 1, 0, 0, '2021-10-29 21:03:54', '2021-10-29 21:03:54'),
-	(26, NULL, 'SENDER_EMAIL', 'Email remitente de los mensajes', NULL, 'email@email.com', 1, 1, 0, '2021-10-29 21:03:54', '2021-10-29 21:03:54'),
-	(27, NULL, 'SENDER_EMAIL_FROM', 'Nombre del remitente de correos', NULL, 'Activos Fijos Modern Soflutions', 1, 1, 0, '2021-10-29 21:03:54', '2021-10-29 21:03:54'),
-	(28, NULL, 'SMMLV', 'SMMLV del año en curso', 908526.00000, NULL, 1, 1, 0, '2021-10-29 21:03:54', '2021-10-29 21:03:54'),
-	(29, NULL, 'USER_ROLE', 'Roles de los usuarios del sistema', NULL, NULL, 1, 0, 0, '2021-10-29 21:03:54', '2021-10-29 21:03:54'),
-	(30, NULL, 'USER_STATUS', 'Estados de los usuarios del sistema', NULL, NULL, 1, 0, 0, '2021-10-29 21:03:54', '2021-10-29 21:03:54'),
-	(31, NULL, 'ASSET_AMOUNT', 'Valor para considerar un bien como activo fijo', 700000.00000, NULL, 1, 1, 0, '2021-10-29 21:03:54', '2021-10-29 21:03:54'),
-	(32, NULL, 'ASSET_DEPRECATION_RESIDUAL_VALUE', 'Valor residual para la depreciación en porcentaje', 0.05000, NULL, 1, 1, 0, '2021-10-29 21:03:54', '2021-10-29 21:03:54'),
-	(100, 1, 'ASSETS', '', NULL, 'Activos', 1, 0, 0, '2021-10-29 21:03:54', '2021-10-29 21:03:54'),
-	(101, 1, 'ATTATCHMENTS', '', NULL, 'Adjuntos', 1, 0, 0, '2021-10-29 21:03:54', '2021-10-29 21:03:54'),
-	(102, 1, 'AUTH', '', NULL, 'Autenticación', 1, 0, 0, '2021-10-29 21:03:54', '2021-10-29 21:03:54'),
-	(103, 1, 'CERTIFICATES', '', NULL, 'Actas', 1, 0, 0, '2021-10-29 21:03:54', '2021-10-29 21:03:54'),
-	(104, 1, 'DEPRECATIONS', '', NULL, 'Depreciaciones', 1, 0, 0, '2021-10-29 21:03:54', '2021-10-29 21:03:54'),
-	(105, 1, 'DERECOGNITIONS', '', NULL, 'Bajas', 1, 0, 0, '2021-10-29 21:03:54', '2021-10-29 21:03:54'),
-	(106, 1, 'INVENTORIES', '', NULL, 'Inventarios', 1, 0, 0, '2021-10-29 21:03:54', '2021-10-29 21:03:54'),
-	(107, 1, 'MAINTENANCES', '', NULL, 'Mantenimientos', 1, 0, 0, '2021-10-29 21:03:54', '2021-10-29 21:03:54'),
-	(108, 1, 'PARAMETERS', '', NULL, 'Parámetros', 1, 0, 0, '2021-10-29 21:03:54', '2021-10-29 21:03:54'),
-	(109, 1, 'PROVIDERS', '', NULL, 'Proveedores', 1, 0, 0, '2021-10-29 21:03:54', '2021-10-29 21:03:54'),
-	(110, 1, 'PURCHASES', '', NULL, 'Compras', 1, 0, 0, '2021-10-29 21:03:54', '2021-10-29 21:03:54'),
-	(111, 1, 'REVALUATIONS', '', NULL, 'Revaluaciones', 1, 0, 0, '2021-10-29 21:03:54', '2021-10-29 21:03:54'),
-	(112, 1, 'USERS', '', NULL, 'Usuarios', 1, 0, 0, '2021-10-29 21:03:54', '2021-10-29 21:03:54'),
-	(113, 2, '', '', NULL, 'Apple', 1, 1, 0, '2021-10-29 21:03:54', '2021-10-29 21:03:54'),
-	(114, 2, '', '', NULL, 'Asus', 1, 1, 0, '2021-10-29 21:03:54', '2021-10-29 21:03:54'),
-	(115, 2, '', '', NULL, 'Diseñar Modulares', 1, 1, 0, '2021-10-29 21:03:54', '2021-10-29 21:03:54'),
-	(116, 2, '', '', NULL, 'HP', 1, 1, 0, '2021-10-29 21:03:54', '2021-10-29 21:03:54'),
-	(117, 2, '', '', NULL, 'Huawei', 1, 1, 0, '2021-10-29 21:03:54', '2021-10-29 21:03:54'),
-	(118, 2, '', '', NULL, 'Lenovo', 1, 1, 0, '2021-10-29 21:03:54', '2021-10-29 21:03:54'),
-	(119, 2, '', '', NULL, 'LG', 1, 1, 0, '2021-10-29 21:03:54', '2021-10-29 21:03:54'),
-	(120, 2, '', '', NULL, 'Logitech', 1, 1, 0, '2021-10-29 21:03:54', '2021-10-29 21:03:54'),
-	(121, 2, '', '', NULL, 'Motorola', 1, 1, 0, '2021-10-29 21:03:54', '2021-10-29 21:03:54'),
-	(122, 2, '', '', NULL, 'Ricoh', 1, 1, 0, '2021-10-29 21:03:54', '2021-10-29 21:03:54'),
-	(123, 2, '', '', NULL, 'Samsung', 1, 1, 0, '2021-10-29 21:03:54', '2021-10-29 21:03:54'),
-	(124, 2, '', '', NULL, 'Unitec', 1, 1, 0, '2021-10-29 21:03:54', '2021-10-29 21:03:54'),
-	(125, 2, '', '', NULL, 'Wacom', 1, 1, 0, '2021-10-29 21:03:54', '2021-10-29 21:03:54'),
-	(126, 3, 'ASSET_GROUP_LANDS', 'Ítems del grupo de activos de terrenos', 1.00000, 'Terrenos', 1, 0, 1, '2021-10-29 21:03:54', '2021-10-29 21:03:54'),
-	(127, 3, 'ASSET_GROUP_BUILDINGS', 'Ítems del grupo de activos de construcciones y edificaciones', 2.00000, 'Construcciones y edificaciones', 1, 0, 1, '2021-10-29 21:03:54', '2021-10-29 21:03:54'),
-	(128, 3, 'ASSET_GROUP_MACHINERY_EQUIPMENT', 'Ítems del grupo de activos de maquinaria y equipo', 3.00000, 'Maquinaria y equipo', 1, 0, 1, '2021-10-29 21:03:54', '2021-10-29 21:03:54'),
-	(129, 3, 'ASSET_GROUP_OFFICE_EQUIPMENT', 'Ítems del grupo de activos de equipo de oficina', 4.00000, 'Equipo de oficina', 1, 0, 1, '2021-10-29 21:03:54', '2021-10-29 21:03:54'),
-	(130, 3, 'ASSET_GROUP_COMPUTER_COMMUNICATION_EQUIPMENT', 'Ítems del grupo de activos de equipo de computación y comunicación', 5.00000, 'Equipo de computación y comunicación', 1, 0, 1, '2021-10-29 21:03:54', '2021-10-29 21:03:54'),
-	(131, 3, 'ASSET_GROUP_TRANSPORTATION', 'Ítems del grupo de activos de flota y equipo de transporte', 6.00000, 'Flota y equipo de transporte', 1, 0, 1, '2021-10-29 21:03:54', '2021-10-29 21:03:54'),
-	(132, 126, '', '', NULL, 'Lote', 1, 1, 0, '2021-10-29 21:03:54', '2021-10-29 21:03:54'),
-	(133, 127, '', '', NULL, 'Apartamento', 1, 1, 0, '2021-10-29 21:03:54', '2021-10-29 21:03:54'),
-	(134, 127, '', '', NULL, 'Casa', 1, 1, 0, '2021-10-29 21:03:54', '2021-10-29 21:03:54'),
-	(135, 127, '', '', NULL, 'Edificio', 1, 1, 0, '2021-10-29 21:03:54', '2021-10-29 21:03:54'),
-	(136, 127, '', '', NULL, 'Oficina', 1, 1, 0, '2021-10-29 21:03:54', '2021-10-29 21:03:54'),
-	(137, 128, '', '', NULL, 'Aire acondicionado', 1, 1, 0, '2021-10-29 21:03:54', '2021-10-29 21:03:54'),
-	(138, 128, '', '', NULL, 'Cafetera', 1, 1, 0, '2021-10-29 21:03:54', '2021-10-29 21:03:54'),
-	(139, 128, '', '', NULL, 'Caja fuerte', 1, 1, 0, '2021-10-29 21:03:54', '2021-10-29 21:03:54'),
-	(140, 128, '', '', NULL, 'Cámara de seguridad', 1, 1, 0, '2021-10-29 21:03:54', '2021-10-29 21:03:54'),
-	(141, 128, '', '', NULL, 'DVR', 1, 1, 0, '2021-10-29 21:03:54', '2021-10-29 21:03:54'),
-	(142, 128, '', '', NULL, 'Horno microondas', 1, 1, 0, '2021-10-29 21:03:54', '2021-10-29 21:03:54'),
-	(143, 128, '', '', NULL, 'Planta de alimentación', 1, 1, 0, '2021-10-29 21:03:54', '2021-10-29 21:03:54'),
-	(144, 128, '', '', NULL, 'UPS', 1, 1, 0, '2021-10-29 21:03:54', '2021-10-29 21:03:54'),
-	(145, 129, '', '', NULL, 'Escritorio', 1, 1, 0, '2021-10-29 21:03:54', '2021-10-29 21:03:54'),
-	(146, 129, '', '', NULL, 'Impresora', 1, 1, 0, '2021-10-29 21:03:54', '2021-10-29 21:03:54'),
-	(147, 129, '', '', NULL, 'Mesa', 1, 1, 0, '2021-10-29 21:03:54', '2021-10-29 21:03:54'),
-	(148, 129, '', '', NULL, 'Proyector', 1, 1, 0, '2021-10-29 21:03:54', '2021-10-29 21:03:54'),
-	(149, 129, '', '', NULL, 'Rack', 1, 1, 0, '2021-10-29 21:03:54', '2021-10-29 21:03:54'),
-	(150, 129, '', '', NULL, 'Silla', 1, 1, 0, '2021-10-29 21:03:54', '2021-10-29 21:03:54'),
-	(151, 129, '', '', NULL, 'Tablero', 1, 1, 0, '2021-10-29 21:03:54', '2021-10-29 21:03:54'),
-	(152, 130, '', '', NULL, 'Celular', 1, 1, 0, '2021-10-29 21:03:54', '2021-10-29 21:03:54'),
-	(153, 130, '', '', NULL, 'Computador de escritorio', 1, 1, 0, '2021-10-29 21:03:54', '2021-10-29 21:03:54'),
-	(154, 130, '', '', NULL, 'Computador portátil', 1, 1, 0, '2021-10-29 21:03:54', '2021-10-29 21:03:54'),
-	(155, 130, '', '', NULL, 'Monitor', 1, 1, 0, '2021-10-29 21:03:54', '2021-10-29 21:03:54'),
-	(156, 130, '', '', NULL, 'Tablet', 1, 1, 0, '2021-10-29 21:03:54', '2021-10-29 21:03:54'),
-	(157, 130, '', '', NULL, 'Tablet digitalizadora', 1, 1, 0, '2021-10-29 21:03:54', '2021-10-29 21:03:54'),
-	(158, 130, '', '', NULL, 'Teléfono', 1, 1, 0, '2021-10-29 21:03:54', '2021-10-29 21:03:54'),
-	(159, 130, '', '', NULL, 'Torre', 1, 1, 0, '2021-10-29 21:03:54', '2021-10-29 21:03:54'),
-	(160, 131, '', '', NULL, 'Bicicleta', 1, 1, 0, '2021-10-29 21:03:54', '2021-10-29 21:03:54'),
-	(161, 131, '', '', NULL, 'Camión', 1, 1, 0, '2021-10-29 21:03:54', '2021-10-29 21:03:54'),
-	(162, 131, '', '', NULL, 'Camioneta', 1, 1, 0, '2021-10-29 21:03:54', '2021-10-29 21:03:54'),
-	(163, 131, '', '', NULL, 'Carro', 1, 1, 0, '2021-10-29 21:03:54', '2021-10-29 21:03:54'),
-	(164, 131, '', '', NULL, 'Moto', 1, 1, 0, '2021-10-29 21:03:54', '2021-10-29 21:03:54'),
-	(165, 4, 'ASSET_MAINTENANCE_ANNUAL', '', 12.00000, 'Anual', 1, 0, 0, '2021-10-29 21:03:54', '2021-10-29 21:03:54'),
-	(166, 4, 'ASSET_MAINTENANCE_BIANNUAL', '', 6.00000, 'Semestral', 1, 0, 0, '2021-10-29 21:03:54', '2021-10-29 21:03:54'),
-	(167, 4, 'ASSET_MAINTENANCE_BIMONTHLY', '', 2.00000, 'Bimestral', 1, 0, 0, '2021-10-29 21:03:54', '2021-10-29 21:03:54'),
-	(168, 4, 'ASSET_MAINTENANCE_MONTHLY', '', 1.00000, 'Mensual', 1, 0, 0, '2021-10-29 21:03:54', '2021-10-29 21:03:54'),
-	(169, 4, 'ASSET_MAINTENANCE_NOT_REQUIRE', '', 0.00000, 'No requiere', 1, 0, 0, '2021-10-29 21:03:54', '2021-10-29 21:03:54'),
-	(170, 4, 'ASSET_MAINTENANCE_QUARTERLY', '', 3.00000, 'Trimestral', 1, 0, 0, '2021-10-29 21:03:54', '2021-10-29 21:03:54'),
-	(171, 5, 'ASSET_ASSIGNED', '', NULL, 'Asignado', 1, 0, 0, '2021-10-29 21:03:54', '2021-10-29 21:03:54'),
-	(172, 5, 'ASSET_DECOMMISSIONED', '', NULL, 'Dado de baja', 1, 0, 0, '2021-10-29 21:03:54', '2021-10-29 21:03:54'),
-	(173, 5, 'ASSET_UNASSIGNED', '', NULL, 'Sin asignar', 1, 0, 0, '2021-10-29 21:03:54', '2021-10-29 21:03:54'),
-	(174, 6, 'ASSET_DEPRECIATION', '', NULL, 'Depreciación', 1, 0, 0, '2021-10-29 21:03:54', '2021-10-29 21:03:54'),
-	(175, 6, 'ASSET_REVALUATION', '', NULL, 'Revaluación', 1, 0, 0, '2021-10-29 21:03:54', '2021-10-29 21:03:54'),
-	(176, 7, 'ASSET_UPDATE_COST_IN_PROCESS', '', NULL, 'En Proceso', 1, 0, 0, '2021-10-29 21:03:54', '2021-10-29 21:03:54'),
-	(177, 7, 'ASSET_UPDATE_COST_EXECUTED', '', NULL, 'Ejecutada', 1, 0, 0, '2021-10-29 21:03:54', '2021-10-29 21:03:54'),
-	(178, 7, 'ASSET_UPDATE_COST_REVERSED', '', NULL, 'Reversada', 1, 0, 0, '2021-10-29 21:03:54', '2021-10-29 21:03:54'),
-	(179, 7, 'ASSET_UPDATE_COST_CANCELLED', '', NULL, 'Anulada', 1, 0, 0, '2021-10-29 21:03:54', '2021-10-29 21:03:54'),
-	(180, 9, 'CERTIFICATE_IN_PROCESS', '', NULL, 'En Proceso', 1, 0, 0, '2021-10-29 21:03:55', '2021-10-29 21:03:55'),
-	(181, 9, 'CERTIFICATE_CHECKING', '', NULL, 'En Revisión', 1, 0, 0, '2021-10-29 21:03:55', '2021-10-29 21:03:55'),
-	(182, 9, 'CERTIFICATE_APPROVED', '', NULL, 'Aprobada', 1, 0, 0, '2021-10-29 21:03:55', '2021-10-29 21:03:55'),
-	(183, 9, 'CERTIFICATE_REJECTED', '', NULL, 'Rechazada', 1, 0, 0, '2021-10-29 21:03:55', '2021-10-29 21:03:55'),
-	(184, 9, 'CERTIFICATE_SIGNATURE_PROCESS', '', NULL, 'En Proceso de Firma', 1, 0, 0, '2021-10-29 21:03:55', '2021-10-29 21:03:55'),
-	(185, 9, 'CERTIFICATE_ACTIVE', '', NULL, 'Activa', 1, 0, 0, '2021-10-29 21:03:55', '2021-10-29 21:03:55'),
-	(186, 9, 'CERTIFICATE_INACTIVE', '', NULL, 'Inactiva', 1, 0, 0, '2021-10-29 21:03:55', '2021-10-29 21:03:55'),
-	(187, 9, 'CERTIFICATE_CANCELLED', '', NULL, 'Anulada', 1, 0, 0, '2021-10-29 21:03:55', '2021-10-29 21:03:55'),
-	(188, 8, '', '', NULL, 'Buen estado', 1, 1, 0, '2021-10-29 21:03:55', '2021-10-29 21:03:55'),
-	(189, 8, '', '', NULL, 'Deteriorado', 1, 1, 0, '2021-10-29 21:03:55', '2021-10-29 21:03:55'),
-	(190, 8, '', '', NULL, 'Mal estado', 1, 1, 0, '2021-10-29 21:03:55', '2021-10-29 21:03:55'),
-	(191, 8, '', '', NULL, 'Dañado', 1, 1, 0, '2021-10-29 21:03:55', '2021-10-29 21:03:55'),
-	(192, 10, '', '', NULL, 'Contabilidad', 1, 1, 0, '2021-10-29 21:03:55', '2021-10-29 21:03:55'),
-	(193, 10, '', '', NULL, 'Desarrollo', 1, 1, 0, '2021-10-29 21:03:55', '2021-10-29 21:03:55'),
-	(194, 10, '', '', NULL, 'Diseño', 1, 1, 0, '2021-10-29 21:03:55', '2021-10-29 21:03:55'),
-	(195, 10, '', '', NULL, 'Soporte', 1, 1, 0, '2021-10-29 21:03:55', '2021-10-29 21:03:55'),
-	(196, 10, '', '', NULL, 'Gerencia', 1, 1, 0, '2021-10-29 21:03:55', '2021-10-29 21:03:55'),
-	(197, 12, '', '', NULL, 'Gerente', 1, 1, 0, '2021-10-29 21:03:55', '2021-10-29 21:03:55'),
-	(198, 12, '', '', NULL, 'Director(a) Creativo(a)', 1, 1, 0, '2021-10-29 21:03:55', '2021-10-29 21:03:55'),
-	(199, 12, '', '', NULL, 'Contador(a)', 1, 1, 0, '2021-10-29 21:03:55', '2021-10-29 21:03:55'),
-	(200, 12, '', '', NULL, 'Desarrollador(a)', 1, 1, 0, '2021-10-29 21:03:55', '2021-10-29 21:03:55'),
-	(201, 12, '', '', NULL, 'Diseñador(a)', 1, 1, 0, '2021-10-29 21:03:55', '2021-10-29 21:03:55'),
-	(202, 12, '', '', NULL, 'Ejecutivo(a)', 1, 1, 0, '2021-10-29 21:03:55', '2021-10-29 21:03:55'),
-	(203, 13, '', '', 76.00000, 'Valle del Cauca', 1, 1, 1, '2021-10-29 21:03:55', '2021-10-29 21:03:55'),
-	(204, 203, '', '', 76001.00000, 'Cali', 1, 1, 0, '2021-10-29 21:03:55', '2021-10-29 21:03:55'),
-	(205, 14, '', '', NULL, 'Daño', 1, 1, 0, '2021-10-29 21:03:55', '2021-10-29 21:03:55'),
-	(206, 14, '', '', NULL, 'Desuso', 1, 1, 0, '2021-10-29 21:03:55', '2021-10-29 21:03:55'),
-	(207, 14, '', '', NULL, 'Deterioro', 1, 1, 0, '2021-10-29 21:03:55', '2021-10-29 21:03:55'),
-	(208, 14, '', '', NULL, 'Error de registro', 1, 1, 0, '2021-10-29 21:03:55', '2021-10-29 21:03:55'),
-	(209, 14, '', '', NULL, 'Obsolescencia', 1, 1, 0, '2021-10-29 21:03:55', '2021-10-29 21:03:55'),
-	(210, 14, '', '', NULL, 'Pérdida', 1, 1, 0, '2021-10-29 21:03:55', '2021-10-29 21:03:55'),
-	(211, 14, '', '', NULL, 'Robo', 1, 1, 0, '2021-10-29 21:03:55', '2021-10-29 21:03:55'),
-	(212, 14, '', '', NULL, 'Venta', 1, 1, 0, '2021-10-29 21:03:55', '2021-10-29 21:03:55'),
-	(213, 14, '', '', NULL, 'Vida útil', 1, 1, 0, '2021-10-29 21:03:55', '2021-10-29 21:03:55'),
-	(214, 15, 'DERECOGNITION_IN_PROCESS', '', NULL, 'En Proceso', 1, 0, 0, '2021-10-29 21:03:55', '2021-10-29 21:03:55'),
-	(215, 15, 'DERECOGNITION_CHECKING', '', NULL, 'En Revisión', 1, 0, 0, '2021-10-29 21:03:55', '2021-10-29 21:03:55'),
-	(216, 15, 'DERECOGNITION_APPROVED', '', NULL, 'Aprobada', 1, 0, 0, '2021-10-29 21:03:55', '2021-10-29 21:03:55'),
-	(217, 15, 'DERECOGNITION_REJECTED', '', NULL, 'Rechazada', 1, 0, 0, '2021-10-29 21:03:55', '2021-10-29 21:03:55'),
-	(218, 15, 'DERECOGNITION_EXECUTED', '', NULL, 'Ejecutada', 1, 0, 0, '2021-10-29 21:03:55', '2021-10-29 21:03:55'),
-	(219, 15, 'DERECOGNITION_REVERSED', '', NULL, 'Reversada', 1, 0, 0, '2021-10-29 21:03:55', '2021-10-29 21:03:55'),
-	(220, 15, 'DERECOGNITION_CANCELLED', '', NULL, 'Anulada', 1, 0, 0, '2021-10-29 21:03:55', '2021-10-29 21:03:55'),
-	(221, 20, 'INVENTORY_IN_PROCESS', '', NULL, 'En Proceso', 1, 0, 0, '2021-10-29 21:03:55', '2021-10-29 21:03:55'),
-	(222, 20, 'INVENTORY_FINISHED', '', NULL, 'Finalizado', 1, 0, 0, '2021-10-29 21:03:55', '2021-10-29 21:03:55'),
-	(223, 22, 'MAINTENANCE_IN_PROCESS', '', NULL, 'En Proceso', 1, 0, 0, '2021-10-29 21:03:55', '2021-10-29 21:03:55'),
-	(224, 22, 'MAINTENANCE_FINISHED', '', NULL, 'Finalizado', 1, 0, 0, '2021-10-29 21:03:55', '2021-10-29 21:03:55'),
-	(225, 22, 'MAINTENANCE_CANCELLED', '', NULL, 'Anulado', 1, 0, 0, '2021-10-29 21:03:55', '2021-10-29 21:03:55'),
-	(226, 23, '', '', NULL, 'Adaptativo', 1, 1, 0, '2021-10-29 21:03:55', '2021-10-29 21:03:55'),
-	(227, 23, '', '', NULL, 'Correctivo', 1, 1, 0, '2021-10-29 21:03:55', '2021-10-29 21:03:55'),
-	(228, 23, '', '', NULL, 'Predictivo', 1, 1, 0, '2021-10-29 21:03:55', '2021-10-29 21:03:55'),
-	(229, 23, '', '', NULL, 'Preventivo', 1, 1, 0, '2021-10-29 21:03:55', '2021-10-29 21:03:55'),
-	(230, 24, 'CREDIT_PAYMENT', '', NULL, 'Crédito', 1, 0, 0, '2021-10-29 21:03:55', '2021-10-29 21:03:55'),
-	(231, 24, 'EFFECTIVE_PAYMENT', '', NULL, 'Efectivo', 1, 0, 0, '2021-10-29 21:03:55', '2021-10-29 21:03:55'),
-	(232, 25, 'PURCHASE_STATUS_IN_PROCESS', '', NULL, 'En Proceso', 1, 0, 0, '2021-10-29 21:03:55', '2021-10-29 21:03:55'),
-	(233, 25, 'PURCHASE_STATUS_CHECKING', '', NULL, 'En Revisión', 1, 0, 0, '2021-10-29 21:03:55', '2021-10-29 21:03:55'),
-	(234, 25, 'PURCHASE_STATUS_CANCELLED', '', NULL, 'Anulada', 1, 0, 0, '2021-10-29 21:03:55', '2021-10-29 21:03:55'),
-	(235, 25, 'PURCHASE_STATUS_APPROVED', '', NULL, 'Aprobada', 1, 0, 0, '2021-10-29 21:03:55', '2021-10-29 21:03:55'),
-	(236, 25, 'PURCHASE_STATUS_REJECTED', '', NULL, 'Rechazada', 1, 0, 0, '2021-10-29 21:03:55', '2021-10-29 21:03:55'),
-	(237, 25, 'PURCHASE_STATUS_CLOSED', '', NULL, 'Cerrada', 1, 0, 0, '2021-10-29 21:03:55', '2021-10-29 21:03:55'),
-	(238, 25, 'PURCHASE_STATUS_FINISHED', '', NULL, 'Finalizada', 1, 0, 0, '2021-10-29 21:03:55', '2021-10-29 21:03:55'),
-	(239, 29, 'USER_ROLE_ADMIN', '', NULL, 'Administrador', 1, 0, 0, '2021-10-29 21:03:55', '2021-10-29 21:03:55'),
-	(240, 29, 'USER_ROLE_APPROVER', '', NULL, 'Aprobador', 1, 0, 0, '2021-10-29 21:03:55', '2021-10-29 21:03:55'),
-	(241, 29, 'USER_ROLE_RESPONSIBLE', '', NULL, 'Responsable', 1, 0, 0, '2021-10-29 21:03:55', '2021-10-29 21:03:55'),
-	(242, 30, 'USER_STATUS_ACTIVE', '', NULL, 'Activo', 1, 0, 0, '2021-10-29 21:03:55', '2021-10-29 21:03:55'),
-	(243, 30, 'USER_STATUS_INACTIVE', '', NULL, 'Inactivo', 1, 0, 0, '2021-10-29 21:03:55', '2021-10-29 21:03:55'),
-	(244, 30, 'USER_STATUS_LOCKED', '', NULL, 'Bloqueado', 1, 0, 0, '2021-10-29 21:03:55', '2021-10-29 21:03:55'),
-	(245, 11, 'COMPANY_NAME', '', NULL, 'Modern Soflutions', 1, 1, 0, '2021-10-29 21:03:55', '2021-10-29 21:03:55'),
-	(246, 11, 'COMPANY_DOCUMENT_NUMBER', '', NULL, '901378835 - 4', 1, 1, 0, '2021-10-29 21:03:55', '2021-10-29 21:03:55'),
-	(247, 11, 'COMPANY_ADDRESS', '', NULL, 'Cl. 23 Nte # 3-33 OF. 606, Ed. Peñas Blancas', 1, 1, 0, '2021-10-29 21:03:55', '2021-10-29 21:03:55'),
-	(248, 11, 'COMPANY_PHONE_NUMBER', '', NULL, '3197648512', 1, 1, 0, '2021-10-29 21:03:55', '2021-10-29 21:03:55'),
-	(249, 11, 'COMPANY_CITY_ID', '', 203.00000, NULL, 1, 1, 0, '2021-10-29 21:03:55', '2021-10-29 21:03:55'),
-	(250, 16, '', '', NULL, 'CC', 1, 1, 0, '2021-10-29 21:03:55', '2021-10-29 21:03:55'),
-	(251, 16, '', '', NULL, 'CE', 1, 1, 0, '2021-10-29 21:03:55', '2021-10-29 21:03:55'),
-	(252, 16, '', '', NULL, 'TI', 1, 1, 0, '2021-10-29 21:03:55', '2021-10-29 21:03:55'),
-	(253, 16, '', '', NULL, 'NIT', 1, 1, 0, '2021-10-29 21:03:55', '2021-10-29 21:03:55'),
-	(254, 16, '', '', NULL, 'PAS', 1, 1, 0, '2021-10-29 21:03:55', '2021-10-29 21:03:55'),
-	(255, 17, 'EMAIL_TEMPLATE_HEADER', '', NULL, '<div style="margin: 10px 0px;"><img src="https://lh5.googleusercontent.com/pUafnUNY7Zhn9pJx-91xd4GSx1kEgwAw2IYFkA_bslIirCxlp0ZlE_yISwXu625mBYwDeLcumQFyAX9rnElf=w1920-h977-rw" style="width: 100%;" /></div>', 1, 1, 0, '2021-10-29 21:03:55', '2021-10-29 21:03:55'),
-	(256, 17, 'EMAIL_TEMPLATE_FOOTER', '', NULL, '<div style="margin: 10px 0px;"><p style="font-size: 12px;">Mensaje generado automáticamente por el <b> Sistema de Gestión de Activos </b> de <b> Modern Soflutions </b>. Por favor no responda a este email.</p></div>', 1, 1, 0, '2021-10-29 21:03:55', '2021-10-29 21:03:55'),
-	(257, 17, 'EMAIL_TEMPLATE_RECOVERY_PASSWORD_USER', 'Solicitud de recuperación de contraseña', NULL, '<div><h1>Hola {{name}}</h1><p>Solicitaste un cambio de contraseña. Si no fuiste tu quién solicitó el cambio por favor comunícate con el adminstrador del sistema.</p><p>Se ha generado la siguiente clave temporal que deberás utilizar para tu siguiente inicio de sesión. Luego de iniciada la sesión deberás de generar una nueva contraseña.</p><h3>Nueva contraseña: {{password}}</h3></div>', 1, 1, 0, '2021-10-29 21:03:55', '2021-10-29 21:03:55'),
-	(258, 17, 'EMAIL_TEMPLATE_PURCHASE_APPROVED', 'Aprobación orden de compra [{{id_order}}]', NULL, '<div><p>La orden de compra Nº {{id_order}} ha sido aprovada por {{approver_name}} el {{approved_at}}.</p></div>', 1, 1, 0, '2021-10-29 21:03:55', '2021-10-29 21:03:55'),
-	(259, 17, 'EMAIL_TEMPLATE_CERTIFICATE_APPROVED', 'Aprobación acta de movimiento [{{id_certificate}}]', NULL, '<div><p>El acta de movimiento Nº {{id_certificate}} ha sido aprobada por {{approver_name}} el {{approved_at}}.</p></div>', 1, 1, 0, '2021-10-29 21:03:55', '2021-10-29 21:03:55'),
-	(260, 17, 'EMAIL_TEMPLATE_CERTIFICATE_SIGNATURE_PENDING', 'Firma de acta de movimiento [{{id_certificate}}]', NULL, '<div><p>Se solicita la firma de recibido para el acta de movimiento Nº {{id_certificate}}.</p></div>', 1, 1, 0, '2021-10-29 21:03:55', '2021-10-29 21:03:55'),
-	(261, 17, 'EMAIL_TEMPLATE_CERTIFICATE_ACTIVE', 'Acta de movimiento [{{id_certificate}}] firmada', NULL, '<div><p>El responsable {{name}} ha firmado el recibido del acta de movimiento Nº {{id_certificate}}.</p></div>', 1, 1, 0, '2021-10-29 21:03:55', '2021-10-29 21:03:55'),
-	(262, 17, 'EMAIL_TEMPLATE_DERECOGNITIOIN_APPROVED', 'Aprobación acta de proceso de baja de activos [{{id_derecognition}}]', NULL, '<div><p>El proceso de baja de activos Nº {{id_derecognition}} ha sido aprobada por {{approver_name}} el {{approved_at}}.</p></div>', 1, 1, 0, '2021-10-29 21:03:55', '2021-10-29 21:03:55'),
-	(263, 17, 'EMAIL_TEMPLATE_USER_PASSWORD', 'Generación de contraseña', NULL, '<div><h1>Hola {{name}}</h1><p>El administrador del sistema le ha generado la siguiente contraseña, la cual debe de ser cambiada en el siguiente inicio de sesión.</p><h3>Nueva contraseña: {{password}}</h3></div>', 1, 1, 0, '2021-10-29 21:03:55', '2021-10-29 21:03:55');
+	(1, NULL, 'APP_KEY', 'Identificador que representa un módulo o proceso del sistema', NULL, NULL, 1, 0, 0, '2022-02-09 23:58:20', '2022-02-09 23:58:20'),
+	(2, NULL, 'ASSET_BRAND', 'Marcas de los activos', NULL, NULL, 1, 0, 1, '2022-02-09 23:58:20', '2022-02-09 23:58:20'),
+	(3, NULL, 'ASSET_GROUP', 'Grupos de activos', NULL, NULL, 1, 0, 1, '2022-02-09 23:58:20', '2022-02-09 23:58:20'),
+	(4, NULL, 'ASSET_MAINTENANCE_FREQUENCE', 'Frecuencia del mantenimiento de un activo', NULL, NULL, 1, 0, 0, '2022-02-09 23:58:20', '2022-02-09 23:58:20'),
+	(5, NULL, 'ASSET_STATUS', 'Estado de un activo fijo', NULL, NULL, 1, 0, 0, '2022-02-09 23:58:20', '2022-02-09 23:58:20'),
+	(6, NULL, 'ASSET_UPDATE_COST', 'Tipo de acción que afecta el costo del activo', NULL, NULL, 1, 0, 0, '2022-02-09 23:58:20', '2022-02-09 23:58:20'),
+	(7, NULL, 'ASSET_UPDATE_COST_STATUS', 'Estados para los procesos de depreciación y revaluación', NULL, NULL, 1, 0, 0, '2022-02-09 23:58:20', '2022-02-09 23:58:20'),
+	(8, NULL, 'CERTIFICATES_ASSET_STATUS', 'Estado físico del activo a entregar', NULL, NULL, 1, 0, 0, '2022-02-09 23:58:20', '2022-02-09 23:58:20'),
+	(9, NULL, 'CERTIFICATES_STATUS', 'Estados de las actas', NULL, NULL, 1, 0, 0, '2022-02-09 23:58:20', '2022-02-09 23:58:20'),
+	(10, NULL, 'COMPANY_AREAS', 'Áreas de la compañía', NULL, NULL, 1, 0, 1, '2022-02-09 23:58:20', '2022-02-09 23:58:20'),
+	(11, NULL, 'COMPANY_INFO', 'Información de la compañía', NULL, NULL, 1, 0, 1, '2022-02-09 23:58:20', '2022-02-09 23:58:20'),
+	(12, NULL, 'COMPANY_POSITIONS', 'Cargos de la compañía', NULL, NULL, 1, 0, 1, '2022-02-09 23:58:20', '2022-02-09 23:58:20'),
+	(13, NULL, 'DEPARTMENTS', 'Departamentos de Colombia', NULL, NULL, 1, 0, 1, '2022-02-09 23:58:20', '2022-02-09 23:58:20'),
+	(14, NULL, 'DERECOGNITION_REASONS', 'Motivos para dar de baja a un activo', NULL, NULL, 1, 0, 1, '2022-02-09 23:58:20', '2022-02-09 23:58:20'),
+	(15, NULL, 'DERECOGNITION_STATUS', 'Estados que puede tener un proceso de baja de activos', NULL, NULL, 1, 0, 0, '2022-02-09 23:58:20', '2022-02-09 23:58:20'),
+	(16, NULL, 'DOCUMENT_TYPE', 'Tipos de documentos de identidad', NULL, NULL, 1, 0, 1, '2022-02-09 23:58:20', '2022-02-09 23:58:20'),
+	(17, NULL, 'EMAILS_TEMPLATES', 'Plantillas para el envío de correos', NULL, NULL, 1, 0, 1, '2022-02-09 23:58:20', '2022-02-09 23:58:20'),
+	(18, NULL, 'GENERIC_AREA_MANAGEMENT_ASSETS', 'Identificador de un área genérica en el sistema que solo es utilizada para indicar que un activo no ', 195.00000, NULL, 1, 0, 0, '2022-02-09 23:58:20', '2022-02-09 23:58:20'),
+	(19, NULL, 'GENERIC_USER_MANAGEMENT_ASSETS', 'Identificador de un usuario genérico en el sistema que solo es utilizado para indicar que un activo ', 1.00000, NULL, 1, 0, 0, '2022-02-09 23:58:20', '2022-02-09 23:58:20'),
+	(20, NULL, 'INVENTORY_STATUS', 'Estados que puede tener un proceso de inventario de activos', NULL, NULL, 1, 0, 0, '2022-02-09 23:58:20', '2022-02-09 23:58:20'),
+	(21, NULL, 'IVA', 'IVA', 0.19000, NULL, 1, 1, 0, '2022-02-09 23:58:20', '2022-02-09 23:58:20'),
+	(22, NULL, 'MAINTENANCE_STATUS', 'Estados que puede tener un proceso de mantenimiento de activos', NULL, NULL, 1, 0, 0, '2022-02-09 23:58:20', '2022-02-09 23:58:20'),
+	(23, NULL, 'MAINTENANCE_TYPE', 'Tipos de mantenimiento', NULL, NULL, 1, 0, 1, '2022-02-09 23:58:20', '2022-02-09 23:58:20'),
+	(24, NULL, 'PAYMENT_METHODS', 'Métodos de pago', NULL, NULL, 1, 0, 0, '2022-02-09 23:58:20', '2022-02-09 23:58:20'),
+	(25, NULL, 'PURCHASE_STATUS', 'Estados que puede tener una orden de compra', NULL, NULL, 1, 0, 0, '2022-02-09 23:58:20', '2022-02-09 23:58:20'),
+	(26, NULL, 'SENDER_EMAIL', 'Email remitente de los mensajes', NULL, 'activos.fijos.ms@gmail.com', 1, 1, 0, '2022-02-09 23:58:20', '2022-02-09 23:58:20'),
+	(27, NULL, 'SENDER_EMAIL_FROM', 'Nombre del remitente de correos', NULL, 'Activos Fijos Modern Soflutions', 1, 1, 0, '2022-02-09 23:58:20', '2022-02-09 23:58:20'),
+	(28, NULL, 'SMMLV', 'SMMLV del año en curso', 908526.00000, NULL, 1, 1, 0, '2022-02-09 23:58:20', '2022-02-09 23:58:20'),
+	(29, NULL, 'USER_ROLE', 'Roles de los usuarios del sistema', NULL, NULL, 1, 0, 0, '2022-02-09 23:58:20', '2022-02-09 23:58:20'),
+	(30, NULL, 'USER_STATUS', 'Estados de los usuarios del sistema', NULL, NULL, 1, 0, 0, '2022-02-09 23:58:21', '2022-02-09 23:58:21'),
+	(31, NULL, 'ASSET_AMOUNT', 'Valor para considerar un bien como activo fijo', 700000.00000, NULL, 1, 1, 0, '2022-02-09 23:58:21', '2022-02-09 23:58:21'),
+	(32, NULL, 'ASSET_DEPRECATION_RESIDUAL_VALUE', 'Valor residual para la depreciación en porcentaje', 0.05000, NULL, 1, 1, 0, '2022-02-09 23:58:21', '2022-02-09 23:58:21'),
+	(100, 1, 'ASSETS', '', NULL, 'Activos', 1, 0, 0, '2022-02-09 23:58:21', '2022-02-09 23:58:21'),
+	(101, 1, 'ATTATCHMENTS', '', NULL, 'Adjuntos', 1, 0, 0, '2022-02-09 23:58:21', '2022-02-09 23:58:21'),
+	(102, 1, 'AUTH', '', NULL, 'Autenticación', 1, 0, 0, '2022-02-09 23:58:21', '2022-02-09 23:58:21'),
+	(103, 1, 'CERTIFICATES', '', NULL, 'Actas', 1, 0, 0, '2022-02-09 23:58:21', '2022-02-09 23:58:21'),
+	(104, 1, 'DEPRECATIONS', '', NULL, 'Depreciaciones', 1, 0, 0, '2022-02-09 23:58:21', '2022-02-09 23:58:21'),
+	(105, 1, 'DERECOGNITIONS', '', NULL, 'Bajas', 1, 0, 0, '2022-02-09 23:58:21', '2022-02-09 23:58:21'),
+	(106, 1, 'INVENTORIES', '', NULL, 'Inventarios', 1, 0, 0, '2022-02-09 23:58:21', '2022-02-09 23:58:21'),
+	(107, 1, 'MAINTENANCES', '', NULL, 'Mantenimientos', 1, 0, 0, '2022-02-09 23:58:21', '2022-02-09 23:58:21'),
+	(108, 1, 'PARAMETERS', '', NULL, 'Parámetros', 1, 0, 0, '2022-02-09 23:58:21', '2022-02-09 23:58:21'),
+	(109, 1, 'PROVIDERS', '', NULL, 'Proveedores', 1, 0, 0, '2022-02-09 23:58:21', '2022-02-09 23:58:21'),
+	(110, 1, 'PURCHASES', '', NULL, 'Compras', 1, 0, 0, '2022-02-09 23:58:21', '2022-02-09 23:58:21'),
+	(111, 1, 'REVALUATIONS', '', NULL, 'Revaluaciones', 1, 0, 0, '2022-02-09 23:58:21', '2022-02-09 23:58:21'),
+	(112, 1, 'USERS', '', NULL, 'Usuarios', 1, 0, 0, '2022-02-09 23:58:21', '2022-02-09 23:58:21'),
+	(113, 2, '', '', NULL, 'Apple', 1, 1, 0, '2022-02-09 23:58:21', '2022-02-09 23:58:21'),
+	(114, 2, '', '', NULL, 'Asus', 1, 1, 0, '2022-02-09 23:58:21', '2022-02-09 23:58:21'),
+	(115, 2, '', '', NULL, 'Diseñar Modulares', 1, 1, 0, '2022-02-09 23:58:21', '2022-02-09 23:58:21'),
+	(116, 2, '', '', NULL, 'HP', 1, 1, 0, '2022-02-09 23:58:21', '2022-02-09 23:58:21'),
+	(117, 2, '', '', NULL, 'Huawei', 1, 1, 0, '2022-02-09 23:58:21', '2022-02-09 23:58:21'),
+	(118, 2, '', '', NULL, 'Lenovo', 1, 1, 0, '2022-02-09 23:58:21', '2022-02-09 23:58:21'),
+	(119, 2, '', '', NULL, 'LG', 1, 1, 0, '2022-02-09 23:58:21', '2022-02-09 23:58:21'),
+	(120, 2, '', '', NULL, 'Logitech', 1, 1, 0, '2022-02-09 23:58:21', '2022-02-09 23:58:21'),
+	(121, 2, '', '', NULL, 'Motorola', 1, 1, 0, '2022-02-09 23:58:21', '2022-02-09 23:58:21'),
+	(122, 2, '', '', NULL, 'Ricoh', 1, 1, 0, '2022-02-09 23:58:21', '2022-02-09 23:58:21'),
+	(123, 2, '', '', NULL, 'Samsung', 1, 1, 0, '2022-02-09 23:58:21', '2022-02-09 23:58:21'),
+	(124, 2, '', '', NULL, 'Unitec', 1, 1, 0, '2022-02-09 23:58:21', '2022-02-09 23:58:21'),
+	(125, 2, '', '', NULL, 'Wacom', 1, 1, 0, '2022-02-09 23:58:21', '2022-02-09 23:58:21'),
+	(126, 3, 'ASSET_GROUP_LANDS', 'Ítems del grupo de activos de terrenos', 1.00000, 'Terrenos', 1, 0, 1, '2022-02-09 23:58:21', '2022-02-09 23:58:21'),
+	(127, 3, 'ASSET_GROUP_BUILDINGS', 'Ítems del grupo de activos de construcciones y edificaciones', 2.00000, 'Construcciones y edificaciones', 1, 0, 1, '2022-02-09 23:58:21', '2022-02-09 23:58:21'),
+	(128, 3, 'ASSET_GROUP_MACHINERY_EQUIPMENT', 'Ítems del grupo de activos de maquinaria y equipo', 3.00000, 'Maquinaria y equipo', 1, 0, 1, '2022-02-09 23:58:21', '2022-02-09 23:58:21'),
+	(129, 3, 'ASSET_GROUP_OFFICE_EQUIPMENT', 'Ítems del grupo de activos de equipo de oficina', 4.00000, 'Equipo de oficina', 1, 0, 1, '2022-02-09 23:58:21', '2022-02-09 23:58:21'),
+	(130, 3, 'ASSET_GROUP_COMPUTER_COMMUNICATION_EQUIPMENT', 'Ítems del grupo de activos de equipo de computación y comunicación', 5.00000, 'Equipo de computación y comunicación', 1, 0, 1, '2022-02-09 23:58:21', '2022-02-09 23:58:21'),
+	(131, 3, 'ASSET_GROUP_TRANSPORTATION', 'Ítems del grupo de activos de flota y equipo de transporte', 6.00000, 'Flota y equipo de transporte', 1, 0, 1, '2022-02-09 23:58:21', '2022-02-09 23:58:21'),
+	(132, 126, '', '', NULL, 'Lote', 1, 1, 0, '2022-02-09 23:58:21', '2022-02-09 23:58:21'),
+	(133, 127, '', '', NULL, 'Apartamento', 1, 1, 0, '2022-02-09 23:58:21', '2022-02-09 23:58:21'),
+	(134, 127, '', '', NULL, 'Casa', 1, 1, 0, '2022-02-09 23:58:21', '2022-02-09 23:58:21'),
+	(135, 127, '', '', NULL, 'Edificio', 1, 1, 0, '2022-02-09 23:58:21', '2022-02-09 23:58:21'),
+	(136, 127, '', '', NULL, 'Oficina', 1, 1, 0, '2022-02-09 23:58:21', '2022-02-09 23:58:21'),
+	(137, 128, '', '', NULL, 'Aire acondicionado', 1, 1, 0, '2022-02-09 23:58:21', '2022-02-09 23:58:21'),
+	(138, 128, '', '', NULL, 'Cafetera', 1, 1, 0, '2022-02-09 23:58:21', '2022-02-09 23:58:21'),
+	(139, 128, '', '', NULL, 'Caja fuerte', 1, 1, 0, '2022-02-09 23:58:21', '2022-02-09 23:58:21'),
+	(140, 128, '', '', NULL, 'Cámara de seguridad', 1, 1, 0, '2022-02-09 23:58:21', '2022-02-09 23:58:21'),
+	(141, 128, '', '', NULL, 'DVR', 1, 1, 0, '2022-02-09 23:58:21', '2022-02-09 23:58:21'),
+	(142, 128, '', '', NULL, 'Horno microondas', 1, 1, 0, '2022-02-09 23:58:21', '2022-02-09 23:58:21'),
+	(143, 128, '', '', NULL, 'Planta de alimentación', 1, 1, 0, '2022-02-09 23:58:21', '2022-02-09 23:58:21'),
+	(144, 128, '', '', NULL, 'UPS', 1, 1, 0, '2022-02-09 23:58:21', '2022-02-09 23:58:21'),
+	(145, 129, '', '', NULL, 'Escritorio', 1, 1, 0, '2022-02-09 23:58:21', '2022-02-09 23:58:21'),
+	(146, 129, '', '', NULL, 'Impresora', 1, 1, 0, '2022-02-09 23:58:21', '2022-02-09 23:58:21'),
+	(147, 129, '', '', NULL, 'Mesa', 1, 1, 0, '2022-02-09 23:58:21', '2022-02-09 23:58:21'),
+	(148, 129, '', '', NULL, 'Proyector', 1, 1, 0, '2022-02-09 23:58:21', '2022-02-09 23:58:21'),
+	(149, 129, '', '', NULL, 'Rack', 1, 1, 0, '2022-02-09 23:58:21', '2022-02-09 23:58:21'),
+	(150, 129, '', '', NULL, 'Silla', 1, 1, 0, '2022-02-09 23:58:21', '2022-02-09 23:58:21'),
+	(151, 129, '', '', NULL, 'Tablero', 1, 1, 0, '2022-02-09 23:58:21', '2022-02-09 23:58:21'),
+	(152, 130, '', '', NULL, 'Celular', 1, 1, 0, '2022-02-09 23:58:21', '2022-02-09 23:58:21'),
+	(153, 130, '', '', NULL, 'Computador de escritorio', 1, 1, 0, '2022-02-09 23:58:21', '2022-02-09 23:58:21'),
+	(154, 130, '', '', NULL, 'Computador portátil', 1, 1, 0, '2022-02-09 23:58:21', '2022-02-09 23:58:21'),
+	(155, 130, '', '', NULL, 'Monitor', 1, 1, 0, '2022-02-09 23:58:21', '2022-02-09 23:58:21'),
+	(156, 130, '', '', NULL, 'Tablet', 1, 1, 0, '2022-02-09 23:58:21', '2022-02-09 23:58:21'),
+	(157, 130, '', '', NULL, 'Tablet digitalizadora', 1, 1, 0, '2022-02-09 23:58:21', '2022-02-09 23:58:21'),
+	(158, 130, '', '', NULL, 'Teléfono', 1, 1, 0, '2022-02-09 23:58:21', '2022-02-09 23:58:21'),
+	(159, 130, '', '', NULL, 'Torre', 1, 1, 0, '2022-02-09 23:58:21', '2022-02-09 23:58:21'),
+	(160, 131, '', '', NULL, 'Bicicleta', 1, 1, 0, '2022-02-09 23:58:21', '2022-02-09 23:58:21'),
+	(161, 131, '', '', NULL, 'Camión', 1, 1, 0, '2022-02-09 23:58:21', '2022-02-09 23:58:21'),
+	(162, 131, '', '', NULL, 'Camioneta', 1, 1, 0, '2022-02-09 23:58:21', '2022-02-09 23:58:21'),
+	(163, 131, '', '', NULL, 'Carro', 1, 1, 0, '2022-02-09 23:58:21', '2022-02-09 23:58:21'),
+	(164, 131, '', '', NULL, 'Moto', 1, 1, 0, '2022-02-09 23:58:21', '2022-02-09 23:58:21'),
+	(165, 4, 'ASSET_MAINTENANCE_ANNUAL', '', 12.00000, 'Anual', 1, 0, 0, '2022-02-09 23:58:21', '2022-02-09 23:58:21'),
+	(166, 4, 'ASSET_MAINTENANCE_BIANNUAL', '', 6.00000, 'Semestral', 1, 0, 0, '2022-02-09 23:58:21', '2022-02-09 23:58:21'),
+	(167, 4, 'ASSET_MAINTENANCE_BIMONTHLY', '', 2.00000, 'Bimestral', 1, 0, 0, '2022-02-09 23:58:21', '2022-02-09 23:58:21'),
+	(168, 4, 'ASSET_MAINTENANCE_MONTHLY', '', 1.00000, 'Mensual', 1, 0, 0, '2022-02-09 23:58:21', '2022-02-09 23:58:21'),
+	(169, 4, 'ASSET_MAINTENANCE_NOT_REQUIRE', '', 0.00000, 'No requiere', 1, 0, 0, '2022-02-09 23:58:21', '2022-02-09 23:58:21'),
+	(170, 4, 'ASSET_MAINTENANCE_QUARTERLY', '', 3.00000, 'Trimestral', 1, 0, 0, '2022-02-09 23:58:21', '2022-02-09 23:58:21'),
+	(171, 5, 'ASSET_ASSIGNED', '', NULL, 'Asignado', 1, 0, 0, '2022-02-09 23:58:21', '2022-02-09 23:58:21'),
+	(172, 5, 'ASSET_DECOMMISSIONED', '', NULL, 'Dado de baja', 1, 0, 0, '2022-02-09 23:58:21', '2022-02-09 23:58:21'),
+	(173, 5, 'ASSET_UNASSIGNED', '', NULL, 'Sin asignar', 1, 0, 0, '2022-02-09 23:58:21', '2022-02-09 23:58:21'),
+	(174, 6, 'ASSET_DEPRECIATION', '', NULL, 'Depreciación', 1, 0, 0, '2022-02-09 23:58:21', '2022-02-09 23:58:21'),
+	(175, 6, 'ASSET_REVALUATION', '', NULL, 'Revaluación', 1, 0, 0, '2022-02-09 23:58:21', '2022-02-09 23:58:21'),
+	(176, 7, 'ASSET_UPDATE_COST_IN_PROCESS', '', NULL, 'En Proceso', 1, 0, 0, '2022-02-09 23:58:21', '2022-02-09 23:58:21'),
+	(177, 7, 'ASSET_UPDATE_COST_EXECUTED', '', NULL, 'Ejecutada', 1, 0, 0, '2022-02-09 23:58:21', '2022-02-09 23:58:21'),
+	(178, 7, 'ASSET_UPDATE_COST_REVERSED', '', NULL, 'Reversada', 1, 0, 0, '2022-02-09 23:58:21', '2022-02-09 23:58:21'),
+	(179, 7, 'ASSET_UPDATE_COST_CANCELLED', '', NULL, 'Anulada', 1, 0, 0, '2022-02-09 23:58:21', '2022-02-09 23:58:21'),
+	(180, 9, 'CERTIFICATE_IN_PROCESS', '', NULL, 'En Proceso', 1, 0, 0, '2022-02-09 23:58:21', '2022-02-09 23:58:21'),
+	(181, 9, 'CERTIFICATE_CHECKING', '', NULL, 'En Revisión', 1, 0, 0, '2022-02-09 23:58:21', '2022-02-09 23:58:21'),
+	(182, 9, 'CERTIFICATE_APPROVED', '', NULL, 'Aprobada', 1, 0, 0, '2022-02-09 23:58:21', '2022-02-09 23:58:21'),
+	(183, 9, 'CERTIFICATE_REJECTED', '', NULL, 'Rechazada', 1, 0, 0, '2022-02-09 23:58:21', '2022-02-09 23:58:21'),
+	(184, 9, 'CERTIFICATE_SIGNATURE_PROCESS', '', NULL, 'En Proceso de Firma', 1, 0, 0, '2022-02-09 23:58:21', '2022-02-09 23:58:21'),
+	(185, 9, 'CERTIFICATE_ACTIVE', '', NULL, 'Activa', 1, 0, 0, '2022-02-09 23:58:21', '2022-02-09 23:58:21'),
+	(186, 9, 'CERTIFICATE_INACTIVE', '', NULL, 'Inactiva', 1, 0, 0, '2022-02-09 23:58:21', '2022-02-09 23:58:21'),
+	(187, 9, 'CERTIFICATE_CANCELLED', '', NULL, 'Anulada', 1, 0, 0, '2022-02-09 23:58:21', '2022-02-09 23:58:21'),
+	(188, 8, '', '', NULL, 'Buen estado', 1, 1, 0, '2022-02-09 23:58:21', '2022-02-09 23:58:21'),
+	(189, 8, '', '', NULL, 'Deteriorado', 1, 1, 0, '2022-02-09 23:58:21', '2022-02-09 23:58:21'),
+	(190, 8, '', '', NULL, 'Mal estado', 1, 1, 0, '2022-02-09 23:58:21', '2022-02-09 23:58:21'),
+	(191, 8, '', '', NULL, 'Dañado', 1, 1, 0, '2022-02-09 23:58:21', '2022-02-09 23:58:21'),
+	(192, 10, '', '', NULL, 'Contabilidad', 1, 1, 0, '2022-02-09 23:58:21', '2022-02-09 23:58:21'),
+	(193, 10, '', '', NULL, 'Desarrollo', 1, 1, 0, '2022-02-09 23:58:21', '2022-02-09 23:58:21'),
+	(194, 10, '', '', NULL, 'Diseño', 1, 1, 0, '2022-02-09 23:58:21', '2022-02-09 23:58:21'),
+	(195, 10, '', '', NULL, 'Soporte', 1, 1, 0, '2022-02-09 23:58:21', '2022-02-09 23:58:21'),
+	(196, 10, '', '', NULL, 'Gerencia', 1, 1, 0, '2022-02-09 23:58:21', '2022-02-09 23:58:21'),
+	(197, 12, '', '', NULL, 'Gerente', 1, 1, 0, '2022-02-09 23:58:21', '2022-02-09 23:58:21'),
+	(198, 12, '', '', NULL, 'Director(a) Creativo(a)', 1, 1, 0, '2022-02-09 23:58:21', '2022-02-09 23:58:21'),
+	(199, 12, '', '', NULL, 'Contador(a)', 1, 1, 0, '2022-02-09 23:58:21', '2022-02-09 23:58:21'),
+	(200, 12, '', '', NULL, 'Desarrollador(a)', 1, 1, 0, '2022-02-09 23:58:21', '2022-02-09 23:58:21'),
+	(201, 12, '', '', NULL, 'Diseñador(a)', 1, 1, 0, '2022-02-09 23:58:21', '2022-02-09 23:58:21'),
+	(202, 12, '', '', NULL, 'Ejecutivo(a)', 1, 1, 0, '2022-02-09 23:58:21', '2022-02-09 23:58:21'),
+	(203, 13, '', '', 76.00000, 'Valle del Cauca', 1, 1, 1, '2022-02-09 23:58:21', '2022-02-09 23:58:21'),
+	(204, 203, '', '', 76001.00000, 'Cali', 1, 1, 0, '2022-02-09 23:58:21', '2022-02-09 23:58:21'),
+	(205, 14, '', '', NULL, 'Daño', 1, 1, 0, '2022-02-09 23:58:21', '2022-02-09 23:58:21'),
+	(206, 14, '', '', NULL, 'Desuso', 1, 1, 0, '2022-02-09 23:58:21', '2022-02-09 23:58:21'),
+	(207, 14, '', '', NULL, 'Deterioro', 1, 1, 0, '2022-02-09 23:58:21', '2022-02-09 23:58:21'),
+	(208, 14, '', '', NULL, 'Error de registro', 1, 1, 0, '2022-02-09 23:58:21', '2022-02-09 23:58:21'),
+	(209, 14, '', '', NULL, 'Obsolescencia', 1, 1, 0, '2022-02-09 23:58:21', '2022-02-09 23:58:21'),
+	(210, 14, '', '', NULL, 'Pérdida', 1, 1, 0, '2022-02-09 23:58:21', '2022-02-09 23:58:21'),
+	(211, 14, '', '', NULL, 'Robo', 1, 1, 0, '2022-02-09 23:58:21', '2022-02-09 23:58:21'),
+	(212, 14, '', '', NULL, 'Venta', 1, 1, 0, '2022-02-09 23:58:21', '2022-02-09 23:58:21'),
+	(213, 14, '', '', NULL, 'Vida útil', 1, 1, 0, '2022-02-09 23:58:21', '2022-02-09 23:58:21'),
+	(214, 15, 'DERECOGNITION_IN_PROCESS', '', NULL, 'En Proceso', 1, 0, 0, '2022-02-09 23:58:21', '2022-02-09 23:58:21'),
+	(215, 15, 'DERECOGNITION_CHECKING', '', NULL, 'En Revisión', 1, 0, 0, '2022-02-09 23:58:21', '2022-02-09 23:58:21'),
+	(216, 15, 'DERECOGNITION_APPROVED', '', NULL, 'Aprobada', 1, 0, 0, '2022-02-09 23:58:21', '2022-02-09 23:58:21'),
+	(217, 15, 'DERECOGNITION_REJECTED', '', NULL, 'Rechazada', 1, 0, 0, '2022-02-09 23:58:21', '2022-02-09 23:58:21'),
+	(218, 15, 'DERECOGNITION_EXECUTED', '', NULL, 'Ejecutada', 1, 0, 0, '2022-02-09 23:58:21', '2022-02-09 23:58:21'),
+	(219, 15, 'DERECOGNITION_REVERSED', '', NULL, 'Reversada', 1, 0, 0, '2022-02-09 23:58:21', '2022-02-09 23:58:21'),
+	(220, 15, 'DERECOGNITION_CANCELLED', '', NULL, 'Anulada', 1, 0, 0, '2022-02-09 23:58:21', '2022-02-09 23:58:21'),
+	(221, 20, 'INVENTORY_IN_PROCESS', '', NULL, 'En Proceso', 1, 0, 0, '2022-02-09 23:58:21', '2022-02-09 23:58:21'),
+	(222, 20, 'INVENTORY_FINISHED', '', NULL, 'Finalizado', 1, 0, 0, '2022-02-09 23:58:21', '2022-02-09 23:58:21'),
+	(223, 22, 'MAINTENANCE_IN_PROCESS', '', NULL, 'En Proceso', 1, 0, 0, '2022-02-09 23:58:21', '2022-02-09 23:58:21'),
+	(224, 22, 'MAINTENANCE_FINISHED', '', NULL, 'Finalizado', 1, 0, 0, '2022-02-09 23:58:21', '2022-02-09 23:58:21'),
+	(225, 22, 'MAINTENANCE_CANCELLED', '', NULL, 'Anulado', 1, 0, 0, '2022-02-09 23:58:21', '2022-02-09 23:58:21'),
+	(226, 23, '', '', NULL, 'Adaptativo', 1, 1, 0, '2022-02-09 23:58:21', '2022-02-09 23:58:21'),
+	(227, 23, '', '', NULL, 'Correctivo', 1, 1, 0, '2022-02-09 23:58:21', '2022-02-09 23:58:21'),
+	(228, 23, '', '', NULL, 'Predictivo', 1, 1, 0, '2022-02-09 23:58:21', '2022-02-09 23:58:21'),
+	(229, 23, '', '', NULL, 'Preventivo', 1, 1, 0, '2022-02-09 23:58:21', '2022-02-09 23:58:21'),
+	(230, 24, 'CREDIT_PAYMENT', '', NULL, 'Crédito', 1, 0, 0, '2022-02-09 23:58:21', '2022-02-09 23:58:21'),
+	(231, 24, 'EFFECTIVE_PAYMENT', '', NULL, 'Efectivo', 1, 0, 0, '2022-02-09 23:58:21', '2022-02-09 23:58:21'),
+	(232, 25, 'PURCHASE_STATUS_IN_PROCESS', '', NULL, 'En Proceso', 1, 0, 0, '2022-02-09 23:58:21', '2022-02-09 23:58:21'),
+	(233, 25, 'PURCHASE_STATUS_CHECKING', '', NULL, 'En Revisión', 1, 0, 0, '2022-02-09 23:58:21', '2022-02-09 23:58:21'),
+	(234, 25, 'PURCHASE_STATUS_CANCELLED', '', NULL, 'Anulada', 1, 0, 0, '2022-02-09 23:58:21', '2022-02-09 23:58:21'),
+	(235, 25, 'PURCHASE_STATUS_APPROVED', '', NULL, 'Aprobada', 1, 0, 0, '2022-02-09 23:58:21', '2022-02-09 23:58:21'),
+	(236, 25, 'PURCHASE_STATUS_REJECTED', '', NULL, 'Rechazada', 1, 0, 0, '2022-02-09 23:58:21', '2022-02-09 23:58:21'),
+	(237, 25, 'PURCHASE_STATUS_CLOSED', '', NULL, 'Cerrada', 1, 0, 0, '2022-02-09 23:58:21', '2022-02-09 23:58:21'),
+	(238, 25, 'PURCHASE_STATUS_FINISHED', '', NULL, 'Finalizada', 1, 0, 0, '2022-02-09 23:58:21', '2022-02-09 23:58:21'),
+	(239, 29, 'USER_ROLE_ADMIN', '', NULL, 'Administrador', 1, 0, 0, '2022-02-09 23:58:21', '2022-02-09 23:58:21'),
+	(240, 29, 'USER_ROLE_APPROVER', '', NULL, 'Aprobador', 1, 0, 0, '2022-02-09 23:58:21', '2022-02-09 23:58:21'),
+	(241, 29, 'USER_ROLE_RESPONSIBLE', '', NULL, 'Responsable', 1, 0, 0, '2022-02-09 23:58:21', '2022-02-09 23:58:21'),
+	(242, 30, 'USER_STATUS_ACTIVE', '', NULL, 'Activo', 1, 0, 0, '2022-02-09 23:58:21', '2022-02-09 23:58:21'),
+	(243, 30, 'USER_STATUS_INACTIVE', '', NULL, 'Inactivo', 1, 0, 0, '2022-02-09 23:58:21', '2022-02-09 23:58:21'),
+	(244, 30, 'USER_STATUS_LOCKED', '', NULL, 'Bloqueado', 1, 0, 0, '2022-02-09 23:58:21', '2022-02-09 23:58:21'),
+	(245, 11, 'COMPANY_NAME', '', NULL, 'Modern Soflutions', 1, 1, 0, '2022-02-09 23:58:21', '2022-02-09 23:58:21'),
+	(246, 11, 'COMPANY_DOCUMENT_NUMBER', '', NULL, '901378835 - 4', 1, 1, 0, '2022-02-09 23:58:21', '2022-02-09 23:58:21'),
+	(247, 11, 'COMPANY_ADDRESS', '', NULL, 'Cl. 23 Nte # 3-33 OF. 606, Ed. Peñas Blancas', 1, 1, 0, '2022-02-09 23:58:21', '2022-02-09 23:58:21'),
+	(248, 11, 'COMPANY_PHONE_NUMBER', '', NULL, '3197648512', 1, 1, 0, '2022-02-09 23:58:21', '2022-02-09 23:58:21'),
+	(249, 11, 'COMPANY_CITY_ID', '', 203.00000, NULL, 1, 1, 0, '2022-02-09 23:58:21', '2022-02-09 23:58:21'),
+	(250, 16, '', '', NULL, 'CC', 1, 1, 0, '2022-02-09 23:58:21', '2022-02-09 23:58:21'),
+	(251, 16, '', '', NULL, 'CE', 1, 1, 0, '2022-02-09 23:58:21', '2022-02-09 23:58:21'),
+	(252, 16, '', '', NULL, 'TI', 1, 1, 0, '2022-02-09 23:58:21', '2022-02-09 23:58:21'),
+	(253, 16, '', '', NULL, 'NIT', 1, 1, 0, '2022-02-09 23:58:21', '2022-02-09 23:58:21'),
+	(254, 16, '', '', NULL, 'PAS', 1, 1, 0, '2022-02-09 23:58:21', '2022-02-09 23:58:21'),
+	(255, 17, 'EMAIL_TEMPLATE_HEADER', '', NULL, '<div style="margin: 10px 0px;"><img src="https://cloaiza1997.github.io/CristianLoaiza/logo_grande.png" style="width: 100%;" /></div>', 1, 1, 0, '2022-02-09 23:58:21', '2022-02-09 23:58:21'),
+	(256, 17, 'EMAIL_TEMPLATE_FOOTER', '', NULL, '<div style="margin: 10px 0px;"><p style="font-size: 12px;">Mensaje generado automáticamente por el <b> Sistema de Gestión de Activos </b> de <b> Modern Soflutions </b>. Por favor no responda a este email.</p></div>', 1, 1, 0, '2022-02-09 23:58:21', '2022-02-09 23:58:21'),
+	(257, 17, 'EMAIL_TEMPLATE_RECOVERY_PASSWORD_USER', 'Solicitud de recuperación de contraseña', NULL, '<div><h1>Hola {{name}}</h1><p>Solicitaste un cambio de contraseña. Si no fuiste tu quién solicitó el cambio por favor comunícate con el adminstrador del sistema.</p><p>Se ha generado la siguiente clave temporal que deberás utilizar para tu siguiente inicio de sesión. Luego de iniciada la sesión deberás de generar una nueva contraseña.</p><h3>Nueva contraseña: {{password}}</h3></div>', 1, 1, 0, '2022-02-09 23:58:21', '2022-02-09 23:58:21'),
+	(258, 17, 'EMAIL_TEMPLATE_PURCHASE_APPROVED', 'Aprobación orden de compra [{{id_order}}]', NULL, '<div><p>La orden de compra Nº {{id_order}} ha sido aprovada por {{approver_name}} el {{approved_at}}.</p></div>', 1, 1, 0, '2022-02-09 23:58:21', '2022-02-09 23:58:21'),
+	(259, 17, 'EMAIL_TEMPLATE_CERTIFICATE_APPROVED', 'Aprobación acta de movimiento [{{id_certificate}}]', NULL, '<div><p>El acta de movimiento Nº {{id_certificate}} ha sido aprobada por {{approver_name}} el {{approved_at}}.</p></div>', 1, 1, 0, '2022-02-09 23:58:21', '2022-02-09 23:58:21'),
+	(260, 17, 'EMAIL_TEMPLATE_CERTIFICATE_SIGNATURE_PENDING', 'Firma de acta de movimiento [{{id_certificate}}]', NULL, '<div><p>Se solicita la firma de recibido para el acta de movimiento Nº {{id_certificate}}.</p></div>', 1, 1, 0, '2022-02-09 23:58:21', '2022-02-09 23:58:21'),
+	(261, 17, 'EMAIL_TEMPLATE_CERTIFICATE_ACTIVE', 'Acta de movimiento [{{id_certificate}}] firmada', NULL, '<div><p>El responsable {{name}} ha firmado el recibido del acta de movimiento Nº {{id_certificate}}.</p></div>', 1, 1, 0, '2022-02-09 23:58:21', '2022-02-09 23:58:21'),
+	(262, 17, 'EMAIL_TEMPLATE_DERECOGNITIOIN_APPROVED', 'Aprobación acta de proceso de baja de activos [{{id_derecognition}}]', NULL, '<div><p>El proceso de baja de activos Nº {{id_derecognition}} ha sido aprobada por {{approver_name}} el {{approved_at}}.</p></div>', 1, 1, 0, '2022-02-09 23:58:21', '2022-02-09 23:58:21'),
+	(263, 17, 'EMAIL_TEMPLATE_USER_PASSWORD', 'Generación de contraseña', NULL, '<div><h1>Hola {{name}}</h1><p>El administrador del sistema le ha generado la siguiente contraseña, la cual debe de ser cambiada en el siguiente inicio de sesión.</p><h3>Nueva contraseña: {{password}}</h3></div>', 1, 1, 0, '2022-02-09 23:58:21', '2022-02-09 23:58:21');
 /*!40000 ALTER TABLE `parameters` ENABLE KEYS */;
 
 -- Volcando estructura para tabla gestion_activos.providers
@@ -692,7 +692,7 @@ CREATE TABLE IF NOT EXISTS `purchases` (
   CONSTRAINT `fk_users_purchases_id_updater` FOREIGN KEY (`id_updater_user`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla gestion_activos.purchases: ~0 rows (aproximadamente)
+-- Volcando datos para la tabla gestion_activos.purchases: ~3 rows (aproximadamente)
 /*!40000 ALTER TABLE `purchases` DISABLE KEYS */;
 /*!40000 ALTER TABLE `purchases` ENABLE KEYS */;
 
@@ -712,7 +712,7 @@ CREATE TABLE IF NOT EXISTS `purch_items` (
   CONSTRAINT `fk_purchases_purch_item_id_purchas` FOREIGN KEY (`id_purchase`) REFERENCES `purchases` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla gestion_activos.purch_items: ~0 rows (aproximadamente)
+-- Volcando datos para la tabla gestion_activos.purch_items: ~2 rows (aproximadamente)
 /*!40000 ALTER TABLE `purch_items` DISABLE KEYS */;
 /*!40000 ALTER TABLE `purch_items` ENABLE KEYS */;
 
@@ -752,7 +752,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   CONSTRAINT `fk_parameters_users_id_status` FOREIGN KEY (`id_status`) REFERENCES `parameters` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla gestion_activos.users: ~0 rows (aproximadamente)
+-- Volcando datos para la tabla gestion_activos.users: ~7 rows (aproximadamente)
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 

@@ -7,13 +7,22 @@ DELETE FROM outboxes;	ALTER TABLE `outboxes` AUTO_INCREMENT=0;
 DELETE FROM depre_reval_details WHERE id_parent IS NOT NULL AND id NOT IN (SELECT id_parent FROM depre_reval_details WHERE id_parent IS NOT NULL GROUP BY id_parent);	 
 DELETE FROM depre_reval_details WHERE id_parent IS NOT NULL AND id NOT IN (SELECT id_parent FROM depre_reval_details WHERE id_parent IS NOT NULL GROUP BY id_parent);	 
 DELETE FROM depre_reval_details WHERE id_parent IS NOT NULL AND id NOT IN (SELECT id_parent FROM depre_reval_details WHERE id_parent IS NOT NULL GROUP BY id_parent);	 
+DELETE FROM depre_reval_details WHERE id_parent IS NOT NULL AND id NOT IN (SELECT id_parent FROM depre_reval_details WHERE id_parent IS NOT NULL GROUP BY id_parent);	 
+DELETE FROM depre_reval_details WHERE id_parent IS NOT NULL AND id NOT IN (SELECT id_parent FROM depre_reval_details WHERE id_parent IS NOT NULL GROUP BY id_parent);	 
+DELETE FROM depre_reval_details WHERE id_parent IS NOT NULL AND id NOT IN (SELECT id_parent FROM depre_reval_details WHERE id_parent IS NOT NULL GROUP BY id_parent);	 
 DELETE FROM depre_reval_details;	ALTER TABLE `depre_reval_details` AUTO_INCREMENT=0;
 
 DELETE FROM depreciation_revaluation WHERE id_parent IS NOT NULL AND id NOT IN (SELECT id_parent FROM depreciation_revaluation WHERE id_parent IS NOT NULL GROUP BY id_parent);	 
 DELETE FROM depreciation_revaluation WHERE id_parent IS NOT NULL AND id NOT IN (SELECT id_parent FROM depreciation_revaluation WHERE id_parent IS NOT NULL GROUP BY id_parent);	 
 DELETE FROM depreciation_revaluation WHERE id_parent IS NOT NULL AND id NOT IN (SELECT id_parent FROM depreciation_revaluation WHERE id_parent IS NOT NULL GROUP BY id_parent);	 
+DELETE FROM depreciation_revaluation WHERE id_parent IS NOT NULL AND id NOT IN (SELECT id_parent FROM depreciation_revaluation WHERE id_parent IS NOT NULL GROUP BY id_parent);	 
+DELETE FROM depreciation_revaluation WHERE id_parent IS NOT NULL AND id NOT IN (SELECT id_parent FROM depreciation_revaluation WHERE id_parent IS NOT NULL GROUP BY id_parent);	 
+DELETE FROM depreciation_revaluation WHERE id_parent IS NOT NULL AND id NOT IN (SELECT id_parent FROM depreciation_revaluation WHERE id_parent IS NOT NULL GROUP BY id_parent);	 
 DELETE FROM depreciation_revaluation;	ALTER TABLE `depreciation_revaluation` AUTO_INCREMENT=0;
 
+DELETE FROM derec_details WHERE id_parent IS NOT NULL AND id NOT IN (SELECT id_parent FROM derec_details WHERE id_parent IS NOT NULL GROUP BY id_parent);	 
+DELETE FROM derec_details WHERE id_parent IS NOT NULL AND id NOT IN (SELECT id_parent FROM derec_details WHERE id_parent IS NOT NULL GROUP BY id_parent);	 
+DELETE FROM derec_details WHERE id_parent IS NOT NULL AND id NOT IN (SELECT id_parent FROM derec_details WHERE id_parent IS NOT NULL GROUP BY id_parent);	 
 DELETE FROM derec_details WHERE id_parent IS NOT NULL AND id NOT IN (SELECT id_parent FROM derec_details WHERE id_parent IS NOT NULL GROUP BY id_parent);	 
 DELETE FROM derec_details WHERE id_parent IS NOT NULL AND id NOT IN (SELECT id_parent FROM derec_details WHERE id_parent IS NOT NULL GROUP BY id_parent);	 
 DELETE FROM derec_details WHERE id_parent IS NOT NULL AND id NOT IN (SELECT id_parent FROM derec_details WHERE id_parent IS NOT NULL GROUP BY id_parent);	 
@@ -24,10 +33,17 @@ DELETE FROM derecognitions WHERE id_parent IS NOT NULL AND id NOT IN (SELECT id_
 DELETE FROM derecognitions WHERE id_parent IS NOT NULL AND id NOT IN (SELECT id_parent FROM derecognitions WHERE id_parent IS NOT NULL GROUP BY id_parent);	 
 DELETE FROM derecognitions WHERE id_parent IS NOT NULL AND id NOT IN (SELECT id_parent FROM derecognitions WHERE id_parent IS NOT NULL GROUP BY id_parent);	 
 DELETE FROM derecognitions WHERE id_parent IS NOT NULL AND id NOT IN (SELECT id_parent FROM derecognitions WHERE id_parent IS NOT NULL GROUP BY id_parent);	 
+DELETE FROM derecognitions WHERE id_parent IS NOT NULL AND id NOT IN (SELECT id_parent FROM derecognitions WHERE id_parent IS NOT NULL GROUP BY id_parent);	 
+DELETE FROM derecognitions WHERE id_parent IS NOT NULL AND id NOT IN (SELECT id_parent FROM derecognitions WHERE id_parent IS NOT NULL GROUP BY id_parent);	 
+DELETE FROM derecognitions WHERE id_parent IS NOT NULL AND id NOT IN (SELECT id_parent FROM derecognitions WHERE id_parent IS NOT NULL GROUP BY id_parent);	 
 DELETE FROM derecognitions;	ALTER TABLE `derecognitions` AUTO_INCREMENT=0;
 
 DELETE FROM certi_details;	ALTER TABLE `certi_details` AUTO_INCREMENT=0;
 
+DELETE FROM certificates WHERE id_parent IS NOT NULL AND id NOT IN (SELECT id_parent FROM certificates WHERE id_parent IS NOT NULL GROUP BY id_parent);	 
+DELETE FROM certificates WHERE id_parent IS NOT NULL AND id NOT IN (SELECT id_parent FROM certificates WHERE id_parent IS NOT NULL GROUP BY id_parent);	 
+DELETE FROM certificates WHERE id_parent IS NOT NULL AND id NOT IN (SELECT id_parent FROM certificates WHERE id_parent IS NOT NULL GROUP BY id_parent);	 
+DELETE FROM certificates WHERE id_parent IS NOT NULL AND id NOT IN (SELECT id_parent FROM certificates WHERE id_parent IS NOT NULL GROUP BY id_parent);	 
 DELETE FROM certificates WHERE id_parent IS NOT NULL AND id NOT IN (SELECT id_parent FROM certificates WHERE id_parent IS NOT NULL GROUP BY id_parent);	 
 DELETE FROM certificates WHERE id_parent IS NOT NULL AND id NOT IN (SELECT id_parent FROM certificates WHERE id_parent IS NOT NULL GROUP BY id_parent);	 
 DELETE FROM certificates WHERE id_parent IS NOT NULL AND id NOT IN (SELECT id_parent FROM certificates WHERE id_parent IS NOT NULL GROUP BY id_parent);	 
@@ -54,6 +70,9 @@ DELETE FROM parameters WHERE id IN (SELECT id FROM parameters WHERE id NOT IN (S
 DELETE FROM parameters WHERE id IN (SELECT id FROM parameters WHERE id NOT IN (SELECT id_parent FROM parameters WHERE id_parent IS NOT NULL GROUP BY id_parent ) AND id_parent IS NOT NULL);	 
 DELETE FROM parameters WHERE id IN (SELECT id FROM parameters WHERE id NOT IN (SELECT id_parent FROM parameters WHERE id_parent IS NOT NULL GROUP BY id_parent ) AND id_parent IS NOT NULL);	 
 DELETE FROM parameters WHERE id IN (SELECT id FROM parameters WHERE id NOT IN (SELECT id_parent FROM parameters WHERE id_parent IS NOT NULL GROUP BY id_parent ) AND id_parent IS NOT NULL);	 
+DELETE FROM parameters WHERE id IN (SELECT id FROM parameters WHERE id NOT IN (SELECT id_parent FROM parameters WHERE id_parent IS NOT NULL GROUP BY id_parent ) AND id_parent IS NOT NULL);
+DELETE FROM parameters WHERE id IN (SELECT id FROM parameters WHERE id NOT IN (SELECT id_parent FROM parameters WHERE id_parent IS NOT NULL GROUP BY id_parent ) AND id_parent IS NOT NULL);
+DELETE FROM parameters WHERE id IN (SELECT id FROM parameters WHERE id NOT IN (SELECT id_parent FROM parameters WHERE id_parent IS NOT NULL GROUP BY id_parent ) AND id_parent IS NOT NULL);
 DELETE FROM parameters;	ALTER TABLE `parameters` AUTO_INCREMENT=0;
 
 /* INSERTAR PARÁMETROS PADRE */
@@ -83,7 +102,7 @@ INSERT INTO parameters (id, parameter_key, name, num_val, str_val, is_editable, 
 INSERT INTO parameters (id, parameter_key, name, num_val, str_val, is_editable, is_editable_details) VALUES ('23','MAINTENANCE_TYPE','Tipos de mantenimiento',null,null,'0','1');
 INSERT INTO parameters (id, parameter_key, name, num_val, str_val, is_editable, is_editable_details) VALUES ('24','PAYMENT_METHODS','Métodos de pago',null,null,'0','0');
 INSERT INTO parameters (id, parameter_key, name, num_val, str_val, is_editable, is_editable_details) VALUES ('25','PURCHASE_STATUS','Estados que puede tener una orden de compra',null,null,'0','0');
-INSERT INTO parameters (id, parameter_key, name, num_val, str_val, is_editable, is_editable_details) VALUES ('26','SENDER_EMAIL','Email remitente de los mensajes',null,'email@email.com','1','0');
+INSERT INTO parameters (id, parameter_key, name, num_val, str_val, is_editable, is_editable_details) VALUES ('26','SENDER_EMAIL','Email remitente de los mensajes',null,'activos.fijos.ms@gmail.com','1','0');
 INSERT INTO parameters (id, parameter_key, name, num_val, str_val, is_editable, is_editable_details) VALUES ('27','SENDER_EMAIL_FROM','Nombre del remitente de correos',null,'Activos Fijos Modern Soflutions','1','0');
 INSERT INTO parameters (id, parameter_key, name, num_val, str_val, is_editable, is_editable_details) VALUES ('28','SMMLV','SMMLV del año en curso',908526,null,'1','0');
 INSERT INTO parameters (id, parameter_key, name, num_val, str_val, is_editable, is_editable_details) VALUES ('29','USER_ROLE','Roles de los usuarios del sistema',null,null,'0','0');
@@ -248,15 +267,15 @@ INSERT INTO parameters (id, id_parent, parameter_key, name, num_val, str_val, is
 INSERT INTO parameters (id, id_parent, parameter_key, name, num_val, str_val, is_editable, is_editable_details) VALUES ('252','16','','',null,'TI','1','0');
 INSERT INTO parameters (id, id_parent, parameter_key, name, num_val, str_val, is_editable, is_editable_details) VALUES ('253','16','','',null,'NIT','1','0');
 INSERT INTO parameters (id, id_parent, parameter_key, name, num_val, str_val, is_editable, is_editable_details) VALUES ('254','16','','',null,'PAS','1','0');
-INSERT INTO parameters (id, id_parent, parameter_key, name, num_val, str_val, is_editable, is_editable_details) VALUES ('255','17','EMAIL_TEMPLATE_HEADER','',null,'<div style="margin: 10px 0px;"><img src="https://lh5.googleusercontent.com/pUafnUNY7Zhn9pJx-91xd4GSx1kEgwAw2IYFkA_bslIirCxlp0ZlE_yISwXu625mBYwDeLcumQFyAX9rnElf=w1920-h977-rw" style="width: 100%;" /></div>','1','0');
-INSERT INTO parameters (id, id_parent, parameter_key, name, num_val, str_val, is_editable, is_editable_details) VALUES ('256','17','EMAIL_TEMPLATE_FOOTER','',null,'<div style="margin: 10px 0px;"><p style="font-size: 12px;">Mensaje generado automáticamente por el <b> Sistema de Gestión de Activos </b> de <b> Modern Soflutions </b>. Por favor no responda a este email.</p></div>','1','0');
-INSERT INTO parameters (id, id_parent, parameter_key, name, num_val, str_val, is_editable, is_editable_details) VALUES ('257','17','EMAIL_TEMPLATE_RECOVERY_PASSWORD_USER','Solicitud de recuperación de contraseña',null,'<div><h1>Hola {{name}}</h1><p>Solicitaste un cambio de contraseña. Si no fuiste tu quién solicitó el cambio por favor comunícate con el adminstrador del sistema.</p><p>Se ha generado la siguiente clave temporal que deberás utilizar para tu siguiente inicio de sesión. Luego de iniciada la sesión deberás de generar una nueva contraseña.</p><h3>Nueva contraseña: {{password}}</h3></div>','1','0');
-INSERT INTO parameters (id, id_parent, parameter_key, name, num_val, str_val, is_editable, is_editable_details) VALUES ('258','17','EMAIL_TEMPLATE_PURCHASE_APPROVED','Aprobación orden de compra [{{id_order}}]',null,'<div><p>La orden de compra Nº {{id_order}} ha sido aprovada por {{approver_name}} el {{approved_at}}.</p></div>','1','0');
-INSERT INTO parameters (id, id_parent, parameter_key, name, num_val, str_val, is_editable, is_editable_details) VALUES ('259','17','EMAIL_TEMPLATE_CERTIFICATE_APPROVED','Aprobación acta de movimiento [{{id_certificate}}]',null,'<div><p>El acta de movimiento Nº {{id_certificate}} ha sido aprobada por {{approver_name}} el {{approved_at}}.</p></div>','1','0');
-INSERT INTO parameters (id, id_parent, parameter_key, name, num_val, str_val, is_editable, is_editable_details) VALUES ('260','17','EMAIL_TEMPLATE_CERTIFICATE_SIGNATURE_PENDING','Firma de acta de movimiento [{{id_certificate}}]',null,'<div><p>Se solicita la firma de recibido para el acta de movimiento Nº {{id_certificate}}.</p></div>','1','0');
-INSERT INTO parameters (id, id_parent, parameter_key, name, num_val, str_val, is_editable, is_editable_details) VALUES ('261','17','EMAIL_TEMPLATE_CERTIFICATE_ACTIVE','Acta de movimiento [{{id_certificate}}] firmada',null,'<div><p>El responsable {{name}} ha firmado el recibido del acta de movimiento Nº {{id_certificate}}.</p></div>','1','0');
-INSERT INTO parameters (id, id_parent, parameter_key, name, num_val, str_val, is_editable, is_editable_details) VALUES ('262','17','EMAIL_TEMPLATE_DERECOGNITIOIN_APPROVED','Aprobación acta de proceso de baja de activos [{{id_derecognition}}]',null,'<div><p>El proceso de baja de activos Nº {{id_derecognition}} ha sido aprobada por {{approver_name}} el {{approved_at}}.</p></div>','1','0');
-INSERT INTO parameters (id, id_parent, parameter_key, name, num_val, str_val, is_editable, is_editable_details) VALUES ('263','17','EMAIL_TEMPLATE_USER_PASSWORD','Generación de contraseña',null,'<div><h1>Hola {{name}}</h1><p>El administrador del sistema le ha generado la siguiente contraseña, la cual debe de ser cambiada en el siguiente inicio de sesión.</p><h3>Nueva contraseña: {{password}}</h3></div>','1','0');
+INSERT INTO parameters (id, id_parent, parameter_key, name, num_val, str_val, is_editable, is_editable_details) VALUES ('255','17','EMAIL_TEMPLATE_HEADER','',null,'<div style="margin: 10px 0px;"><img src="https://cloaiza1997.github.io/CristianLoaiza/logo_grande.png" style="width: 100%;" /></div>','1','0');
+INSERT INTO parameters (id, id_parent, parameter_key, name, num_val, str_val, is_editable, is_editable_details) VALUES ('256','17','EMAIL_TEMPLATE_FOOTER','',null,'<div style="margin: 10px 0px;"><p style="font-size: 12px;">Mensaje generado automáticamente por el <b> Sistema de Gestión de Activos </b> de <b> Modern Soflutions </b>. Por favor no responda a este email.</p></div>','1','0');
+INSERT INTO parameters (id, id_parent, parameter_key, name, num_val, str_val, is_editable, is_editable_details) VALUES ('257','17','EMAIL_TEMPLATE_RECOVERY_PASSWORD_USER','Solicitud de recuperación de contraseña',null,'<div><h1>Hola {{name}}</h1><p>Solicitaste un cambio de contraseña. Si no fuiste tu quién solicitó el cambio por favor comunícate con el adminstrador del sistema.</p><p>Se ha generado la siguiente clave temporal que deberás utilizar para tu siguiente inicio de sesión. Luego de iniciada la sesión deberás de generar una nueva contraseña.</p><h3>Nueva contraseña: {{password}}</h3></div>','1','0');
+INSERT INTO parameters (id, id_parent, parameter_key, name, num_val, str_val, is_editable, is_editable_details) VALUES ('258','17','EMAIL_TEMPLATE_PURCHASE_APPROVED','Aprobación orden de compra [{{id_order}}]',null,'<div><p>La orden de compra Nº {{id_order}} ha sido aprovada por {{approver_name}} el {{approved_at}}.</p></div>','1','0');
+INSERT INTO parameters (id, id_parent, parameter_key, name, num_val, str_val, is_editable, is_editable_details) VALUES ('259','17','EMAIL_TEMPLATE_CERTIFICATE_APPROVED','Aprobación acta de movimiento [{{id_certificate}}]',null,'<div><p>El acta de movimiento Nº {{id_certificate}} ha sido aprobada por {{approver_name}} el {{approved_at}}.</p></div>','1','0');
+INSERT INTO parameters (id, id_parent, parameter_key, name, num_val, str_val, is_editable, is_editable_details) VALUES ('260','17','EMAIL_TEMPLATE_CERTIFICATE_SIGNATURE_PENDING','Firma de acta de movimiento [{{id_certificate}}]',null,'<div><p>Se solicita la firma de recibido para el acta de movimiento Nº {{id_certificate}}.</p></div>','1','0');
+INSERT INTO parameters (id, id_parent, parameter_key, name, num_val, str_val, is_editable, is_editable_details) VALUES ('261','17','EMAIL_TEMPLATE_CERTIFICATE_ACTIVE','Acta de movimiento [{{id_certificate}}] firmada',null,'<div><p>El responsable {{name}} ha firmado el recibido del acta de movimiento Nº {{id_certificate}}.</p></div>','1','0');
+INSERT INTO parameters (id, id_parent, parameter_key, name, num_val, str_val, is_editable, is_editable_details) VALUES ('262','17','EMAIL_TEMPLATE_DERECOGNITIOIN_APPROVED','Aprobación acta de proceso de baja de activos [{{id_derecognition}}]',null,'<div><p>El proceso de baja de activos Nº {{id_derecognition}} ha sido aprobada por {{approver_name}} el {{approved_at}}.</p></div>','1','0');
+INSERT INTO parameters (id, id_parent, parameter_key, name, num_val, str_val, is_editable, is_editable_details) VALUES ('263','17','EMAIL_TEMPLATE_USER_PASSWORD','Generación de contraseña',null,'<div><h1>Hola {{name}}</h1><p>El administrador del sistema le ha generado la siguiente contraseña, la cual debe de ser cambiada en el siguiente inicio de sesión.</p><h3>Nueva contraseña: {{password}}</h3></div>','1','0');
 
 /* INSERTAR USUARIOS */
 

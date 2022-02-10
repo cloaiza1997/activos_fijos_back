@@ -6,6 +6,13 @@ use App\Constants\ParameterConsts;
 use App\Models\Parameter;
 use Illuminate\Http\Request;
 
+/**
+ * @class ParameterController
+ * @namespace App\Http\Controllers
+ * @brief Controlador de la gestión de parámetros del sistema
+ * @date 01/06/2021
+ * @author Cristian Loaiza <cris-1997-loaiza@hotmail.com>
+ */
 class ParameterController extends Controller
 {
     public function index()

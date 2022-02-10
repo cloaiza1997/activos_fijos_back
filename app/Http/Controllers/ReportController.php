@@ -6,6 +6,13 @@ use App\Constants\ReportConsts;
 use App\Models\Report;
 use Illuminate\Http\Request;
 
+/**
+ * @class ReportController
+ * @namespace App\Http\Controllers
+ * @brief Controlador de la gestión de reportes
+ * @date 01/06/2021
+ * @author Cristian Loaiza <cris-1997-loaiza@hotmail.com>
+ */
 class ReportController extends Controller
 {
     public function index()

@@ -31,9 +31,9 @@ CREATE TABLE IF NOT EXISTS `assets` (
   `model` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
   `serial_number` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
   `entry_date` date NOT NULL,
-  `init_value` decimal(11,2) DEFAULT NULL,
-  `residual_value` decimal(11,2) NOT NULL,
-  `current_value` decimal(11,2) NOT NULL,
+  `init_value` decimal(20,2) DEFAULT NULL,
+  `residual_value` decimal(20,2) NOT NULL,
+  `current_value` decimal(20,2) NOT NULL,
   `use_life` int(11) NOT NULL,
   `id_maintenance_frequence` int(11) NOT NULL,
   `maintenance_date` date DEFAULT NULL,
@@ -180,8 +180,8 @@ CREATE TABLE IF NOT EXISTS `depre_reval_details` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `id_depre_reval` int(11) NOT NULL,
   `id_asset` int(11) NOT NULL,
-  `old_value` decimal(11,2) NOT NULL,
-  `new_value` decimal(11,2) NOT NULL,
+  `old_value` decimal(20,2) NOT NULL,
+  `new_value` decimal(20,2) NOT NULL,
   `observations` varchar(1000) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `id_parent` int(11) DEFAULT NULL COMMENT 'En caso de que el proceso sea una reversa\n',
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
@@ -310,7 +310,7 @@ CREATE TABLE IF NOT EXISTS `logs` (
   CONSTRAINT `fk_users_logs_id_user` FOREIGN KEY (`id_user`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla gestion_activos.logs: ~0 rows (aproximadamente)
+-- Volcando datos para la tabla gestion_activos.logs: ~93 rows (aproximadamente)
 /*!40000 ALTER TABLE `logs` DISABLE KEYS */;
 /*!40000 ALTER TABLE `logs` ENABLE KEYS */;
 
@@ -412,7 +412,7 @@ CREATE TABLE IF NOT EXISTS `parameters` (
   `id_parent` int(11) DEFAULT NULL,
   `parameter_key` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `name` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `num_val` decimal(11,5) DEFAULT NULL,
+  `num_val` decimal(20,2) DEFAULT NULL,
   `str_val` varchar(1000) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `is_active` tinyint(1) NOT NULL DEFAULT 1,
   `is_editable` tinyint(1) NOT NULL DEFAULT 0,
@@ -424,7 +424,7 @@ CREATE TABLE IF NOT EXISTS `parameters` (
   CONSTRAINT `fk_parameters_parameters_id_parent` FOREIGN KEY (`id_parent`) REFERENCES `parameters` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla gestion_activos.parameters: ~193 rows (aproximadamente)
+-- Volcando datos para la tabla gestion_activos.parameters: ~0 rows (aproximadamente)
 /*!40000 ALTER TABLE `parameters` DISABLE KEYS */;
 /*!40000 ALTER TABLE `parameters` ENABLE KEYS */;
 
@@ -463,9 +463,9 @@ CREATE TABLE IF NOT EXISTS `purchases` (
   `delivery_date` date NOT NULL,
   `delivery_address` varchar(500) COLLATE utf8mb4_unicode_ci NOT NULL,
   `id_city` int(11) NOT NULL,
-  `sub_total` decimal(11,2) NOT NULL,
-  `iva` decimal(11,2) NOT NULL,
-  `total` decimal(11,2) NOT NULL,
+  `sub_total` decimal(20,2) NOT NULL,
+  `iva` decimal(20,2) NOT NULL,
+  `total` decimal(20,2) NOT NULL,
   `id_status` int(11) NOT NULL,
   `id_payment_method` int(11) NOT NULL,
   `payment_days` int(5) DEFAULT NULL,
@@ -495,7 +495,7 @@ CREATE TABLE IF NOT EXISTS `purchases` (
   CONSTRAINT `fk_users_purchases_id_updater` FOREIGN KEY (`id_updater_user`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla gestion_activos.purchases: ~0 rows (aproximadamente)
+-- Volcando datos para la tabla gestion_activos.purchases: ~3 rows (aproximadamente)
 /*!40000 ALTER TABLE `purchases` DISABLE KEYS */;
 /*!40000 ALTER TABLE `purchases` ENABLE KEYS */;
 
@@ -506,8 +506,8 @@ CREATE TABLE IF NOT EXISTS `purch_items` (
   `id_purchase` int(11) NOT NULL,
   `product` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
   `quantity` int(11) NOT NULL,
-  `unit_value` decimal(11,2) NOT NULL,
-  `total_value` decimal(11,2) NOT NULL,
+  `unit_value` decimal(20,2) NOT NULL,
+  `total_value` decimal(20,2) NOT NULL,
   `created_at` timestamp NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`id`),
@@ -515,7 +515,7 @@ CREATE TABLE IF NOT EXISTS `purch_items` (
   CONSTRAINT `fk_purchases_purch_item_id_purchas` FOREIGN KEY (`id_purchase`) REFERENCES `purchases` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla gestion_activos.purch_items: ~0 rows (aproximadamente)
+-- Volcando datos para la tabla gestion_activos.purch_items: ~3 rows (aproximadamente)
 /*!40000 ALTER TABLE `purch_items` DISABLE KEYS */;
 /*!40000 ALTER TABLE `purch_items` ENABLE KEYS */;
 
@@ -555,7 +555,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   CONSTRAINT `fk_parameters_users_id_status` FOREIGN KEY (`id_status`) REFERENCES `parameters` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla gestion_activos.users: ~0 rows (aproximadamente)
+-- Volcando datos para la tabla gestion_activos.users: ~7 rows (aproximadamente)
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 

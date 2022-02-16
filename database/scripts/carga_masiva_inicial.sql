@@ -104,14 +104,13 @@ INSERT INTO parameters (id, parameter_key, name, num_val, str_val, is_editable, 
 INSERT INTO parameters (id, parameter_key, name, num_val, str_val, is_editable, is_editable_details) VALUES ('25','PURCHASE_STATUS','Estados que puede tener una orden de compra',null,null,'0','0');
 INSERT INTO parameters (id, parameter_key, name, num_val, str_val, is_editable, is_editable_details) VALUES ('26','SENDER_EMAIL','Email remitente de los mensajes',null,'activos.fijos.ms@gmail.com','1','0');
 INSERT INTO parameters (id, parameter_key, name, num_val, str_val, is_editable, is_editable_details) VALUES ('27','SENDER_EMAIL_FROM','Nombre del remitente de correos',null,'Activos Fijos Modern Soflutions','1','0');
-INSERT INTO parameters (id, parameter_key, name, num_val, str_val, is_editable, is_editable_details) VALUES ('28','SMMLV','SMMLV del año en curso',908526,null,'1','0');
+INSERT INTO parameters (id, parameter_key, name, num_val, str_val, is_editable, is_editable_details) VALUES ('28','SMMLV','SMMLV del año en curso',1000000,null,'1','0');
 INSERT INTO parameters (id, parameter_key, name, num_val, str_val, is_editable, is_editable_details) VALUES ('29','USER_ROLE','Roles de los usuarios del sistema',null,null,'0','0');
 INSERT INTO parameters (id, parameter_key, name, num_val, str_val, is_editable, is_editable_details) VALUES ('30','USER_STATUS','Estados de los usuarios del sistema',null,null,'0','0');
-INSERT INTO parameters (id, parameter_key, name, num_val, str_val, is_editable, is_editable_details) VALUES ('31','ASSET_AMOUNT','Valor para considerar un bien como activo fijo',700000,null,'1','0');
+INSERT INTO parameters (id, parameter_key, name, num_val, str_val, is_editable, is_editable_details) VALUES ('31','ASSET_AMOUNT','Valor para considerar un bien como activo fijo',1000000,null,'1','0');
 INSERT INTO parameters (id, parameter_key, name, num_val, str_val, is_editable, is_editable_details) VALUES ('32','ASSET_DEPRECATION_RESIDUAL_VALUE','Valor residual para la depreciación en porcentaje',0.05,null,'1','0');
 
 /* INSERTAR PARÁMETROS HIJOS */
-
 INSERT INTO parameters (id, id_parent, parameter_key, name, num_val, str_val, is_editable, is_editable_details) VALUES ('100','1','ASSETS','',null,'Activos','0','0');
 INSERT INTO parameters (id, id_parent, parameter_key, name, num_val, str_val, is_editable, is_editable_details) VALUES ('101','1','ATTATCHMENTS','',null,'Adjuntos','0','0');
 INSERT INTO parameters (id, id_parent, parameter_key, name, num_val, str_val, is_editable, is_editable_details) VALUES ('102','1','AUTH','',null,'Autenticación','0','0');
@@ -270,7 +269,7 @@ INSERT INTO parameters (id, id_parent, parameter_key, name, num_val, str_val, is
 INSERT INTO parameters (id, id_parent, parameter_key, name, num_val, str_val, is_editable, is_editable_details) VALUES ('255','17','EMAIL_TEMPLATE_HEADER','',null,'<div style="margin: 10px 0px;"><img src="https://cloaiza1997.github.io/CristianLoaiza/logo_grande.png" style="width: 100%;" /></div>','1','0');
 INSERT INTO parameters (id, id_parent, parameter_key, name, num_val, str_val, is_editable, is_editable_details) VALUES ('256','17','EMAIL_TEMPLATE_FOOTER','',null,'<div style="margin: 10px 0px;"><p style="font-size: 12px;">Mensaje generado automáticamente por el <b> Sistema de Gestión de Activos </b> de <b> Modern Soflutions </b>. Por favor no responda a este email.</p></div>','1','0');
 INSERT INTO parameters (id, id_parent, parameter_key, name, num_val, str_val, is_editable, is_editable_details) VALUES ('257','17','EMAIL_TEMPLATE_RECOVERY_PASSWORD_USER','Solicitud de recuperación de contraseña',null,'<div><h1>Hola {{name}}</h1><p>Solicitaste un cambio de contraseña. Si no fuiste tu quién solicitó el cambio por favor comunícate con el adminstrador del sistema.</p><p>Se ha generado la siguiente clave temporal que deberás utilizar para tu siguiente inicio de sesión. Luego de iniciada la sesión deberás de generar una nueva contraseña.</p><h3>Nueva contraseña: {{password}}</h3></div>','1','0');
-INSERT INTO parameters (id, id_parent, parameter_key, name, num_val, str_val, is_editable, is_editable_details) VALUES ('258','17','EMAIL_TEMPLATE_PURCHASE_APPROVED','Aprobación orden de compra [{{id_order}}]',null,'<div><p>La orden de compra Nº {{id_order}} ha sido aprovada por {{approver_name}} el {{approved_at}}.</p></div>','1','0');
+INSERT INTO parameters (id, id_parent, parameter_key, name, num_val, str_val, is_editable, is_editable_details) VALUES ('258','17','EMAIL_TEMPLATE_PURCHASE_APPROVED','Aprobación orden de compra [{{id_order}}]',null,'<div><p>La orden de compra Nº {{id_order}} ha sido aprobada por {{approver_name}} el {{approved_at}}.</p></div>','1','0');
 INSERT INTO parameters (id, id_parent, parameter_key, name, num_val, str_val, is_editable, is_editable_details) VALUES ('259','17','EMAIL_TEMPLATE_CERTIFICATE_APPROVED','Aprobación acta de movimiento [{{id_certificate}}]',null,'<div><p>El acta de movimiento Nº {{id_certificate}} ha sido aprobada por {{approver_name}} el {{approved_at}}.</p></div>','1','0');
 INSERT INTO parameters (id, id_parent, parameter_key, name, num_val, str_val, is_editable, is_editable_details) VALUES ('260','17','EMAIL_TEMPLATE_CERTIFICATE_SIGNATURE_PENDING','Firma de acta de movimiento [{{id_certificate}}]',null,'<div><p>Se solicita la firma de recibido para el acta de movimiento Nº {{id_certificate}}.</p></div>','1','0');
 INSERT INTO parameters (id, id_parent, parameter_key, name, num_val, str_val, is_editable, is_editable_details) VALUES ('261','17','EMAIL_TEMPLATE_CERTIFICATE_ACTIVE','Acta de movimiento [{{id_certificate}}] firmada',null,'<div><p>El responsable {{name}} ha firmado el recibido del acta de movimiento Nº {{id_certificate}}.</p></div>','1','0');
@@ -280,25 +279,21 @@ INSERT INTO parameters (id, id_parent, parameter_key, name, num_val, str_val, is
 /* INSERTAR USUARIOS */
 
 INSERT INTO users (id, id_document_type, document_number, name, last_name, display_name, email, phone_number, id_role, id_area, id_position, id_status, signature, password) VALUES ('1','253','0000000000','Usuario del Sistema','','','','','239','196','197','243','','');
-INSERT INTO users (id, id_document_type, document_number, name, last_name, display_name, email, phone_number, id_role, id_area, id_position, id_status, signature, password) VALUES ('2','250','123','Admin','Admin','Admin','kla-1997@hotmail.com','300000000','239','196','197','242','00000000000000_USERS_2_admin.png','$2y$10$v2ymdojUz6jmK/QmPdTkaOHdo8gp2DPGzxBnPdki3wW1sjgXxmzLa');
-INSERT INTO users (id, id_document_type, document_number, name, last_name, display_name, email, phone_number, id_role, id_area, id_position, id_status, signature, password) VALUES ('3','250','456','Aprobador','Aprobador','Aprobador','cristian97loaiza@gmail.com','300000000','240','196','197','242','00000000000000_USERS_3_aprobador.png','$2y$10$v2ymdojUz6jmK/QmPdTkaOHdo8gp2DPGzxBnPdki3wW1sjgXxmzLa');
-INSERT INTO users (id, id_document_type, document_number, name, last_name, display_name, email, phone_number, id_role, id_area, id_position, id_status, signature, password) VALUES ('4','250','789','Responsable','Responsable','Responsable','cristianaloaiza@estudiante.uniajc.edu.co','300000000','241','196','197','242','00000000000000_USERS_4_responsable.png','$2y$10$v2ymdojUz6jmK/QmPdTkaOHdo8gp2DPGzxBnPdki3wW1sjgXxmzLa');
-INSERT INTO users (id, id_document_type, document_number, name, last_name, display_name, email, phone_number, id_role, id_area, id_position, id_status, signature, password) VALUES ('5','250','111111111','Cristian','Loaiza','Cristian','cloaiza@modernsoftlutions.com','300000000','239','196','200','242','00000000000000_USERS_5_cristian.png','$2y$10$v2ymdojUz6jmK/QmPdTkaOHdo8gp2DPGzxBnPdki3wW1sjgXxmzLa');
-INSERT INTO users (id, id_document_type, document_number, name, last_name, display_name, email, phone_number, id_role, id_area, id_position, id_status, signature, password) VALUES ('6','250','222222222','Sara','Zuluaga','Sara','szuluaga@modernsoftlutions.com','300000000','239','196','199','242','00000000000000_USERS_6_sara.png','$2y$10$v2ymdojUz6jmK/QmPdTkaOHdo8gp2DPGzxBnPdki3wW1sjgXxmzLa');
-INSERT INTO users (id, id_document_type, document_number, name, last_name, display_name, email, phone_number, id_role, id_area, id_position, id_status, signature, password) VALUES ('7','250','333333333','Sebastián','Henao','Sebastián','shenao@modernsoftlutions.com','300000000','240','196','197','242','00000000000000_USERS_7_sebastián.png','$2y$10$v2ymdojUz6jmK/QmPdTkaOHdo8gp2DPGzxBnPdki3wW1sjgXxmzLa');
+INSERT INTO users (id, id_document_type, document_number, name, last_name, display_name, email, phone_number, id_role, id_area, id_position, id_status, signature, password) VALUES ('2','250','123','Sara','Zuluaga','Sara_Admin','kla-1997@hotmail.com','300000000','239','196','197','242','00000000000000_USERS_2_sara_admin.png','$2y$10$v2ymdojUz6jmK/QmPdTkaOHdo8gp2DPGzxBnPdki3wW1sjgXxmzLa');
+INSERT INTO users (id, id_document_type, document_number, name, last_name, display_name, email, phone_number, id_role, id_area, id_position, id_status, signature, password) VALUES ('3','250','456','Sebastián','Henao','Sebastián_Aprobador','cristian97loaiza@gmail.com','300000000','240','196','197','242','00000000000000_USERS_3_sebastián_aprobador.png','$2y$10$v2ymdojUz6jmK/QmPdTkaOHdo8gp2DPGzxBnPdki3wW1sjgXxmzLa');
+INSERT INTO users (id, id_document_type, document_number, name, last_name, display_name, email, phone_number, id_role, id_area, id_position, id_status, signature, password) VALUES ('4','250','789','Cristian','Loaiza','Cristian_Responsable','cristianaloaiza@estudiante.uniajc.edu.co','300000000','241','196','197','242','00000000000000_USERS_4_cristian_responsable.png','$2y$10$v2ymdojUz6jmK/QmPdTkaOHdo8gp2DPGzxBnPdki3wW1sjgXxmzLa');
 
 /* INSERTAR FIRMAS DE USUARIOS */
 
-INSERT INTO attachments (id, id_app_key, id_register, file_name) VALUES ('2','112','2','00000000000000_USERS_2_admin.png');
-INSERT INTO attachments (id, id_app_key, id_register, file_name) VALUES ('3','112','3','00000000000000_USERS_3_aprobador.png');
-INSERT INTO attachments (id, id_app_key, id_register, file_name) VALUES ('4','112','4','00000000000000_USERS_4_responsable.png');
-INSERT INTO attachments (id, id_app_key, id_register, file_name) VALUES ('5','112','5','00000000000000_USERS_5_cristian.png');
-INSERT INTO attachments (id, id_app_key, id_register, file_name) VALUES ('6','112','6','00000000000000_USERS_6_sara.png');
-INSERT INTO attachments (id, id_app_key, id_register, file_name) VALUES ('7','112','7','00000000000000_USERS_7_sebastián.png');
+INSERT INTO attachments (id, id_app_key, id_register, file_name) VALUES ('2','112','2','00000000000000_USERS_2_sara_admin.png');
+INSERT INTO attachments (id, id_app_key, id_register, file_name) VALUES ('3','112','3','00000000000000_USERS_3_sebastián_aprobador.png');
+INSERT INTO attachments (id, id_app_key, id_register, file_name) VALUES ('4','112','4','00000000000000_USERS_4_cristian_responsable.png');
 
 /* INSERTAR PROVEEDORES */
 
-INSERT INTO providers (id, id_document_type, document_number, name, address, id_city, email, phone_number, observations) VALUES ('1','253','0000000000','Proveedor de prueba','Calle # 123','204','proveedor@proveedor.com','300000000','');
+INSERT INTO providers (id, id_document_type, document_number, name, address, id_city, email, phone_number, observations) VALUES ('1','253','0000000001','Proveedor de prueba 1','Calle # 123','204','proveedor@proveedor.com','300000000','');
+INSERT INTO providers (id, id_document_type, document_number, name, address, id_city, email, phone_number, observations) VALUES ('2','253','0000000002','Proveedor de prueba 2','Calle # 123','204','proveedor@proveedor.com','300000000','');
+INSERT INTO providers (id, id_document_type, document_number, name, address, id_city, email, phone_number, observations) VALUES ('3','253','0000000003','Proveedor de prueba 3','Calle # 123','204','proveedor@proveedor.com','300000000','');
 
 /* INSERTAR ACTIVOS */
 

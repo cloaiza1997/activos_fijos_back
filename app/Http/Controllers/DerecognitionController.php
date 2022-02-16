@@ -100,8 +100,6 @@ class DerecognitionController extends Controller
         $derecognition = Derecognition::find($id);
         $derecognition->id_status = $statud_id_in_process;
         $derecognition->observations = $inputs["observations"];
-        $derecognition->id_approver_user = null;
-        $derecognition->approved_at = null;
         $derecognition->update();
 
         DerecognitionDetail::where("id_derecognition", $id)->delete();
